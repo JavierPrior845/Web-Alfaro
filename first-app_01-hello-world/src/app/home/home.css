@@ -1,0 +1,82 @@
+.results {
+  display: grid;
+  column-gap: 14px;
+  row-gap: 14px;
+  
+  /* ESTE ES EL CAMBIO CLAVE: minmax(min, max) */
+  /* min: 400px (mínimo) | max: 1fr (ocupa toda la fracción disponible) */
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); 
+  
+  margin-top: 50px;
+  /* IMPORTANTE: Asegúrate de que esta línea esté comentada o eliminada */
+  /* justify-content: space-around; */
+}
+input[type="text"] {
+  border: solid 1px var(--primary-color);
+  padding: 10px;
+  border-radius: 8px;
+  margin-right: 4px;
+  display: inline-block;
+  width: 30%;
+}
+button {
+  padding: 10px;
+  border: solid 1px var(--primary-color);
+  background: var(--primary-color);
+  color: white;
+  border-radius: 8px;
+}
+@media (min-width: 500px) and (max-width: 768px) {
+  .results {
+      grid-template-columns: repeat(2, 1fr);
+  }
+  input[type="text"] {
+      width: 70%;
+  }   
+}
+@media (max-width: 499px) {
+  .results {
+      grid-template-columns: 1fr;
+  }    
+}
+
+.hero-section {
+    /* Usa el 100% del ancho del viewport (vw) para garantizar que se estire */
+    width: 100%; 
+    height: 300px; /* Altura generosa para destacar */
+    margin-bottom: 50px;
+    
+    /* Imagen de Fondo (Reemplaza con tu propia URL) */
+    background-image: url('/assets/GONZALEZ_CONDE.jpg'); 
+    background-size: cover;
+    background-position: center;
+    
+    /* Efecto Oscuro (Superposición) */
+    background-color: rgba(0, 0, 0, 0.4); /* Capa oscura para que el texto resalte */
+    background-blend-mode: darken; /* Oscurece la imagen de fondo */
+
+    /* Flexbox para centrar el contenido (título/párrafo) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-content {
+    color: white; /* Texto blanco para resaltar sobre el fondo oscuro */
+    padding: 20px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Sombra suave para mejor legibilidad */
+}
+
+.hero-content h1 {
+    font-size: 2.5rem; /* Título grande */
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px; /* Espaciado sutil para elegancia */
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    opacity: 0.9;
+}
