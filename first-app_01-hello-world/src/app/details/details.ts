@@ -13,7 +13,8 @@ import * as L from "leaflet";
   imports: [ReactiveFormsModule, UnitTableComponent],
   template: `
     <article>
-      <img
+      <section>
+         <img
         class="listing-photo"
         [src]="housingLocation?.photo"
         alt="Exterior photo of {{ housingLocation?.name }}"
@@ -28,7 +29,7 @@ import * as L from "leaflet";
       </section>
 
       <section class="listing-features">
-        <h2 class="section-heading">About this housing location</h2>
+        <h2 class="section-heading">Sobre el edificio</h2>
         <ul>
           <li>Units available: {{ housingLocation?.availableUnits }}</li>
           <li>Does this location have wifi: {{ housingLocation?.wifi }}</li>
@@ -38,32 +39,61 @@ import * as L from "leaflet";
         </ul>
       </section>
 
-      <section class="listing-apply">
-        <h2 class="section-heading">Apply now to live here</h2>
-        <form [formGroup]="applyForm" (submit)="submitApplication()">
-          <label for="first-name">First Name</label>
-          <input id="first-name" type="text" formControlName="firstName" />
-
-          <label for="last-name">Last Name</label>
-          <input id="last-name" type="text" formControlName="lastName" />
-
-          <label for="email">Email</label>
-          <input id="email" type="email" formControlName="email" />
-
-          <button type="submit" class="primary">Apply now</button>
-        </form>
+      <section class="download-section clearfix">
+        <h2 class="section-heading">Planos Generales</h2>
+        <!-- 
+          Usamos [href] para enlazar dinámicamente al método getGlobalPlanPath().
+          'download' sugiere al navegador que descargue el archivo.
+          Usamos 'button primary' para que parezca un botón.
+        -->
+        <a [href]="getGlobalPlanPath()" download class="button primary">Descargar Planos Globales</a>
       </section>
       
-      <section>
-        @if (housingLocation?.units) {
-        <app-unit-table [units]="housingLocation.units" />
+      <section class="download-section clearfix">
+        <h2 class="section-heading">Memoria de Calidades</h2>
+        <!-- 
+          Usamos [href] para enlazar dinámicamente al método getGlobalPlanPath().
+          'download' sugiere al navegador que descargue el archivo.
+          Usamos 'button primary' para que parezca un botón.
+        -->
+        <a [href]="getGlobalPlanPath()" download class="button primary">Descargar Memoria de Calidades</a>
+      </section>
+      </section>
+      
+      
+      <section class="unit-table-section clearfix">
+        @if (housingLocation?.units; as availableUnits) {
+          <!-- Usamos el alias 'availableUnits' para asegurar el tipo -->
+          <app-unit-table [units]="availableUnits" />
         } @else {
-        <p>No hay información de unidades disponible para este edificio.</p>
+          <p>No hay información de unidades disponible para este edificio.</p>
         }
       </section>
       <section class="listing-map-apply">
-        <h2 class="section-heading">Location</h2>
-        <div id="map" style="height: 400px; width: 400px;"></div>
+        <div class="map-form-container">
+          <!-- Columna izquierda: Mapa -->
+          <div class="map-column">
+            <h2 class="section-heading">Ubicación</h2>
+            <div id="map" style="height: 400px; width: 400px;"></div>
+          </div>
+
+          <!-- Columna derecha: Formulario -->
+          <div class="form-column">
+            <h2 class="section-heading">Quieres que te enviemos información</h2>
+            <form [formGroup]="applyForm" (submit)="submitApplication()">
+              <label for="first-name">Nombre</label>
+              <input id="first-name" type="text" formControlName="firstName" />
+
+              <label for="last-name">Telefono</label>
+              <input id="last-name" type="text" formControlName="lastName" />
+
+              <label for="email">Email</label>
+              <input id="email" type="email" formControlName="email" />
+
+              <button type="submit" class="primary">Confirmar información</button>
+            </form>
+          </div>
+        </div>
       </section>
 
     </article>
@@ -110,6 +140,12 @@ export class Details implements AfterViewInit {
     setTimeout(() => {
       map.invalidateSize();
     }, 0);
+  }
+
+  getGlobalPlanPath(): string {
+    // Asegúrate de que este archivo existe en la ruta especificada
+    // (Ajusta el nombre si es diferente)
+    return 'assets/pdfs/planos/Edificio_Global.pdf';
   }
 
   submitApplication() {
