@@ -20,9 +20,9 @@ export class Housing {
       city: "Murcia",
       state: "Barrio del Carmen",
       photo: `${this.baseUrl}/gonzalez conde_5-Foto.jpg`,
-      availableUnits: 4,
-      wifi: true,
-      laundry: true,
+      realEstateName: "AnovaHomes",
+      realEstateLink: "https://www.anovahomes.com/", 
+      minimunPrice: "10000€",
       units: [
         {
           vivienda: "1º A",
@@ -115,6 +115,15 @@ export class Housing {
           precio: 512000.00,
           planoPdfUrl: `${this.baseUrl}/pdfs/planos/Reino_de_Mucia_Sotano-PB.pdf`,
         },
+      ],
+      resume: "Diseñado por Juan Carlos Cartagena Arquitectos, este exclusivo edificio residencial de obra nueva está ubicado junto a la iglesia del Carmen. Combina la elegancia histórica de su fachada protegida con un diseño contemporáneo en cinco alturas. Consta de 15 viviendas de 1 a 5 dormitorios, adecuadas para distintos tipos de compradores, todas con plaza de garaje en sótano y trasteros distribuidos en dos niveles. En planta baja cuenta con un local comercial de 389,69 m². Destacan acabados de alta calidad y eficiencia energética, en un proyecto que respeta la identidad arquitectónica original con modernas comodidades.",
+      galleryImages: [
+        "assets/pdfs/fotos/GonzalezConde/gonzalezconde_3-Foto.jpg",
+        "assets/pdfs/fotos/GonzalezConde/gonzalezconde_5-Foto.jpg",
+        "assets/pdfs/fotos/GonzalezConde/gonzalezconde_Lateralder_mod.jpg",
+        "assets/pdfs/fotos/GonzalezConde/gonzalezconde_Lateralder.jpg",
+        "assets/pdfs/fotos/GonzalezConde/gonzalezconde_Lateralizq_mod.jpg",
+
       ],
     },
     {
@@ -123,9 +132,9 @@ export class Housing {
       city: "Murcia",
       state: "Barrio del progreso",
       photo: `${this.baseUrl}/1_3-Foto.jpg`,
-      availableUnits: 0,
-      wifi: false,
-      laundry: true,
+      realEstateName: "Anova Homes",
+      realEstateLink: "https://www.anovahomes.com/", 
+      minimunPrice: "250.000€",
       units: [
         {
           vivienda: "1º A",
@@ -219,6 +228,13 @@ export class Housing {
           planoPdfUrl: `${this.baseUrl}/pdfs/planos/Reino_de_Mucia_Sotano-PB.pdf`,
         },
       ],
+      resume: "Este proyecto, diseñado por Juan Carlos Cartagena Sevilla, propone un edificio de 8 viviendas, con un local en la primera planta y distribución en las plantas 1ª-2ª y 3ª-4ª. Cuenta con aproximadamente 440 m² útiles de vivienda, distribuidas en tipos A y B, y un local de 76,25 m² en la primera planta. Además, dispone de un espacio común de 110 m², complementando la funcionalidad del conjunto en una ubicación privilegiada en Murcia." ,
+      galleryImages: [
+        "assets/pdfs/fotos/BarrioDelCarmen/1_2-Foto1VIVIENDA PLANTA.jpg",
+        "assets/pdfs/fotos/BarrioDelCarmen/1_3-Foto.jpg",
+        "assets/pdfs/fotos/BarrioDelCarmen/OPCIONA1VIVIENDAPLANTA.jpg",
+        "assets/pdfs/fotos/BarrioDelCarmen/OPCIONB1VIVIENDAPLANTA.jpg",
+      ],
     },
     {
       id: 2,
@@ -226,9 +242,9 @@ export class Housing {
       city: "Murcia",
       state: "Reino de Murcia",
       photo: `${this.baseUrl}/PERPECTIVA_DETALLE.jpg`,
-      availableUnits: 1,
-      wifi: false,
-      laundry: false,
+      realEstateName: "Siroco",
+      realEstateLink: "https://sirocoinmuebles.com/", 
+      minimunPrice: "180.000€",
       units: [
         {
           vivienda: "1º A",
@@ -321,6 +337,12 @@ export class Housing {
           precio: 512000.00,
           planoPdfUrl: `${this.baseUrl}/pdfs/planos/Reino_de_Mucia_Sotano-PB.pdf`,
         },
+      ],
+      resume: "Proyecto promovido por PROMARHOGAR INFANTE S.L. y diseñado por el arquitecto Juan Sánchez Carrillo. Ubicado en Avenida Miguel Indurain, el edificio cuenta con 11 viviendas, locales comerciales, garaje y trasteros, cumpliendo todas las normativas vigentes.Dispone de amplias viviendas con terrazas, locales comerciales en planta baja, y zonas de almacenamiento en sótano. El diseño incluye terrazas comunitarias para el disfrute de los residentes, combinando funcionalidad y calidad en un entorno accesible y bien situado.",
+      galleryImages: [
+        "assets/pdfs/fotos/ReinoDeMurcia/FRONTAL.jpg",
+        "assets/pdfs/fotos/ReinoDeMurcia/GENERAL.jpg",
+        "assets/pdfs/fotos/ReinoDeMurcia/PLANTA.jpg",
       ],
     },
   ];

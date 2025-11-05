@@ -1,4 +1,5 @@
 .footer-section {
+    margin-top: 60px;
     /* Fondo oscuro usando el color principal */
     background-color: var(--primary-color);
     color: white; /* Texto blanco en fondo oscuro */

@@ -1,0 +1,61 @@
+.gallery-container {
+  width: 100%;
+  margin-bottom: 30px; /* Espacio antes de la tabla de unidades */
+}
+
+/* 1. Estilo de la Imagen Principal (Hero) */
+.hero-image-wrapper {
+  width: 100%;
+  height: 50%; /* Altura fija para la imagen grande */
+  background-color: #f0f0f0; /* Color de fondo mientras carga */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  margin-bottom: 15px;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Asegura que la imagen cubra el espacio sin distorsionarse */
+  transition: transform 0.3s ease;
+}
+
+/* 2. Estilos de las Miniaturas (Thumbnails) */
+.thumbnail-list {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  /* Permite scroll horizontal si hay muchas imágenes */
+  overflow-x: auto; 
+  padding-bottom: 10px; /* Espacio para la barra de scroll */
+}
+
+.thumbnail {
+  /* Tamaño fijo para las miniaturas */
+  min-width: 100px; 
+  height: 70px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 3px solid transparent; /* Borde transparente para mantener el tamaño */
+  opacity: 0.7;
+  transition: all 0.2s ease;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumbnail:hover {
+  opacity: 1;
+}
+
+/* Estilo para la miniatura ACTIVA */
+.thumbnail.active {
+  border-color: var(--primary-color); /* Usa tu color primario */
+  opacity: 1;
+  transform: scale(1.05);
+}

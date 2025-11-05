@@ -6,8 +6,13 @@ export interface HousingLocationInfo {
     city: string;
     state: string;
     photo: string;
-    availableUnits: number;
-    wifi: boolean;
-    laundry: boolean;
+    realEstateName?: string;
+    realEstateLink: string;
+    minimunPrice: string;
     units: Unit[]; 
+    resume: string;
+    lat?: number;
+    lng?: number;
+    // --- NUEVA PROPIEDAD ---
+    galleryImages?: string[]; // Array de rutas a las imágenes de la galería
 }

@@ -141,3 +141,165 @@ input {
     width: 100%;
   }
 }
+
+/* ... tus estilos existentes ... */
+
+/* Sección de descargas */
+.download-section {
+  margin: 30px 0;
+  padding: 20px 0;
+}
+
+.download-section .section-heading {
+  color: var(--secondary-color);
+  font-size: 24pt;
+  margin-bottom: 20px;
+}
+
+.download-buttons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 25px;
+  background-color: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  border: 2px solid var(--primary-color);
+}
+
+.btn-download:hover {
+  background-color: white;
+  color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-download svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Responsive para botones */
+@media (max-width: 768px) {
+  .download-buttons {
+    flex-direction: column;
+  }
+  
+  .btn-download {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.listing-features ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 30px;
+}
+
+.listing-features li {
+  font-size: 14pt;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.listing-features li strong {
+  color: var(--primary-color);
+  min-width: 180px;
+}
+
+/* Sección de inmobiliaria */
+.real-estate-info {
+  background-color: var(--accent-color, #f9f9f9);
+  padding: 25px;
+  border-radius: 12px;
+  border-left: 4px solid var(--primary-color);
+  margin-top: 20px;
+}
+
+.real-estate-heading {
+  font-size: 16pt;
+  color: var(--secondary-color);
+  margin: 0 0 10px 0;
+  font-weight: 600;
+}
+
+.real-estate-name {
+  font-size: 20pt;
+  color: var(--primary-color);
+  font-weight: 700;
+  margin: 0 0 15px 0;
+}
+
+.real-estate-description {
+  font-size: 14pt;
+  color: #666;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.btn-real-estate {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background-color: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  border: 2px solid var(--primary-color);
+}
+
+.btn-real-estate:hover {
+  background-color: white;
+  color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-real-estate svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .real-estate-info {
+    padding: 20px;
+  }
+  
+  .real-estate-name {
+    font-size: 18pt;
+  }
+  
+  .btn-real-estate {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+
+.building-resume p {
+  font-size: 15pt;
+  line-height: 1.7;
+  color: #333;
+  margin: 0;
+  text-align: justify;
+}
+
+/* ... resto de estilos existentes ... */

@@ -1,16 +1,14 @@
 .results {
   display: grid;
-  column-gap: 14px;
-  row-gap: 14px;
+  column-gap: 30px; /* Aumentado de 14px */
+  row-gap: 30px;    /* Aumentado de 14px */
   
-  /* ESTE ES EL CAMBIO CLAVE: minmax(min, max) */
-  /* min: 400px (mínimo) | max: 1fr (ocupa toda la fracción disponible) */
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); 
+  /* OPCIÓN 1: Tarjetas más grandes (mínimo 500px) */
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr)); 
   
   margin-top: 50px;
-  /* IMPORTANTE: Asegúrate de que esta línea esté comentada o eliminada */
-  /* justify-content: space-around; */
 }
+
 input[type="text"] {
   border: solid 1px var(--primary-color);
   padding: 10px;
@@ -19,6 +17,7 @@ input[type="text"] {
   display: inline-block;
   width: 30%;
 }
+
 button {
   padding: 10px;
   border: solid 1px var(--primary-color);
@@ -26,6 +25,7 @@ button {
   color: white;
   border-radius: 8px;
 }
+
 @media (min-width: 500px) and (max-width: 768px) {
   .results {
       grid-template-columns: repeat(2, 1fr);
@@ -34,6 +34,7 @@ button {
       width: 70%;
   }   
 }
+
 @media (max-width: 499px) {
   .results {
       grid-template-columns: 1fr;
@@ -41,21 +42,17 @@ button {
 }
 
 .hero-section {
-    /* Usa el 100% del ancho del viewport (vw) para garantizar que se estire */
     width: 100%; 
-    height: 300px; /* Altura generosa para destacar */
+    height: 300px;
     margin-bottom: 50px;
     
-    /* Imagen de Fondo (Reemplaza con tu propia URL) */
     background-image: url('/assets/GONZALEZ_CONDE.jpg'); 
     background-size: cover;
     background-position: center;
     
-    /* Efecto Oscuro (Superposición) */
-    background-color: rgba(0, 0, 0, 0.4); /* Capa oscura para que el texto resalte */
-    background-blend-mode: darken; /* Oscurece la imagen de fondo */
+    background-color: rgba(0, 0, 0, 0.4);
+    background-blend-mode: darken;
 
-    /* Flexbox para centrar el contenido (título/párrafo) */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -63,16 +60,16 @@ button {
 }
 
 .hero-content {
-    color: white; /* Texto blanco para resaltar sobre el fondo oscuro */
+    color: white;
     padding: 20px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Sombra suave para mejor legibilidad */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .hero-content h1 {
-    font-size: 2.5rem; /* Título grande */
+    font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    letter-spacing: 1px; /* Espaciado sutil para elegancia */
+    letter-spacing: 1px;
 }
 
 .hero-content p {
