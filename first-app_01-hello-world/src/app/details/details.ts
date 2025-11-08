@@ -9,7 +9,7 @@ import { Unit } from "../unit";
 import * as L from "leaflet";
 
 @Component({
-  selector: "app-details",
+  selector: "app-details", 
   standalone: true,
   imports: [ReactiveFormsModule, UnitTableComponent, ImageGalleryComponent],
   template: `
@@ -196,8 +196,8 @@ export class Details implements AfterViewInit {
 
   ngAfterViewInit(): void {
     // Coordenadas de Madrid, Cambiara cuando tengamos coordenadas de edificios
-    const lat = 40.4168;
-    const lng = -3.7038;
+    const lat = 38.00538956066262;
+    const lng = -1.1178594990637745;
 
     const map = L.map("map").setView([lat, lng], 13);
 
