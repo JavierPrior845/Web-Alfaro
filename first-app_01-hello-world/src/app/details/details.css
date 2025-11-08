@@ -1,11 +1,27 @@
-  .listing-photo {
-    height: 500px;
-    width: 50%;
-    object-fit: cover;
-    border-radius: 30px;
-    float: right;
-  }
+/* ===== CONTENEDOR PRINCIPAL ===== */
+article {
+  max-width: 1500px;              /* Ancho máximo para centrar el contenido */
+  margin: 40px auto;              /* Margen superior/inferior + centrado horizontal */
+  padding: 0 30px;                /* Espacio lateral dentro del contenido */
+  box-sizing: border-box;
+}
 
+/* Añadimos espacio entre secciones principales */
+section {
+  margin-bottom: 40px;
+}
+
+/* ===== IMAGEN PRINCIPAL ===== */
+.listing-photo {
+  height: 550px;
+  width: 50%;
+  object-fit: cover;
+  border-radius: 30px;
+  float: right;
+  margin-left: 40px; /* margen entre la imagen y el texto */
+}
+
+/* ===== CABECERAS Y TEXTOS ===== */
 .listing-heading {
   font-size: 48pt;
   font-weight: bold;
@@ -39,6 +55,7 @@ li {
   list-style-type: none;
 }
 
+/* ===== FORMULARIO ===== */
 .listing-apply .section-heading {
   font-size: 18pt;
   margin-bottom: 15px;
@@ -66,7 +83,7 @@ input {
   border-bottom: solid .3px;
 }
 
-/* Estilos para el contenedor de mapa y formulario */
+/* ===== MAPA Y FORMULARIO ===== */
 .listing-map-apply {
   margin: 2rem 0;
   clear: both;
@@ -78,13 +95,12 @@ input {
   align-items: flex-start;
 }
 
-/* Columna del mapa (izquierda) */
 .map-column {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  align-items: center; /* CENTRA EL MAPA HORIZONTALMENTE */
+  align-items: center;
 }
 
 .map-column .section-heading {
@@ -94,7 +110,6 @@ input {
   text-align: center;
 }
 
-/* Columna del formulario (derecha) */
 .form-column {
   flex: 1;
   min-width: 0;
@@ -119,41 +134,10 @@ input {
   overflow: hidden;
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
-  .listing-photo {
-    width: 100%;
-    height: 400px;
-  }
-}
-
-@media (max-width: 768px) {
-  .map-form-container {
-    flex-direction: column;
-  }
-  
-  .map-column,
-  .form-column {
-    width: 100%;
-  }
-  
-  input {
-    width: 100%;
-  }
-}
-
-/* ... tus estilos existentes ... */
-
-/* Sección de descargas */
+/* ===== DESCARGAS ===== */
 .download-section {
-  margin: 30px 0;
+  margin: 40px 0;
   padding: 20px 0;
-}
-
-.download-section .section-heading {
-  color: var(--secondary-color);
-  font-size: 24pt;
-  margin-bottom: 20px;
 }
 
 .download-buttons {
@@ -184,43 +168,7 @@ input {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.btn-download svg {
-  width: 20px;
-  height: 20px;
-}
-
-/* Responsive para botones */
-@media (max-width: 768px) {
-  .download-buttons {
-    flex-direction: column;
-  }
-  
-  .btn-download {
-    width: 100%;
-    justify-content: center;
-  }
-}
-
-.listing-features ul {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 30px;
-}
-
-.listing-features li {
-  font-size: 14pt;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.listing-features li strong {
-  color: var(--primary-color);
-  min-width: 180px;
-}
-
-/* Sección de inmobiliaria */
+/* ===== INMOBILIARIA ===== */
 .real-estate-info {
   background-color: var(--accent-color, #f9f9f9);
   padding: 25px;
@@ -272,28 +220,7 @@ input {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.btn-real-estate svg {
-  width: 20px;
-  height: 20px;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .real-estate-info {
-    padding: 20px;
-  }
-  
-  .real-estate-name {
-    font-size: 18pt;
-  }
-  
-  .btn-real-estate {
-    width: 100%;
-    justify-content: center;
-  }
-}
-
-
+/* ===== RESUMEN DEL EDIFICIO ===== */
 .building-resume p {
   font-size: 15pt;
   line-height: 1.7;
@@ -302,4 +229,51 @@ input {
   text-align: justify;
 }
 
-/* ... resto de estilos existentes ... */
+/* ===== GALERÍA ===== */
+.gallery-section {
+  margin-top: 50px;
+}
+
+.gallery-section h2 {
+  text-align: center;
+  color: var(--secondary-color);
+  font-size: 24pt;
+  margin-bottom: 25px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .listing-photo {
+    width: 100%;
+    height: 400px;
+    margin: 0 0 20px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  article {
+    padding: 0 15px;
+  }
+
+  .map-form-container {
+    flex-direction: column;
+  }
+
+  .download-buttons {
+    flex-direction: column;
+  }
+
+  .btn-download,
+  .btn-real-estate {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .real-estate-info {
+    padding: 20px;
+  }
+
+  .real-estate-name {
+    font-size: 18pt;
+  }
+}
