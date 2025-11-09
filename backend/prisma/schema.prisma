@@ -1,0 +1,96 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  // AÑADIMOS la ruta de salida.
+  // Esta ruta (relativa a este fichero) apunta a 'node_modules'
+  // y es donde 'server.ts' buscará el cliente.
+ 
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// --- MODELO 1: LAS OBRAS / VIVIENDAS ---
+model Vivienda {
+  id                 Int      @id @default(autoincrement())
+  nombre             String
+  ciudad             String
+  provinciaEstado    String   @map("provincia_estado")
+  fotoPrincipalUrl   String   @map("foto_principal_url")
+  inmobiliariaNombre String?  @map("inmobiliaria_nombre")
+  inmobiliariaUrl    String?  @map("inmobiliaria_url")
+  precioMinimo       String
+  resumen            String   @db.Text // Mejor usar @db.Text para cadenas largas en MySQL
+  latitud            Float?
+  longitud           Float?
+  createdAt          DateTime @default(now())
+
+  // --- Relaciones ---
+  unidades    Unidad[]
+  galeria     ImagenGaleria[]
+  solicitudes SolicitudInfo[]
+
+  @@map("viviendas") // Nombra la tabla "viviendas" en MySQL
+}
+
+// --- MODELO 2: UNIDADES DE LA TABLA ---
+model Unidad {
+  id          Int      @id @default(autoincrement())
+  viviendaRef String   @map("vivienda_ref")
+  m2          Float
+  terrazas    String?
+  precio      String
+  planoPdfUrl String?  @map("plano_pdf_url")
+  createdAt   DateTime @default(now())
+
+  // --- Relación ---
+  vivienda    Vivienda @relation(fields: [viviendaId], references: [id], onDelete: Cascade)
+  viviendaId  Int      @map("vivienda_id")
+
+  @@map("unidades")
+}
+
+// --- MODELO 3: GALERÍA DE IMÁGENES ---
+model ImagenGaleria {
+  id         Int      @id @default(autoincrement())
+  url        String
+  createdAt  DateTime @default(now())
+
+  // --- Relación ---
+  vivienda   Vivienda @relation(fields: [viviendaId], references: [id], onDelete: Cascade)
+  viviendaId Int      @map("vivienda_id")
+
+  @@map("imagenes_galeria")
+}
+
+// --- MODELO 4: SOLICITUDES DE INFORMACIÓN ---
+model SolicitudInfo {
+  id         Int      @id @default(autoincrement())
+  nombre     String
+  email      String
+  telefono   String?
+  createdAt  DateTime @default(now())
+
+  // --- Relación ---
+  vivienda   Vivienda @relation(fields: [viviendaId], references: [id])
+  viviendaId Int      @map("vivienda_id")
+
+  @@map("solicitudes_info")
+}
+
+// --- MODELO 5: SUSCRIPCIONES (AÑADIDO) ---
+// Almacena los correos del formulario del Footer
+model Suscripcion {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique // El email debe ser único
+  createdAt DateTime @default(now())
+
+  @@map("suscripciones")
+}
