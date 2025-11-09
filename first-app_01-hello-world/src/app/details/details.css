@@ -134,6 +134,32 @@ input {
   overflow: hidden;
 }
 
+.terms-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+  font-size: 14pt;
+  color: #333;
+}
+
+.terms-container a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.terms-container a:hover {
+  text-decoration: underline;
+}
+
+.terms-container input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  transform: translateY(2px); 
+  cursor: pointer;
+}
+
 /* ===== DESCARGAS ===== */
 .download-section {
   margin: 40px 0;

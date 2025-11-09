@@ -5,8 +5,9 @@
   
   /* OPCIÓN 1: Tarjetas más grandes (mínimo 500px) */
   grid-template-columns: repeat(auto-fill, minmax(500px, 1fr)); 
-  
-  margin-top: 50px;
+
+  /* margin-top: 50px; */
+  margin: 50px 20px 0 20px;
 }
 
 input[type="text"] {

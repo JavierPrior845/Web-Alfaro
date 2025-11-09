@@ -9,7 +9,7 @@ import { Unit } from "../unit";
 import * as L from "leaflet";
 
 @Component({
-  selector: "app-details", 
+  selector: "app-details",
   standalone: true,
   imports: [ReactiveFormsModule, UnitTableComponent, ImageGalleryComponent],
   template: `
@@ -124,15 +124,14 @@ import * as L from "leaflet";
         Usamos un alias '; as galleryImages' para que TypeScript sepa
         que 'galleryImages' es de tipo string[] (no undefined) dentro del bloque.
       -->
-      @if (housingLocation?.galleryImages; as galleryImages) {
-        @if (galleryImages.length > 0) {
-          <section class="gallery-section">
-            <h2 class="section-heading"> Galería de Imágenes</h2>
-            <!-- Esta línea ahora es segura y no dará error -->
-            <app-image-gallery [images]="galleryImages" />
-          </section>
-        }
-      }
+      @if (housingLocation?.galleryImages; as galleryImages) { @if
+      (galleryImages.length > 0) {
+      <section class="gallery-section">
+        <h2 class="section-heading">Galería de Imágenes</h2>
+        <!-- Esta línea ahora es segura y no dará error -->
+        <app-image-gallery [images]="galleryImages" />
+      </section>
+      } }
 
       <section class="unit-table-section clearfix">
         @if (housingLocation?.units; as availableUnits) {
@@ -147,7 +146,15 @@ import * as L from "leaflet";
           <!-- Columna izquierda: Mapa -->
           <div class="map-column">
             <h2 class="section-heading">Ubicación</h2>
-            <div id="map" style="height: 400px; width: 400px;"></div>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d665.4823069294587!2d-1.1181602905529737!3d38.0052129310496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6382378c4223b7%3A0xbcf245bc7bc0ac4c!2sDiseminado%20Diego%20Carmona%2C%202%2C%2030007%20Zarandona%2C%20Murcia!5e1!3m2!1ses!2ses!4v1762621605517!5m2!1ses!2ses"
+              width="600"
+              height="450"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
 
           <!-- Columna derecha: Formulario -->
@@ -162,6 +169,18 @@ import * as L from "leaflet";
 
               <label for="email">Email</label>
               <input id="email" type="email" formControlName="email" />
+
+              <div class="terms-container">
+                <input
+                  type="checkbox"
+                  id="terms"
+                  formControlName="termsAccepted"
+                />
+                <label for="terms">
+                  Acepto los
+                  <a href="/terms" target="_blank">términos y condiciones</a>
+                </label>
+              </div>
 
               <button type="submit" class="primary">
                 Confirmar información
@@ -185,6 +204,7 @@ export class Details implements AfterViewInit {
     firstName: new FormControl(""),
     lastName: new FormControl(""),
     email: new FormControl(""),
+    termsAccepted: new FormControl(false),
   });
 
   constructor() {
@@ -223,6 +243,11 @@ export class Details implements AfterViewInit {
   }
 
   submitApplication() {
+    if (!this.applyForm.value.termsAccepted) {
+      alert("Debes aceptar los términos y condiciones antes de continuar.");
+      return;
+    }
+
     this.housingService.submitApplication(
       this.applyForm.value.firstName ?? "",
       this.applyForm.value.lastName ?? "",
