@@ -160,7 +160,7 @@ import * as L from "leaflet";
           <!-- Columna derecha: Formulario -->
           <div class="form-column">
             <h2 class="section-heading">Quieres que te enviemos información</h2>
-            <form [formGroup]="applyForm" (submit)="submitApplication()">
+            <form [formGroup]="applyForm" (ngSubmit)="submitApplication()">
               <label for="first-name">Nombre</label>
               <input id="first-name" type="text" formControlName="firstName" />
 
@@ -251,7 +251,8 @@ export class Details implements AfterViewInit {
     this.housingService.submitApplication(
       this.applyForm.value.firstName ?? "",
       this.applyForm.value.lastName ?? "",
-      this.applyForm.value.email ?? ""
+      this.applyForm.value.email ?? "",
+      this.housingLocationId
     );
   }
 }

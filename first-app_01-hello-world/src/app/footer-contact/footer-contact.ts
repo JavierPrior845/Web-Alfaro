@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { environment } from 'src/environments/environment';
+
+const apiUrl = environment.apiBaseUrl;
 
 @Component({
   selector: 'app-footer-contact',
@@ -13,7 +16,7 @@ import { CommonModule } from '@angular/common';
         <p class="footer-text">Suscríbete para recibir notificaciones exclusivas sobre nuevos lanzamientos de ALFARO.</p>
         
         <!-- Formulario de Suscripción -->
-        <form [formGroup]="applyForm" (submit)="submitApplication()" class="contact-form">
+        <form [formGroup]="applyForm" (ngSubmit)="submitApplication()" class="contact-form">
           <div class="input-group">
             <input 
               type="email" 
@@ -52,6 +55,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './footer-contact.css'
 })
 export class FooterContact {
+
   // Estado para manejar la respuesta del servidor (Fastify)
   submissionStatus: 'pending' | 'success' | 'error' | null = null; 
 
@@ -60,21 +64,38 @@ export class FooterContact {
     email: new FormControl('', [Validators.required, Validators.email]),
   });
 
-  submitApplication() {
+
+  async submitApplication() {
     if (this.applyForm.valid) {
       this.submissionStatus = 'pending';
       const email = this.applyForm.value.email ?? '';
 
-      // --- SIMULACIÓN DE LLAMADA AL BACKEND ---
-      // Aquí irá la lógica para llamar a tu Fastify POST /api/contacto
-      console.log(`Intentando enviar: ${email}`);
-      
-      // Simulación de éxito (reemplazar con fetch real a Fastify)
-      setTimeout(() => {
-        this.submissionStatus = 'success'; 
+      try {
+        const response = await fetch(`${apiUrl}/api/suscripcion`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+
+        if (!response.ok) {
+          if (response.status === 409) {
+            alert('Este correo electrónico ya está suscrito.');
+          } else {
+            alert('Error al suscribirse. Intenta nuevamente más tarde.');
+          }
+          this.submissionStatus = 'error';
+          return;
+        }
+
+        const data = await response.json();
+        console.log('Suscripción exitosa', data);
+        this.submissionStatus = 'success';
         this.applyForm.reset();
-      }, 1500);
-      // ----------------------------------------
+      } catch (error) {
+        console.error('Error en la suscripción', error);
+        alert('Error de conexión. Intenta nuevamente más tarde.');
+        this.submissionStatus = 'error';
+      }
     }
   }
 }
