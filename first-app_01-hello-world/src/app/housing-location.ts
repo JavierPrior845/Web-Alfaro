@@ -15,4 +15,5 @@ export interface HousingLocationInfo {
     lng?: number;
     // --- NUEVA PROPIEDAD ---
     galleryImages?: string[]; // Array de rutas a las imágenes de la galería
+    renderLink?: string;
 }

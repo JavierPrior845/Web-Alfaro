@@ -1,0 +1,58 @@
+<footer class="footer-section">
+  <div class="footer-content">
+    <h3 class="footer-heading">¿Interesado en Viviendas de Obra Nueva?</h3>
+    <p class="footer-text">
+      Suscríbete para recibir notificaciones exclusivas sobre nuevos
+      lanzamientos de ALFARO.
+    </p>
+
+    <!-- Formulario de Suscripción -->
+    <form
+      [formGroup]="applyForm"
+      (ngSubmit)="submitApplication()"
+      class="contact-form"
+    >
+      <div class="input-group">
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="Introduce tu correo electrónico"
+          class="email-input"
+        />
+        <button
+          type="submit"
+          [disabled]="!applyForm.valid"
+          class="primary footer-button"
+        >
+          Suscribirme
+        </button>
+      </div>
+
+      <!-- Mensaje de Validación y Error -->
+      @if (applyForm.controls['email'].invalid &&
+      applyForm.controls['email'].dirty) {
+      <p class="error-message">
+        Por favor, introduce un correo electrónico válido.
+      </p>
+      } @if (submissionStatus === 'success') {
+      <p class="success-message">
+        ¡Gracias! Nos pondremos en contacto contigo pronto.
+      </p>
+      } @if (submissionStatus === 'error') {
+      <p class="error-message">
+        Hubo un error al enviar tu solicitud. Inténtalo de nuevo.
+      </p>
+      }
+    </form>
+  </div>
+  <div class="footer-bar">
+    <p class="copyright">
+      ALFARO Inmobiliaria &copy; 2025. Todos los derechos reservados.
+    </p>
+    <div class="contact-info">
+      <!-- Información de contacto estática -->
+      <p>Tel: +34 XXX XXX XXX</p>
+      <p>Email: contacto@alfaro.com</p>
+    </div>
+  </div>
+</footer>

@@ -248,6 +248,7 @@ export class Housing {
       photo: `${this.baseUrlAssets}/PERPECTIVA_DETALLE.jpg`,
       realEstateName: "Siroco",
       realEstateLink: "https://sirocoinmuebles.com/", 
+      renderLink: "https://my.matterport.com/show/?m=poxMa2bcLc2",
       minimunPrice: "180.000€",
       units: [
         {

@@ -1,48 +1,11 @@
 import { Component } from "@angular/core";
-import { Location } from "@angular/common";
 
 @Component({
   selector: "app-terms",
   standalone: true,
-  template: `
-    <div class="terms-wrapper">
-      <h1>Términos y Condiciones</h1>
-      <p>
-        Bienvenido a nuestra web. Al utilizar nuestros servicios, aceptas los
-        siguientes términos y condiciones. Por favor, léelos detenidamente antes
-        de continuar.
-      </p>
-
-      <h2>1. Uso del sitio</h2>
-      <p>
-        El contenido de esta página es únicamente informativo. No se permite su
-        uso con fines comerciales sin autorización previa.
-      </p>
-
-      <h2>2. Protección de datos</h2>
-      <p>
-        Los datos personales que proporciones serán tratados de forma
-        confidencial y utilizados únicamente con el propósito de gestionar tu
-        solicitud.
-      </p>
-
-      <h2>3. Modificaciones</h2>
-      <p>
-        Nos reservamos el derecho a modificar estos términos en cualquier
-        momento. Las modificaciones se publicarán en esta misma página.
-      </p>
-
-      <p class="back-link">
-        <button (click)="volver()" class="btn-volver">← Volver</button>
-      </p>
-    </div>
-  `,
+  templateUrl: "./terms.html",
   styleUrls: ["./terms.css"],
 })
 export class Terms {
-  constructor(private location: Location) {}
 
-  volver() {
-    this.location.back();
-  }
 }

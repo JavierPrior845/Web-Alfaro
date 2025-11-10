@@ -6,53 +6,7 @@ import { Unit } from '../unit';
   selector: 'app-unit-table',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <section class="unit-table-container">
-      <h3 class="table-title">Disponibilidad y Precios</h3>
-      
-      <div class="table-wrapper">
-        <table class="unit-table">
-          <thead>
-            <tr>
-              <th>Vivienda</th>
-              <th class="text-right">M²</th>
-              <th class="text-right">Terrazas (M²)</th>
-              <th class="text-right">Precio Sin IVA (€)</th>
-              <th class="text-center">Plano</th> <!-- Columna del Plano -->
-            </tr>
-          </thead>
-          <tbody>
-            @for (unit of units(); track unit.vivienda) {
-              <tr [class.sold]="unit.precio === 'VENDIDO'">
-                <td>{{ unit.vivienda }}</td>
-                <td class="text-right">{{ unit.m2 | number:'1.2-2' }}</td>
-                <td class="text-right">{{ unit.terrazas || '—' }}</td>
-                <td class="text-right price-col">
-                  @if (unit.precio === 'VENDIDO') {
-                    <span class="sold-tag">{{ unit.precio }}</span>
-                  } @else {
-                    {{ unit.precio | number:'1.2-2' }}
-                  }
-                </td>
-                <td class="text-center">
-                  @if (unit.planoPdfUrl && unit.precio !== 'VENDIDO') {
-                    <a [href]="unit.planoPdfUrl" target="_blank" class="plan-link">
-                      <svg class="pdf-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18h14v2H5z"/>
-                      </svg>
-                      <!-- <img src="assets/pdf-icon.svg" alt="Descargar Plano" class="pdf-icon" /> -->
-                    </a>
-                  } @else {
-                    <span>{{ unit.precio === 'VENDIDO' ? '—' : 'N/D' }}</span>
-                  }
-                </td>
-              </tr>
-            }
-          </tbody>
-        </table>
-      </div>
-    </section>
-  `,
+  templateUrl: "./unit-table.html",
   styleUrl: './unit-table.css',
 })
 export class UnitTableComponent {
