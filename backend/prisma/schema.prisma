@@ -36,6 +36,7 @@ model Vivienda {
   unidades    Unidad[]
   galeria     ImagenGaleria[]
   solicitudes SolicitudInfo[]
+  documentos  DocumentoDescargable[] @relation("ViviendaToDocumentos")
 
   @@map("viviendas") // Nombra la tabla "viviendas" en MySQL
 }
@@ -93,4 +94,19 @@ model Suscripcion {
   createdAt DateTime @default(now())
 
   @@map("suscripciones")
+}
+
+// --- MODELO 6: DOCUMENTOS DESCARGABLES (¡NUEVO!) ---
+// Almacena los PDFs (Planos Generales, Memoria de Calidades, etc.)
+model DocumentoDescargable {
+  id           Int      @id @default(autoincrement())
+  nombreBoton  String   @map("nombre_boton") // Texto que aparecerá en el botón
+  rutaArchivo  String   @map("ruta_archivo") // Ruta (ej: 'assets/pdfs/memoria.pdf')
+  createdAt    DateTime @default(now())
+
+  // --- Relación ---
+  vivienda     Vivienda @relation("ViviendaToDocumentos", fields: [viviendaId], references: [id], onDelete: Cascade)
+  viviendaId   Int      @map("vivienda_id") 
+
+  @@map("documentos_descargables")
 }

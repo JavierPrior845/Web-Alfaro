@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HousingLocationInfo } from './housing-location';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/enviroments/environment';
 
 const apiUrl = environment.apiBaseUrl;
 

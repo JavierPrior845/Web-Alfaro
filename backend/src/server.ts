@@ -1,5 +1,5 @@
 import fastify from 'fastify';
-import { PrismaClient, Prisma } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 import cors from '@fastify/cors';
 
 // Definición de Interfaces para los cuerpos (body) de las peticiones
@@ -39,6 +39,7 @@ app.get('/api/viviendas', async (request, reply) => {
       include: {
         unidades: true, // Incluye la tabla de unidades
         galeria: true,  // Incluye la galería de imágenes
+        documentos: true, // <-- ¡NUEVA LÍNEA AÑADIDA!
       },
     });
     reply.code(200).send({ success: true, data: viviendas });
