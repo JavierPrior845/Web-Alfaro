@@ -54,3 +54,18 @@ section.listing a::after {
   content: "\203A";
   margin-left: 5px;
 }
+
+.listing-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;   
+}
+
+.listing-link section.listing {
+  cursor: pointer;
+}
+
+.listing-link:hover section.listing {
+  /* tu efecto hover si quieres */
+  background-color: rgba(0,0,0,0.02);
+}
