@@ -16,7 +16,7 @@ section {
   height: 550px;
   width: 50%;
   object-fit: cover;
-  border-radius: 30px;
+  border-radius: 0px;
   float: right;
   margin-left: 40px; /* margen entre la imagen y el texto */
 }
@@ -130,7 +130,7 @@ input {
 #map {
   height: 400px;
   width: 100%;
-  border-radius: 10px;
+  border-radius: 0px;
   overflow: hidden;
 }
 
@@ -180,7 +180,7 @@ input {
   background-color: var(--primary-color);
   color: white;
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 0px;
   font-weight: 600;
   font-size: 16px;
   transition: all 0.3s ease;
@@ -198,7 +198,7 @@ input {
 .real-estate-info {
   background-color: var(--accent-color, #f9f9f9);
   padding: 25px;
-  border-radius: 12px;
+  border-radius: 0px;
   border-left: 4px solid var(--primary-color);
   margin-top: 20px;
 }
@@ -232,7 +232,7 @@ input {
   background-color: var(--primary-color);
   color: white;
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 0px;
   font-weight: 600;
   font-size: 15px;
   transition: all 0.3s ease;

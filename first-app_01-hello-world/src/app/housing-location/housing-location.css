@@ -1,43 +1,55 @@
+/* TARJETA PRINCIPAL */
 .listing {
-  background: var(--accent-color);
-  border-radius: 30px;
+   background: var(--card-bg); /* Fondo dorado suave, en vez de accent azul */
+  border-radius: 0;     /* <-- esquinas en pico */
   padding-bottom: 30px;
+  border: 1px solid var(--primary-color);
 }
-
+/* TITULO */
 .listing-heading {
-  color: var(--primary-color);
+  color: var(--primary-color); /* dorado principal */
   padding: 10px 20px 0 20px;
+  font-weight: 700;
 }
 
+/* IMAGEN */
 .listing-photo {
   height: 350px;
   width: 100%;
   object-fit: cover;
-  border-radius: 30px 30px 0 0;
+  border-radius: 0; /* <-- antes 30px */
+  border-bottom: 3px solid var(--primary-color); /* borde dorado elegante */
 }
 
+/* LOCALIZACIÓN */
 .listing-location {
   padding: 10px 20px 20px 20px;
+  color: var(--text-color);
 }
 
+/* icono del pin (si quieres lo cambio a dorado también) */
 .listing-location::before {
   content: url("/assets/location-pin.svg") / "";
 }
 
+/* PRECIO MÍNIMO */
 .minimun-price {
   padding: 0 20px 15px 20px;
-  color: var(--primary-color);
+  color: var(--primary-color);    /* dorado */
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 700;
   margin: 0;
 }
 
+/* ENLACE "Ver más" */
 section.listing a {
   padding-left: 20px;
   text-decoration: none;
-  color: var(--primary-color);
+  color: var(--primary-dark); /* dorado oscuro */
+  font-weight: 600;
 }
 
+/* Flecha del enlace */
 section.listing a::after {
   content: "\203A";
   margin-left: 5px;

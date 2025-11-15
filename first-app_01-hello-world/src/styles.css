@@ -8,16 +8,32 @@ body {
   font-family: 'Be Vietnam Pro', sans-serif;
 }
 :root {
-  --primary-color: #605DC8;
-  --secondary-color: #8B89E6;
-  --accent-color: #e8e7fa;
-  --shadow-color: #E8E8E8;
+  --primary-color: #C2A449;         /* Dorado */
+  --primary-dark: #8C7A3A;          /* Dorado oscuro */
+  --primary-light: #F1E8C7;         /* Fondo dorado suave */
+
+  --bg-color: #FFFFFF;              /* Fondo base */
+  --card-bg: #FAF7EF;               /* Fondo tarjetas */
+  --accent-color: #F5F1E4;          /* Crema premium */
+
+  --text-color: #2F2F2F;            /* Texto principal */
+  --text-muted: #6F6F6F;            /* Texto secundario */
+
+  --border-color: rgba(0,0,0,0.15); /* Bordes suaves */
+  --shadow-color: rgba(0,0,0,0.08); /* Sombras ligeras */
 }
+
+body {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
 
 button.primary {
   padding: 10px;
   border: solid 1px var(--primary-color);
   background: var(--primary-color);
   color: white;
-  border-radius: 8px;
+  border-radius: 0px;
 }
