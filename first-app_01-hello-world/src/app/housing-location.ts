@@ -1,3 +1,4 @@
+import { SocialMediaLink } from './social-media-link';
 import { Unit } from './unit';
 
 export interface HousingLocationInfo {
@@ -16,4 +17,5 @@ export interface HousingLocationInfo {
     // --- NUEVA PROPIEDAD ---
     galleryImages?: string[]; // Array de rutas a las imágenes de la galería
     renderLink?: string;
+    socialMediaLinks?: SocialMediaLink[];
 }
