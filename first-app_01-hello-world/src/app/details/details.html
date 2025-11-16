@@ -23,10 +23,19 @@
       }
 
       <!-- SECCIÓN DE DESCARGAS MEJORADA -->
+      @if (housingLocation?.downloadDocuments; as documentos) { @if
+      (documentos.length > 0) {
       <section class="download-section clearfix">
         <h3 class="real-estate-heading">Documentación</h3>
         <div class="download-buttons">
-          <a [href]="getGlobalPlanPath()" download class="btn-download">
+          <!-- Ahora iteramos sobre el alias 'documentos' -->
+          @for (doc of documentos; track doc.id) {
+          <a
+            [href]="doc.rutaArchivo"
+            target="_blank"
+            download
+            class="btn-download"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -42,28 +51,12 @@
               <polyline points="7 10 12 15 17 10"></polyline>
               <line x1="12" y1="15" x2="12" y2="3"></line>
             </svg>
-            Planos Globales
+            {{ doc.nombreBoton }}
           </a>
-          <a [href]="getGlobalPlanPath()" download class="btn-download">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-            Memoria de Calidades
-          </a>
+          }
         </div>
       </section>
+      } }
 
       <div class="real-estate-info">
         <h3 class="real-estate-heading">Comercializado por</h3>
@@ -171,11 +164,6 @@
     </section>
   </section>
 
-  <!-- 
-        --- SECCIÓN DE GALERÍA (CORREGIDA) ---
-        Usamos un alias '; as galleryImages' para que TypeScript sepa
-        que 'galleryImages' es de tipo string[] (no undefined) dentro del bloque.
-      -->
   @if (housingLocation?.galleryImages; as galleryImages) { @if
   (galleryImages.length > 0) {
   <section class="gallery-section">
@@ -219,22 +207,26 @@
     <p>No hay información de unidades disponible para este edificio.</p>
     }
   </section>
+
   <section class="listing-map-apply">
     <div class="map-form-container">
       <!-- Columna izquierda: Mapa -->
-      <div class="map-column">
-        <h2 class="section-heading">Ubicación</h2>
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d665.4823069294587!2d-1.1181602905529737!3d38.0052129310496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6382378c4223b7%3A0xbcf245bc7bc0ac4c!2sDiseminado%20Diego%20Carmona%2C%202%2C%2030007%20Zarandona%2C%20Murcia!5e1!3m2!1ses!2ses!4v1762621605517!5m2!1ses!2ses"
-          width="600"
-          height="450"
-          style="border: 0"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-        ></iframe>
-      </div>
+      @if(safeMapUrl){
+        <div class="map-column">
+          <h2 class="section-heading">Ubicación</h2>
+          <iframe
+            [src]="safeMapUrl"
+            height="450"
+            width="600"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
 
+      }
+        
       <!-- Columna derecha: Formulario -->
       <div class="form-column">
         <h2 class="section-heading">Quieres que te enviemos información</h2>

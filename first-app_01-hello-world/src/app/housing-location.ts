@@ -9,7 +9,7 @@ export interface HousingLocationInfo {
     state: string;
     photo: string;
     realEstateName?: string;
-    realEstateLink: string;
+    realEstateLink?: string;
     minimunPrice: string;
     units: Unit[]; 
     resume: string;

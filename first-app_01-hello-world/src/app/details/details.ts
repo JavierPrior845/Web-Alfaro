@@ -1,27 +1,31 @@
-import { Component, inject, AfterViewInit } from "@angular/core";
+import { Component, inject, AfterViewInit, OnInit} from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Housing } from "../housing";
 import { HousingLocationInfo } from "../housing-location";
 import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { UnitTableComponent } from "../unit-table/unit-table";
 import { ImageGalleryComponent } from "../image-gallery/image-gallery";
-import { Unit } from "../unit";
 import * as L from "leaflet";
 import { CommonModule } from '@angular/common';
+import { Title } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: "app-details",
   standalone: true,
-  imports: [ReactiveFormsModule, UnitTableComponent, ImageGalleryComponent, CommonModule],
+  imports: [ReactiveFormsModule, UnitTableComponent, ImageGalleryComponent, CommonModule, ],
   templateUrl: "./details.html",
   styleUrls: ["./details.css"],
 })
-export class Details implements AfterViewInit {
+export class Details implements OnInit {
   route: ActivatedRoute = inject(ActivatedRoute);
   housingService = inject(Housing);
+  titleService: Title = inject(Title);
+  sanitizer: DomSanitizer = inject(DomSanitizer);
 
   housingLocationId = -1;
   housingLocation: HousingLocationInfo | undefined;
+  safeMapUrl: SafeResourceUrl | string = '';
 
   applyForm = new FormGroup({
     firstName: new FormControl(""),
@@ -35,35 +39,22 @@ export class Details implements AfterViewInit {
     this.housingLocation = this.housingService.getHousingLocationById(
       this.housingLocationId
     );
+    if (this.housingLocation?.mapLink) {
+      // Le decimos a Angular que esta URL es segura para 'iframes'
+      this.safeMapUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+        this.housingLocation.mapLink
+      );
+    }
   }
 
-  ngAfterViewInit(): void {
-    // Coordenadas de Madrid, Cambiara cuando tengamos coordenadas de edificios
-    const lat = 38.00538956066262;
-    const lng = -1.1178594990637745;
-
-    const map = L.map("map").setView([lat, lng], 13);
-
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
-    }).addTo(map);
-
-    L.marker([lat, lng])
-      .addTo(map)
-      .bindPopup(this.housingLocation?.name || "Housing Location")
-      .openPopup();
-
-    setTimeout(() => {
-      map.invalidateSize();
-    }, 0);
+  ngOnInit(): void {
+    if (this.housingLocation) {
+      this.titleService.setTitle(`ALFARO - ${this.housingLocation.name}`);
+    } else {
+      this.titleService.setTitle('ALFARO');
+    }
   }
 
-  getGlobalPlanPath(): string {
-    // Asegúrate de que este archivo existe en la ruta especificada
-    // (Ajusta el nombre si es diferente)
-    return "assets/pdfs/planos/Edificio_Global.pdf";
-  }
 
   getSocialMediaUrl(nombre: string): string | null {
     if (!this.housingLocation?.socialMediaLinks) return null;
