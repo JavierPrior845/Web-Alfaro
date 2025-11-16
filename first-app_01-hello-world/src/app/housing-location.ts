@@ -1,3 +1,4 @@
+import { DownloadDocument } from './download-document';
 import { Unit } from './unit';
 
 export interface HousingLocationInfo {
@@ -11,9 +12,8 @@ export interface HousingLocationInfo {
     minimunPrice: string;
     units: Unit[]; 
     resume: string;
-    lat?: number;
-    lng?: number;
-    // --- NUEVA PROPIEDAD ---
+    downloadDocuments?: DownloadDocument[];  
     galleryImages?: string[]; // Array de rutas a las imágenes de la galería
     renderLink?: string;
+    mapLink?: string;
 }
