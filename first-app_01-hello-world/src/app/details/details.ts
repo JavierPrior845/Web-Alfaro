@@ -7,11 +7,12 @@ import { UnitTableComponent } from "../unit-table/unit-table";
 import { ImageGalleryComponent } from "../image-gallery/image-gallery";
 import { Unit } from "../unit";
 import * as L from "leaflet";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: "app-details",
   standalone: true,
-  imports: [ReactiveFormsModule, UnitTableComponent, ImageGalleryComponent],
+  imports: [ReactiveFormsModule, UnitTableComponent, ImageGalleryComponent, CommonModule],
   templateUrl: "./details.html",
   styleUrls: ["./details.css"],
 })
@@ -62,6 +63,16 @@ export class Details implements AfterViewInit {
     // Asegúrate de que este archivo existe en la ruta especificada
     // (Ajusta el nombre si es diferente)
     return "assets/pdfs/planos/Edificio_Global.pdf";
+  }
+
+  getSocialMediaUrl(nombre: string): string | null {
+    if (!this.housingLocation?.socialMediaLinks) return null;
+
+    const link = this.housingLocation.socialMediaLinks.find(
+      (s) => s.nombreRedSocial.toLowerCase() === nombre.toLowerCase()
+    );
+
+    return link?.rutaArchivo || null;
   }
 
   submitApplication() {

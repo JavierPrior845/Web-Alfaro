@@ -1,13 +1,14 @@
 /* TARJETA PRINCIPAL */
 .listing {
-   background: var(--card-bg); /* Fondo dorado suave, en vez de accent azul */
-  border-radius: 0;     /* <-- esquinas en pico */
+  background: var(--card-bg);
+  border-radius: 0;
   padding-bottom: 30px;
   border: 1px solid var(--primary-color);
 }
+
 /* TITULO */
 .listing-heading {
-  color: var(--primary-color); /* dorado principal */
+  color: var(--primary-color);
   padding: 10px 20px 0 20px;
   font-weight: 700;
 }
@@ -17,8 +18,8 @@
   height: 350px;
   width: 100%;
   object-fit: cover;
-  border-radius: 0; /* <-- antes 30px */
-  border-bottom: 3px solid var(--primary-color); /* borde dorado elegante */
+  border-radius: 0;
+  border-bottom: 3px solid var(--primary-color);
 }
 
 /* LOCALIZACIÓN */
@@ -27,7 +28,6 @@
   color: var(--text-color);
 }
 
-/* icono del pin (si quieres lo cambio a dorado también) */
 .listing-location::before {
   content: url("/assets/location-pin.svg") / "";
 }
@@ -35,22 +35,22 @@
 /* PRECIO MÍNIMO */
 .minimun-price {
   padding: 0 20px 15px 20px;
-  color: var(--primary-color);    /* dorado */
+  color: var(--primary-color);
   font-size: 1.2rem;
   font-weight: 700;
   margin: 0;
 }
 
-/* ENLACE "Ver más" */
-section.listing a {
-  padding-left: 20px;
+/* TARJETA CLICABLE COMPLETA */
+.listing-link {
   text-decoration: none;
-  color: var(--primary-dark); /* dorado oscuro */
-  font-weight: 600;
+  color: inherit;
+  display: block;
 }
 
-/* Flecha del enlace */
-section.listing a::after {
-  content: "\203A";
-  margin-left: 5px;
+/* Efecto hover en toda la tarjeta */
+.listing-link:hover .listing {
+  background-color: rgba(0, 0, 0, 0.03);
+  transition: 0.2s ease;
+  cursor: pointer;
 }
