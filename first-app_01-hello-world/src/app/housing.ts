@@ -370,6 +370,18 @@ export class Housing {
         "assets/pdfs/fotos/ReinoDeMurcia/GENERAL.jpg",
         "assets/pdfs/fotos/ReinoDeMurcia/PLANTA.jpg",
       ],
+      downloadDocuments: [
+        {
+          id: 1,
+          nombreBoton: 'Planos Globales',
+          rutaArchivo: 'assets/pdfs/planos/Edificio_Global.pdf'
+        },
+        {
+          id: 2,
+          nombreBoton: 'Memoria de Calidades',
+          rutaArchivo: 'assets/pdfs/memoria_calidades.pdf'
+        }
+      ]
     },
   ];
 
