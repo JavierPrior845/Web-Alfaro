@@ -7,12 +7,12 @@ const routeConfig: Routes = [
   {
     path: "",
     component: Home,
-    title: "Home page",
+    title: "ALFARO",
   },
   {
-    path: "details/:id",
+    path: "vivienda-obra-nueva/:id",
     component: Details,
-    title: "Home details",
+    //title: "Home details",
   },
   { path: "terms", component: Terms },
 ];

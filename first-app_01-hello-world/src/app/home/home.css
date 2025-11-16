@@ -70,7 +70,11 @@ button:hover {
 
     background-color: rgba(0, 0, 0, 0.4);
     background-blend-mode: darken;
+    
+    /* --- CAMBIO AQUÍ: Añadida la línea dorada superior --- */
+    border-top: 3px solid var(--primary-color);
     border-bottom: 3px solid var(--primary-color);
+
 
     display: flex;
     align-items: center;
