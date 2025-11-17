@@ -29,14 +29,18 @@ export class Details implements OnInit {
 
   applyForm = new FormGroup({
     firstName: new FormControl(""),
-    lastName: new FormControl(""),
+    phone: new FormControl(""),
     email: new FormControl(""),
     termsAccepted: new FormControl(false),
   });
 
   constructor() {
     this.housingLocationId = Number(this.route.snapshot.params["id"]);
-    this.housingLocation = this.housingService.getHousingLocationById(
+    
+  }
+
+  async ngOnInit(): Promise<void> {
+    this.housingLocation = await this.housingService.getHousingLocationById(
       this.housingLocationId
     );
     if (this.housingLocation?.mapLink) {
@@ -45,9 +49,6 @@ export class Details implements OnInit {
         this.housingLocation.mapLink
       );
     }
-  }
-
-  ngOnInit(): void {
     if (this.housingLocation) {
       this.titleService.setTitle(`ALFARO - ${this.housingLocation.name}`);
     } else {
@@ -56,11 +57,12 @@ export class Details implements OnInit {
   }
 
 
-  getSocialMediaUrl(nombre: string): string | null {
+  getSocialMediaUrl(plataforma: string): string | null {
     if (!this.housingLocation?.socialMediaLinks) return null;
 
+    // Usamos 'plataforma' y 'url' (como en la BD)
     const link = this.housingLocation.socialMediaLinks.find(
-      (s) => s.nombreRedSocial.toLowerCase() === nombre.toLowerCase()
+      (s) => s.nombreRedSocial.toLowerCase() === plataforma.toLowerCase()
     );
 
     return link?.rutaArchivo || null;
@@ -74,7 +76,7 @@ export class Details implements OnInit {
 
     this.housingService.submitApplication(
       this.applyForm.value.firstName ?? "",
-      this.applyForm.value.lastName ?? "",
+      this.applyForm.value.phone ?? "",
       this.applyForm.value.email ?? "",
       this.housingLocationId
     );
