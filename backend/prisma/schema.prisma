@@ -16,7 +16,6 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
-
 // --- MODELO 1: LAS OBRAS / VIVIENDAS ---
 model Vivienda {
   id                 Int      @id @default(autoincrement())
@@ -27,7 +26,9 @@ model Vivienda {
   inmobiliariaNombre String?  @map("inmobiliaria_nombre")
   inmobiliariaUrl    String?  @map("inmobiliaria_url")
   precioMinimo       String
-  resumen            String   @db.Text // Mejor usar @db.Text para cadenas largas en MySQL
+  resumen            String   @db.Text
+  mapLink            String?  @db.Text // URL de Google Maps
+  renderLink         String?  @db.Text // URL de Matterport
   latitud            Float?
   longitud           Float?
   createdAt          DateTime @default(now())
@@ -37,8 +38,9 @@ model Vivienda {
   galeria     ImagenGaleria[]
   solicitudes SolicitudInfo[]
   documentos  DocumentoDescargable[] @relation("ViviendaToDocumentos")
+  socialLinks SocialMediaLink[] // <-- NUEVA RELACIÓN
 
-  @@map("viviendas") // Nombra la tabla "viviendas" en MySQL
+  @@map("viviendas")
 }
 
 // --- MODELO 2: UNIDADES DE LA TABLA ---
@@ -51,7 +53,6 @@ model Unidad {
   planoPdfUrl String?  @map("plano_pdf_url")
   createdAt   DateTime @default(now())
 
-  // --- Relación ---
   vivienda    Vivienda @relation(fields: [viviendaId], references: [id], onDelete: Cascade)
   viviendaId  Int      @map("vivienda_id")
 
@@ -61,10 +62,9 @@ model Unidad {
 // --- MODELO 3: GALERÍA DE IMÁGENES ---
 model ImagenGaleria {
   id         Int      @id @default(autoincrement())
-  url        String
+  url        String   @db.Text // Usar Text por si la URL es muy larga
   createdAt  DateTime @default(now())
 
-  // --- Relación ---
   vivienda   Vivienda @relation(fields: [viviendaId], references: [id], onDelete: Cascade)
   viviendaId Int      @map("vivienda_id")
 
@@ -79,34 +79,43 @@ model SolicitudInfo {
   telefono   String?
   createdAt  DateTime @default(now())
 
-  // --- Relación ---
   vivienda   Vivienda @relation(fields: [viviendaId], references: [id])
   viviendaId Int      @map("vivienda_id")
 
   @@map("solicitudes_info")
 }
 
-// --- MODELO 5: SUSCRIPCIONES (AÑADIDO) ---
-// Almacena los correos del formulario del Footer
+// --- MODELO 5: SUSCRIPCIONES ---
 model Suscripcion {
   id        Int      @id @default(autoincrement())
-  email     String   @unique // El email debe ser único
+  email     String   @unique
   createdAt DateTime @default(now())
 
   @@map("suscripciones")
 }
 
-// --- MODELO 6: DOCUMENTOS DESCARGABLES (¡NUEVO!) ---
-// Almacena los PDFs (Planos Generales, Memoria de Calidades, etc.)
+// --- MODELO 6: DOCUMENTOS DESCARGABLES ---
 model DocumentoDescargable {
   id           Int      @id @default(autoincrement())
-  nombreBoton  String   @map("nombre_boton") // Texto que aparecerá en el botón
-  rutaArchivo  String   @map("ruta_archivo") // Ruta (ej: 'assets/pdfs/memoria.pdf')
+  nombreBoton  String   @map("nombre_boton")
+  rutaArchivo  String   @map("ruta_archivo") @db.Text
   createdAt    DateTime @default(now())
 
-  // --- Relación ---
   vivienda     Vivienda @relation("ViviendaToDocumentos", fields: [viviendaId], references: [id], onDelete: Cascade)
   viviendaId   Int      @map("vivienda_id") 
 
   @@map("documentos_descargables")
+}
+
+// --- MODELO 7: REDES SOCIALES (¡NUEVO!) ---
+model SocialMediaLink {
+  id          Int      @id @default(autoincrement())
+  plataforma  String   // Ej: "Instagram", "TikTok"
+  url         String   @db.Text
+  createdAt   DateTime @default(now())
+
+  vivienda    Vivienda @relation(fields: [viviendaId], references: [id], onDelete: Cascade)
+  viviendaId  Int      @map("vivienda_id")
+
+  @@map("social_media_links")
 }

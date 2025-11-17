@@ -27,20 +27,26 @@ app.register(cors, {
 
 
 // --- Definición de Endpoints ---
-
 /**
- * Endpoint GET para recuperar TODAS las viviendas (obras)
+ * Endpoint de LISTA (Rápido)
+ * Devuelve solo la info necesaria para las tarjetas del Home.
  * Ruta: GET /api/viviendas
  */
 app.get('/api/viviendas', async (request, reply) => {
   try {
     const viviendas = await prisma.vivienda.findMany({
-      // Usamos 'include' para traer las relaciones (tablas anidadas)
-      include: {
-        unidades: true, // Incluye la tabla de unidades
-        galeria: true,  // Incluye la galería de imágenes
-        documentos: true, // <-- ¡NUEVA LÍNEA AÑADIDA!
+      // Seleccionamos solo los campos necesarios para la vista principal
+      select: {
+        id: true,
+        nombre: true,
+        ciudad: true,
+        provinciaEstado: true,
+        fotoPrincipalUrl: true,
+        precioMinimo: true,
       },
+      orderBy: {
+        id: 'asc'
+      }
     });
     reply.code(200).send({ success: true, data: viviendas });
   } catch (error) {
@@ -49,6 +55,41 @@ app.get('/api/viviendas', async (request, reply) => {
   }
 });
 
+/**
+ * Endpoint de DETALLE (Completo)
+ * Devuelve UNA vivienda por ID, con TODAS sus relaciones.
+ * Ruta: GET /api/viviendas/:id
+ */
+app.get<{ Params: { id: string } }>('/api/viviendas/:id', async (request, reply) => {
+  try {
+    const viviendaId = parseInt(request.params.id);
+
+    if (isNaN(viviendaId)) {
+      reply.code(400).send({ error: 'ID de vivienda inválido.' });
+      return;
+    }
+
+    const vivienda = await prisma.vivienda.findUnique({
+      where: { id: viviendaId },
+      include: {
+        unidades: true,       // Incluye la tabla de unidades
+        galeria: true,        // Incluye la galería de imágenes
+        documentos: true,     // Incluye los documentos descargables
+        socialLinks: true,    // Incluye las redes sociales
+      },
+    });
+
+    if (!vivienda) {
+      reply.code(404).send({ error: 'Vivienda no encontrada.' });
+      return;
+    }
+
+    reply.code(200).send({ success: true, data: vivienda });
+  } catch (error) {
+    app.log.error(error);
+    reply.code(500).send({ error: 'Error interno del servidor.' });
+  }
+});
 /**
  * Endpoint POST para el formulario "Solicitud de Información" (Detalle de Vivienda)
  * Ruta: POST /api/solicitud-info
