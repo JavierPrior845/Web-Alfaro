@@ -43,7 +43,7 @@ export class Home implements OnInit, OnDestroy { // Implementar OnInit y OnDestr
     // (Reemplaza estas URLs por las 3 imágenes que quieras usar)
     this.heroImages = [
       'assets/pdfs/fotos/GonzalezConde/gonzalezconde_3-Foto.jpg',
-      'assets/pdfs/fotos/BarrioDelCarmen/OPCIONA1VIVIENDAPLANTA.jpg',
+      'assets/pdfs/fotos/BarrioDelProgreso/OPCIONA1VIVIENDAPLANTA.jpg',
       'assets/pdfs/fotos/ReinoDeMurcia/FRONTAL.jpg'
     ];
 

@@ -59,6 +59,7 @@
       } }
 
       <div class="real-estate-info">
+        @if (housingLocation?.realEstateName) {
         <h3 class="real-estate-heading">Comercializado por</h3>
         <p class="real-estate-name">{{ housingLocation?.realEstateName }}</p>
         <p class="real-estate-description">
@@ -160,6 +161,13 @@
             </svg>
           </a>
         </div>
+        } @else {
+
+        <p class="real-estate-description">
+          Este edificio todavía no tiene inmobiliaria asignada.
+        </p>
+
+        }
       </div>
     </section>
   </section>
@@ -204,7 +212,9 @@
     <!-- Usamos el alias 'availableUnits' para asegurar el tipo -->
     <app-unit-table [units]="availableUnits" />
     } @else {
-    <p>No hay información de unidades disponible para este edificio.</p>
+    <p class="unit-p">
+      No hay información de los pisos disponible todavia para este edificio.
+    </p>
     }
   </section>
 
@@ -212,21 +222,21 @@
     <div class="map-form-container">
       <!-- Columna izquierda: Mapa -->
       @if(safeMapUrl){
-        <div class="map-column">
-          <h2 class="section-heading">Ubicación</h2>
-          <iframe
-            [src]="safeMapUrl"
-            height="450"
-            width="600"
-            style="border: 0"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
-        </div>
+      <div class="map-column">
+        <h2 class="section-heading">Ubicación</h2>
+        <iframe
+          [src]="safeMapUrl"
+          height="450"
+          width="600"
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
 
       }
-        
+
       <!-- Columna derecha: Formulario -->
       <div class="form-column">
         <h2 class="section-heading">Quieres que te enviemos información</h2>
