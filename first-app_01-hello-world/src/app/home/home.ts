@@ -31,12 +31,11 @@ export class Home implements OnInit, OnDestroy { // Implementar OnInit y OnDestr
     // 1. Cargar todas las viviendas
     this.housingLocationList = await this.housingService.getAllHousingLocations();
     this.filteredLocationList = this.housingLocationList;
-
     // 2. Preparar el carrusel
     this.setupHeroCarousel();
   }
 
-   setupHeroCarousel() {
+  setupHeroCarousel() {
     // --- ¡CAMBIO AQUÍ! ---
     // Ya no tomamos las imágenes del servicio.
     // Definimos 3 URLs estáticas (en crudo) para la rotación.
