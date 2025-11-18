@@ -140,7 +140,7 @@
               />
             </svg>
           </a>
-          <!-- Icono de Linkedin (Versión Outline Consistente) -->
+          <!-- Icono de Linkedin -->
           <a
             *ngIf="getSocialMediaUrl('Linkedin')"
             [href]="getSocialMediaUrl('Linkedin')"
@@ -181,31 +181,45 @@
   </section>
   } }
 
-  <a
-    [href]="housingLocation?.renderLink"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="btn-real-estate"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+<div class="render-section">
+
+  @if (housingLocation?.renderLink) {
+
+    <a
+      [href]="housingLocation?.renderLink"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="btn-real-estate"
     >
-      <path
-        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
-      />
-      <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-      <line x1="12" y1="22.08" x2="12" y2="12" />
-    </svg>
-    Ver render en 3D de un piso
-  </a>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path
+          d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+        />
+        <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+        <line x1="12" y1="22.08" x2="12" y2="12" />
+      </svg>
+      Ver render en 3D de un piso
+    </a>
+
+  } @else {
+
+    <p class="real-estate-description">
+      Todavía no hay un render 3D disponible para este edificio.
+    </p>
+
+  }
+
+</div>
 
   <section class="unit-table-section clearfix">
     @if (housingLocation?.units; as availableUnits) {
