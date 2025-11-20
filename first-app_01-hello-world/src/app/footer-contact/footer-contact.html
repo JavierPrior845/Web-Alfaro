@@ -2,7 +2,8 @@
   <div class="footer-content">
     <h2 class="footer-heading">¿Interesado en Viviendas de Obra Nueva?</h2>
     <p class="footer-text">
-      Suscríbete para recibir notificaciones exclusivas sobre nuevos lanzamientos de ALFARO.
+      Suscríbete para recibir notificaciones exclusivas sobre nuevos
+      lanzamientos de ALFARO.
     </p>
 
     <!-- Formulario de Suscripción -->
@@ -33,34 +34,36 @@
       </div>
 
       <!-- Mensajes de Validación y Estado -->
-      @if (applyForm.controls['email'].invalid && applyForm.controls['email'].dirty) {
-        <p class="error-message" aria-live="polite">
-          Por favor, introduce un correo electrónico válido.
-        </p>
-      }
-
-      @if (submissionStatus === 'success') {
-        <p class="success-message" aria-live="polite">
-          ¡Gracias! Nos pondremos en contacto contigo pronto.
-        </p>
-      }
-
-      @if (submissionStatus === 'error') {
-        <p class="error-message" aria-live="polite">
-          Hubo un error al enviar tu solicitud. Inténtalo de nuevo.
-        </p>
+      @if (applyForm.controls['email'].invalid &&
+      applyForm.controls['email'].dirty) {
+      <p class="error-message" aria-live="polite">
+        Por favor, introduce un correo electrónico válido.
+      </p>
+      } @if (submissionStatus === 'success') {
+      <p class="success-message" aria-live="polite">
+        ¡Gracias! Nos pondremos en contacto contigo pronto.
+      </p>
+      } @if (submissionStatus === 'error') {
+      <p class="error-message" aria-live="polite">
+        Hubo un error al enviar tu solicitud. Inténtalo de nuevo.
+      </p>
       }
     </form>
   </div>
 
   <div class="footer-bar">
-    <p class="copyright">
-      ALFARO &copy; 2025. Todos los derechos reservados.
-    </p>
+    <p class="copyright">ALFARO &copy; 2025. Todos los derechos reservados.</p>
 
     <div class="contact-info">
-      <p>Tel: +34 XXX XXX XXX</p>
-      <p>Email: contacto@alfaro.com</p>
+      <div class="top">
+        <p>Horario de atención al cliente 10:00 AM-13:30 PM Lunes-Viernes</p>
+        <p class="address">Calle Alfaro 8, 3A , 30001 Murcia</p>
+      </div>
+
+      <div class="bottom">
+        <p>Tel: +34 968 355 053</p>
+        <p>Email: administración@alfaro2020.es</p>
+      </div>
     </div>
   </div>
 </footer>
