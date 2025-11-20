@@ -103,9 +103,23 @@ copyright {
   color: #b0b0b0;
 }
 
-.contact-info p {
-  display: inline-block;
-  margin-left: 20px;
+.contact-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.address {
+  margin-bottom: 10px;
+}
+
+
+.top p {
+  font-weight: bold; /* opcional */
+  margin-bottom: 10px;
+}
+
+.bottom p {
+  margin: 3px 0;
 }
 
 /* Responsivo */
