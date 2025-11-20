@@ -26,7 +26,8 @@ app.register(cors, {
 });
 
 
-// --- Definición de Endpoints ---
+// --- ENDPOINTS PÚBLICOS (LECTURA) ---
+
 /**
  * Endpoint de LISTA (Rápido)
  * Devuelve solo la info necesaria para las tarjetas del Home.
@@ -34,15 +35,15 @@ app.register(cors, {
  */
 app.get('/api/viviendas', async (request, reply) => {
   try {
-    const viviendas = await prisma.vivienda.findMany({
-      // Seleccionamos solo los campos necesarios para la vista principal
+    // Usamos el nuevo modelo 'housingLocation' (en inglés, como en el schema)
+    const viviendas = await prisma.housingLocation.findMany({
       select: {
         id: true,
-        nombre: true,
-        ciudad: true,
-        provinciaEstado: true,
-        fotoPrincipalUrl: true,
-        precioMinimo: true,
+        name: true,           // Antes 'nombre'
+        city: true,           // Antes 'ciudad'
+        state: true,          // Antes 'provinciaEstado'
+        photo: true,          // Antes 'fotoPrincipalUrl'
+        minimunPrice: true,   // Antes 'precioMinimo'
       },
       orderBy: {
         id: 'asc'
@@ -69,13 +70,13 @@ app.get<{ Params: { id: string } }>('/api/viviendas/:id', async (request, reply)
       return;
     }
 
-    const vivienda = await prisma.vivienda.findUnique({
+    const vivienda = await prisma.housingLocation.findUnique({
       where: { id: viviendaId },
       include: {
-        unidades: true,       // Incluye la tabla de unidades
-        galeria: true,        // Incluye la galería de imágenes
-        documentos: true,     // Incluye los documentos descargables
-        socialLinks: true,    // Incluye las redes sociales
+        units: true,             // Tabla 'Unit'
+        galleryImages: true,     // Tabla 'GalleryImage'
+        downloadDocuments: true, // Tabla 'DownloadDocument'
+        socialMediaLinks: true,  // Tabla 'SocialMediaLink'
       },
     });
 
@@ -90,8 +91,12 @@ app.get<{ Params: { id: string } }>('/api/viviendas/:id', async (request, reply)
     reply.code(500).send({ error: 'Error interno del servidor.' });
   }
 });
+
+
+// --- ENDPOINTS DE ESCRITURA (FORMULARIOS) ---
+
 /**
- * Endpoint POST para el formulario "Solicitud de Información" (Detalle de Vivienda)
+ * Endpoint POST para el formulario "Solicitud de Información"
  * Ruta: POST /api/solicitud-info
  */
 app.post<{ Body: SolicitudInfoBody }>('/api/solicitud-info', async (request, reply) => {
@@ -103,12 +108,14 @@ app.post<{ Body: SolicitudInfoBody }>('/api/solicitud-info', async (request, rep
       return;
     }
 
+    // Guardamos en la tabla 'SolicitudInfo'
+    // Mapeamos 'viviendaId' (del frontend) a 'housingLocationId' (de la BD)
     const nuevaSolicitud = await prisma.solicitudInfo.create({
       data: {
         nombre: nombre,
         telefono: telefono,
         email: email,
-        viviendaId: viviendaId, // Enlazamos con la vivienda
+        housingLocationId: viviendaId, // <-- Conexión correcta con la Foreign Key
       },
     });
 
@@ -117,8 +124,9 @@ app.post<{ Body: SolicitudInfoBody }>('/api/solicitud-info', async (request, rep
 
   } catch (error: any) {
     app.log.error(error);
-    if (error.code === 'P2003') { // Foreign key constraint failed
-      reply.code(404).send({ error: 'La vivienda (viviendaId) especificada no existe.' });
+    // P2003 es el código de error de Prisma para fallo de clave foránea
+    if (error.code === 'P2003') { 
+      reply.code(404).send({ error: 'La vivienda especificada no existe.' });
     } else {
       reply.code(500).send({ error: 'Error interno del servidor.' });
     }
@@ -149,14 +157,13 @@ app.post<{ Body: SuscripcionBody }>('/api/suscripcion', async (request, reply) =
 
   } catch (error: any) {
     app.log.error(error);
-    if (error.code === 'P2002') { // Unique constraint failed
+    if (error.code === 'P2002') { 
       reply.code(409).send({ error: 'Este correo electrónico ya está suscrito.' });
     } else {
       reply.code(500).send({ error: 'Error interno del servidor.' });
     }
   }
 });
-
 
 // --- Lanzar el Servidor ---
 
