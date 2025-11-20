@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { environment } from 'src/enviroments/environment';
+import { environment } from 'src/environments/environment';
 
 const apiUrl = environment.apiBaseUrl;
 

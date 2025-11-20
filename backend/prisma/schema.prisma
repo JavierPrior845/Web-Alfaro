@@ -47,7 +47,10 @@ model Unit {
   terrazas    String? 
   precio      String  
   planoPdfUrl String? @db.Text
-  
+  dormitorios Int?     // Número de habitaciones
+  banos       Int?     // Número de baños
+  precioConIva String? @map("precio_con_iva") // Opcional, calculado
+
   // Relación con HousingLocation
   housingLocation   HousingLocation @relation(fields: [housingLocationId], references: [id], onDelete: Cascade)
   housingLocationId Int

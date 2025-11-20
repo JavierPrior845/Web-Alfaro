@@ -1,81 +1,82 @@
 <section class="unit-table-container">
-  <h3 class="table-title">Disponibilidad y Precios</h3>
+      <h3 class="table-title">Disponibilidad y Precios</h3>
+      
+      <div class="table-wrapper">
+        <table class="unit-table">
+          <thead>
+            <tr>
+              <th>Vivienda</th>
+              <th class="text-right">M²</th>
 
-  <div class="table-wrapper">
-    <table class="unit-table">
-      <thead>
-        <tr>
-          <th>Vivienda</th>
-          <th class="text-right">M²</th>
+              <!-- === ENCABEZADO CONDICIONAL: TERRAZAS === -->
+              @if (shouldDisplayTerraza()) {
+              <th class="text-right">Terrazas (M²)</th>
+              } 
+              
+              <!-- === ENCABEZADO CONDICIONAL: DORMITORIOS === -->
+              @if (shouldDisplayDormitorios()) {
+              <th class="text-right">Dormitorios</th>
+              }
 
-          <!-- === INICIO DEL ENCABEZADO CONDICIONAL === -->
-          <!-- La columna solo se crea si displayColumn() es 'terraza' o 'dormitorios' -->
-          @if (displayColumn() === 'terraza') {
-          <th class="text-right">Terrazas (M²)</th>
-          } @else if (displayColumn() === 'dormitorios') {
-          <th class="text-right">Dormitorios</th>
-          }
+              <th class="text-right">Precio Sin IVA (€)</th>
+              @if (shouldDisplayPlano()){
+                <th class="text-center">Plano</th>
+              }
+              
+            </tr>
+          </thead>
+          <tbody>
+            @for (unit of units(); track unit.vivienda) {
+              <tr [class.sold]="unit.precio === 'VENDIDO'">
+                
+                <!-- Columna 1: Vivienda -->
+                <td>{{ unit.vivienda }}</td>
+                
+                <!-- Columna 2: M² -->
+                <td class="text-right">{{ unit.m2 | number:'1.2-2' }}</td>
+                
+                <!-- Columna 3: Celda CONDICIONAL (Terraza) -->
+                @if (shouldDisplayTerraza()) {
+                  <td class="text-right">{{ unit.terrazas || '—' }}</td>
+                } 
 
-          <th class="text-right">Precio Sin IVA (€)</th>
-          <th class="text-center">Plano</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (unit of units(); track unit.vivienda) {
-        <tr [class.sold]="unit.precio === 'VENDIDO'">
-          <!-- Columna 1: Vivienda -->
-          <td>{{ unit.vivienda }}</td>
+                <!-- Columna 4: Celda CONDICIONAL (Dormitorios) -->
+                @if (shouldDisplayDormitorios()) {
+                  <td class="text-right">{{ unit.dormitorios || '—' }}</td>
+                }
 
-          <!-- Columna 2: M² -->
-          <td class="text-right">{{ unit.m2 | number:'1.2-2' }}</td>
+                <!-- COLUMNA 5/6: PRECIO -->
+                <td class="text-right price-col">
+                  @if (unit.precio === 'VENDIDO') {
+                    <span class="sold-tag">{{ unit.precio }}</span>
+                  } @else if (unit.precio === 'N/D') {
+                    <span>{{ unit.precio }}</span>
+                  } @else {
+                    <!-- El pipe solo se aplica si es un número -->
+                    {{ unit.precio | number:'1.2-2' }}
+                  }
+                </td>
 
-          <!-- Columna 3: Terraza o Dormitorios -->
-          <!-- La celda de datos solo se crea si la columna existe -->
-          @if (displayColumn() === 'terraza') {
-          <td class="text-right">{{ unit.terrazas || '—' }}</td>
-          } @else if (displayColumn() === 'dormitorios') {
-          <td class="text-right">{{ unit.dormitorios || '—' }}</td>
-          }
-
-          <!-- 
-                  --- COLUMNA 4: PRECIO (¡AQUÍ ESTÁ LA CORRECCIÓN!) ---
-                  Comprobamos los casos "VENDIDO" y "N/D" ANTES de
-                  intentar usar el pipe de número.
-                -->
-          <td class="text-right price-col">
-            @if (unit.precio === 'VENDIDO') {
-            <span class="sold-tag">{{ unit.precio }}</span>
-            } @else if (unit.precio === 'N/D') {
-            <span>{{ unit.precio }}</span>
-            } @else {
-            <!-- El pipe solo se aplica si es un número -->
-            {{ unit.precio | number:'1.2-2' }} }
-          </td>
-
-          <!-- Columna 5: Plano -->
-          <td class="text-center">
-            @if (unit.planoPdfUrl && unit.precio !== 'VENDIDO') {
-            <a [href]="unit.planoPdfUrl" target="_blank" class="plan-link">
-              <svg
-                class="pdf-icon"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18h14v2H5z" />
-              </svg>
-            </a>
-            } @else {
-            <!-- 
-                      Esto mostrará "N/D" para Aurora Redondo
-                      y "—" para las unidades vendidas.
+                @if (shouldDisplayPlano()) {
+                  <td class="text-center">
+                    <!-- 
+                      Comprobamos que exista URL, que no sea 'N/D' y que no esté vendido 
                     -->
-            <span>{{ unit.precio === 'VENDIDO' ? '—' : 'N/D' }}</span>
+                    @if (unit.planoPdfUrl && unit.planoPdfUrl !== 'N/D' && unit.precio !== 'VENDIDO') {
+                      <a [href]="unit.planoPdfUrl" target="_blank" class="plan-link">
+                        <svg class="pdf-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18h14v2H5z"/>
+                        </svg>
+                      </a>
+                    } @else {
+                      <span>{{ unit.precio === 'VENDIDO' ? '—' : 'N/D' }}</span>
+                    }
+                  </td>
+                }
+
+              </tr>
             }
-          </td>
-        </tr>
-        }
-      </tbody>
-    </table>
-  </div>
-</section>
+          </tbody>
+        </table>
+      </div>
+    </section>

@@ -13,16 +13,26 @@ export class UnitTableComponent {
   // Recibe la lista de unidades
   units = input.required<Unit[]>();
 
-  // NUEVO: Un 'signal' calculado que determina qué columna mostrar
-  // Revisa el primer piso de la lista para ver si tiene la propiedad 'terrazas' o 'dormitorios'.
-  public displayColumn = computed(() => {
-    const firstUnit = this.units()?.[0];
-    if (firstUnit && typeof firstUnit.terrazas !== "undefined") {
-      return "terraza";
-    }
-    else if (firstUnit && typeof firstUnit.dormitorios !== "undefined") {
-      return "dormitorios";
-    }
-    return "none"; // Por si acaso no viene ninguna de las dos
-  });
+  // 1. COMPUTED: Analiza si TERRAZA debe mostrarse
+  shouldDisplayTerraza = computed(() => this.hasValidData('terrazas'));
+
+  // 2. COMPUTED: Analiza si DORMITORIOS debe mostrarse
+  shouldDisplayDormitorios = computed(() => this.hasValidData('dormitorios'));
+  shouldDisplayPlano = computed(() => this.hasValidData('planoPdfUrl'));
+  /**
+   * Verifica si al menos una unidad tiene un valor real para un campo dado.
+   * La verificación se realiza sobre el array completo de unidades.
+   */
+  private hasValidData(fieldKey: 'terrazas' | 'dormitorios' | 'planoPdfUrl'): boolean {
+    const units = this.units();
+    if (!units || units.length === 0) return false;
+
+    // Busca si existe AL MENOS una unidad donde el valor NO es nulo Y NO es el guion '—'
+    return units.some((unit: any) => {
+      const value = unit[fieldKey];
+      
+      // Debe ser un valor que no sea null, undefined, ni el guion '—'
+      return value !== null && value !== undefined && value !== '—';
+    });
+  }
 }
