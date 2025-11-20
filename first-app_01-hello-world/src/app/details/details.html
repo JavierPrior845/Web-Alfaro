@@ -171,10 +171,9 @@
     <!-- Esta línea ahora es segura y no dará error -->
     <app-image-gallery [images]="galleryImages" />
   </section>
-  } }
-
+  } } @if(housingLocation?.renderLink; as link3d){
   <a
-    [href]="housingLocation?.renderLink"
+    [href]="link3d"
     target="_blank"
     rel="noopener noreferrer"
     class="btn-real-estate"
@@ -198,6 +197,7 @@
     </svg>
     Ver render en 3D de un piso
   </a>
+  }
 
   <section class="unit-table-section clearfix">
     @if (housingLocation?.units; as availableUnits) {
@@ -212,21 +212,21 @@
     <div class="map-form-container">
       <!-- Columna izquierda: Mapa -->
       @if(safeMapUrl){
-        <div class="map-column">
-          <h2 class="section-heading">Ubicación</h2>
-          <iframe
-            [src]="safeMapUrl"
-            height="450"
-            width="600"
-            style="border: 0"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
-        </div>
+      <div class="map-column">
+        <h2 class="section-heading">Ubicación</h2>
+        <iframe
+          [src]="safeMapUrl"
+          height="450"
+          width="600"
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
 
       }
-        
+
       <!-- Columna derecha: Formulario -->
       <div class="form-column">
         <h2 class="section-heading">Quieres que te enviemos información</h2>
