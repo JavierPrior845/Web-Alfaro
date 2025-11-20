@@ -18,13 +18,14 @@ GRANT ALL PRIVILEGES ON web_alfaro.* TO 'javier'@'%';
 
 ## INSERT
 
--- -----------------------------------------------------
--- 1. EDIFICIO AURORA REDONDO (Se convertirá en ID 1)
--- -----------------------------------------------------
-INSERT INTO viviendas 
-(nombre, ciudad, provincia_estado, foto_principal_url, inmobiliaria_nombre, inmobiliaria_url, precioMinimo, resumen, mapLink, createdAt)
+-- ==================================================
+-- ID 0: EDIFICIO AURORA REDONDO
+-- ==================================================
+INSERT INTO `housing_locations` 
+(id, name, city, state, photo, realEstateName, realEstateLink, minimunPrice, resume, mapLink, createdAt)
 VALUES
 (
+  0,
   'Edificio Aurora Redondo',
   'Murcia',
   'Barrio del Carmen',
@@ -37,56 +38,53 @@ VALUES
   NOW()
 );
 
--- Unidades para Vivienda ID 1
-INSERT INTO unidades (vivienda_id, vivienda_ref, m2, terrazas, precio, plano_pdf_url, createdAt)
-VALUES
-(1, '1ºA', 151.72, '15.12', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-6-7.pdf', NOW()),
-(1, '1ºB', 90.16, '—', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-8-9.pdf', NOW()),
-(1, '2ºA', 163.55, '—', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-10-11.pdf', NOW()),
-(1, '2ºB', 56.75, '—', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-12-13.pdf', NOW()),
-(1, '2ºC', 143.27, '—', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-14-15.pdf', NOW()),
-(1, '3ºA', 163.55, '—', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-10-11.pdf', NOW()),
-(1, '3ºB', 56.75, '—', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-12-13.pdf', NOW()),
-(1, '3ºC', 143.27, '—', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-14-15.pdf', NOW()),
-(1, '4ºA', 163.55, '—', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-10-11.pdf', NOW()),
-(1, '4ºB', 56.75, '—', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-12-13.pdf', NOW()),
-(1, '4ºC', 143.27, '—', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-14-15.pdf', NOW()),
-(1, '5ºA', 285.09, '23.67', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-16-17.pdf', NOW()),
-(1, '5ºB', 101.27, '23.34', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-18-19.pdf', NOW()),
-(1, '5ºC', 238.16, '18.94', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-20-21.pdf', NOW()),
-(1, 'Local A', 398.69, '—', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-LOCAL.pdf', NOW()),
-(1, 'Sótano', 3, '—', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-GARAGE.pdf', NOW());
+-- Redes Sociales (ID 0)
+INSERT INTO `social_media_links` (nombreRedSocial, rutaArchivo, housingLocationId) VALUES 
+('Instagram', 'https://www.instagram.com/anova_homes/', 0),
+('TikTok', 'https://www.tiktok.com/@anova_homes', 0),
+('Linkedin', 'https://www.linkedin.com/company/anova-inmobiliaria/', 0);
 
--- Galería para Vivienda ID 1
-INSERT INTO imagenes_galeria  (vivienda_id, url, createdAt)
-VALUES
-(1, 'assets/pdfs/fotos/GonzalezConde/gonzalezconde_3-Foto.jpg', NOW()),
-(1, 'assets/pdfs/fotos/GonzalezConde/gonzalezconde_5-Foto.jpg', NOW()),
-(1, 'assets/pdfs/fotos/GonzalezConde/gonzalezconde_Lateralder_mod.jpg', NOW()),
-(1, 'assets/pdfs/fotos/GonzalezConde/gonzalezconde_Lateralder.jpg', NOW()),
-(1, 'assets/pdfs/fotos/GonzalezConde/gonzalezconde_Lateralizq_mod.jpg', NOW());
+-- Documentos (ID 0)
+INSERT INTO `download_documents` (nombreBoton, rutaArchivo, housingLocationId) VALUES 
+('Comercialización', 'assets/pdfs/descargas/GonzalezConde/COMERCIALIZACION.pdf', 0),
+('Memoria de Calidades', 'assets/pdfs/descargas/GonzalezConde/MEMORIA_DE_CALIDADES.pdf', 0);
 
--- Documentos para Vivienda ID 1
-INSERT INTO documentos_descargables  (vivienda_id, nombre_boton, ruta_archivo, createdAt)
-VALUES
-(1, 'Comercialización', 'assets/pdfs/descargas/GonzalezConde/COMERCIALIZACION.pdf', NOW()),
-(1, 'Memoria de Calidades', 'assets/pdfs/descargas/GonzalezConde/MEMORIA_DE_CALIDADES.pdf', NOW());
+-- Galería (ID 0)
+INSERT INTO `gallery_images` (url, housingLocationId) VALUES 
+('assets/pdfs/fotos/GonzalezConde/gonzalezconde_3-Foto.jpg', 0),
+('assets/pdfs/fotos/GonzalezConde/gonzalezconde_5-Foto.jpg', 0),
+('assets/pdfs/fotos/GonzalezConde/gonzalezconde_Lateralder_mod.jpg', 0),
+('assets/pdfs/fotos/GonzalezConde/gonzalezconde_Lateralder.jpg', 0),
+('assets/pdfs/fotos/GonzalezConde/gonzalezconde_Lateralizq_mod.jpg', 0);
 
--- Redes Sociales para Vivienda ID 1
-INSERT INTO social_media_links (vivienda_id, plataforma, url, createdAt)
-VALUES
-(1, 'Instagram', 'https://www.instagram.com/anova_homes/', NOW()),
-(1, 'TikTok', 'https://www.tiktok.com/@anova_homes', NOW()),
-(1, 'Linkedin', 'https://www.linkedin.com/company/anova-inmobiliaria/', NOW());
+-- Unidades (ID 0)
+INSERT INTO `units` (vivienda, m2, terrazas, precio, planoPdfUrl, housingLocationId) VALUES
+('1ºA', 151.72, '15.12', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-6-7.pdf', 0),
+('1ºB', 90.16, '—', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-8-9.pdf', 0),
+('2ºA', 163.55, '—', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-10-11.pdf', 0),
+('2ºB', 56.75, '—', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-12-13.pdf', 0),
+('2ºC', 143.27, '—', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-14-15.pdf', 0),
+('3ºA', 163.55, '—', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-10-11.pdf', 0),
+('3ºB', 56.75, '—', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-12-13.pdf', 0),
+('3ºC', 143.27, '—', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-14-15.pdf', 0),
+('4ºA', 163.55, '—', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-10-11.pdf', 0),
+('4ºB', 56.75, '—', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-12-13.pdf', 0),
+('4ºC', 143.27, '—', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-14-15.pdf', 0),
+('5ºA', 285.09, '23.67', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-16-17.pdf', 0),
+('5ºB', 101.27, '23.34', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-18-19.pdf', 0),
+('5ºC', 238.16, '18.94', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-20-21.pdf', 0),
+('Local A', 398.69, '—', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-LOCAL.pdf', 0),
+('Sótano', 3, '—', 'N/D', 'assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-GARAGE.pdf', 0);
 
 
--- -----------------------------------------------------
--- 2. EDIFICIO BARRIO DEL PROGRESO (Se convertirá en ID 2)
--- -----------------------------------------------------
-INSERT INTO viviendas 
-(nombre, ciudad, provincia_estado, foto_principal_url, precioMinimo, resumen, mapLink, createdAt)
+-- ==================================================
+-- ID 1: BARRIO DEL PROGRESO
+-- ==================================================
+INSERT INTO `housing_locations` 
+(id, name, city, state, photo, minimunPrice, resume, mapLink, createdAt)
 VALUES
 (
+  1,
   'Edificio Barrio del Progreso',
   'Murcia',
   'Barrio del progreso',
@@ -97,41 +95,40 @@ VALUES
   NOW()
 );
 
--- Unidades para Vivienda ID 2
-INSERT INTO unidades (vivienda_id, vivienda_ref, m2, terrazas, precio, plano_pdf_url, createdAt)
-VALUES
-(2, 'Local vivienda 1°A', 69.79, '—', 'N/D', 'N/D', NOW()),
-(2, 'vivienda 1°B', 72.71, '—', 'N/D', 'N/D', NOW()),
-(2, 'vivienda 2°A', 69.79, '—', 'N/D', 'N/D', NOW()),
-(2, 'vivienda 2°B', 72.71, '—', 'N/D', 'N/D', NOW()),
-(2, 'vivienda 3°A', 69.79, '—', 'N/D', 'N/D', NOW()),
-(2, 'vivienda 3°B', 62.75, '—', 'N/D', 'N/D', NOW()),
-(2, 'vivienda 4°A', 69.79, '—', 'N/D', 'N/D', NOW()),
-(2, 'vivienda 4°B', 62.75, '—', 'N/D', 'N/D', NOW());
+-- Documentos (ID 1)
+INSERT INTO `download_documents` (nombreBoton, rutaArchivo, housingLocationId) VALUES 
+('Planos', 'assets/pdfs/descargas/BarrioDelProgreso/PLANOS1.pdf', 1);
 
--- Galería para Vivienda ID 2
-INSERT INTO imagenes_galeria  (vivienda_id, url, createdAt)
-VALUES
-(2, 'assets/pdfs/fotos/BarrioDelProgreso/1_2-Foto1VIVIENDA PLANTA.jpg', NOW()),
-(2, 'assets/pdfs/fotos/BarrioDelProgreso/1_3-Foto.jpg', NOW()),
-(2, 'assets/pdfs/fotos/BarrioDelProgreso/OPCIONA1VIVIENDAPLANTA.jpg', NOW()),
-(2, 'assets/pdfs/fotos/BarrioDelProgreso/OPCIONB1VIVIENDAPLANTA.jpg', NOW()),
-(2, 'assets/pdfs/fotos/BarrioDelProgreso/RENDERS_VIVIENDA_POR_PLANTA-1_page-0001.jpg', NOW()),
-(2, 'assets/pdfs/fotos/BarrioDelProgreso/RENDERS_VIVIENDA_POR_PLANTA-2_page-0001.jpg', NOW()),
-(2, 'assets/pdfs/fotos/BarrioDelProgreso/RENDERS_VIVIENDA_POR_PLANTA-3_page-0001.jpg', NOW());
+-- Galería (ID 1)
+INSERT INTO `gallery_images` (url, housingLocationId) VALUES 
+('assets/pdfs/fotos/BarrioDelProgreso/1_2-Foto1VIVIENDA PLANTA.jpg', 1),
+('assets/pdfs/fotos/BarrioDelProgreso/1_3-Foto.jpg', 1),
+('assets/pdfs/fotos/BarrioDelProgreso/OPCIONA1VIVIENDAPLANTA.jpg', 1),
+('assets/pdfs/fotos/BarrioDelProgreso/OPCIONB1VIVIENDAPLANTA.jpg', 1),
+('assets/pdfs/fotos/BarrioDelProgreso/RENDERS_VIVIENDA_POR_PLANTA-1_page-0001.jpg', 1),
+('assets/pdfs/fotos/BarrioDelProgreso/RENDERS_VIVIENDA_POR_PLANTA-2_page-0001.jpg', 1),
+('assets/pdfs/fotos/BarrioDelProgreso/RENDERS_VIVIENDA_POR_PLANTA-3_page-0001.jpg', 1);
 
--- Documentos para Vivienda ID 2
-INSERT INTO documentos_descargables  (vivienda_id, nombre_boton, ruta_archivo, createdAt)
-VALUES
-(2, 'Planos', 'assets/pdfs/descargas/BarrioDelProgreso/PLANOS1.pdf', NOW());
+-- Unidades (ID 1)
+INSERT INTO `units` (vivienda, m2, terrazas, precio, planoPdfUrl, housingLocationId) VALUES
+('Local vivienda 1°A', 69.79, '—', 'N/D', 'N/D', 1),
+('vivienda 1°B', 72.71, '—', 'N/D', 'N/D', 1),
+('vivienda 2°A', 69.79, '—', 'N/D', 'N/D', 1),
+('vivienda 2°B', 72.71, '—', 'N/D', 'N/D', 1),
+('vivienda 3°A', 69.79, '—', 'N/D', 'N/D', 1),
+('vivienda 3°B', 62.75, '—', 'N/D', 'N/D', 1),
+('vivienda 4°A', 69.79, '—', 'N/D', 'N/D', 1),
+('vivienda 4°B', 62.75, '—', 'N/D', 'N/D', 1);
 
--- -----------------------------------------------------
--- 3. EDIFICIO REINO DE MURCIA (Se convertirá en ID 3)
--- -----------------------------------------------------
-INSERT INTO viviendas 
-(nombre, ciudad, provincia_estado, foto_principal_url, inmobiliaria_nombre, inmobiliaria_url, renderLink, precioMinimo, resumen, mapLink, createdAt)
+
+-- ==================================================
+-- ID 2: EDIFICIO REINO DE MURCIA
+-- ==================================================
+INSERT INTO `housing_locations` 
+(id, name, city, state, photo, realEstateName, realEstateLink, renderLink, minimunPrice, resume, mapLink, createdAt)
 VALUES
 (
+  2,
   'Edificio Reino de Murcia',
   'Murcia',
   'Reino de Murcia',
@@ -145,39 +142,35 @@ VALUES
   NOW()
 );
 
--- Unidades para Vivienda ID 3
-INSERT INTO unidades (vivienda_id, vivienda_ref, m2, terrazas, precio, plano_pdf_url, createdAt)
-VALUES
-(3, '1º A', 170.2, '40.4', '275000.0', 'assets/pdfs/planos/Reino_de_Murcia_1A.pdf', NOW()),
-(3, '1º B', 117.2, '26.3', '235000.0', 'assets/pdfs/planos/Reino_de_Murcia_1B.pdf', NOW()),
-(3, '1º C', 147.15, '10.0', '257000.0', 'assets/pdfs/planos/Reino_de_Murcia_1C.pdf', NOW()),
-(3, '2º A', 139.8, '10.0', '298000.0', 'assets/pdfs/planos/Reino_de_Murcia_2A-3A.pdf', NOW()),
-(3, '2º B', 90.9, '—', '222000.0', 'assets/pdfs/planos/Reino_de_Murcia_2B-3B.pdf', NOW()),
-(3, '2º C', 137.15, '—', 'VENDIDO', NULL, NOW()),
-(3, '3º A', 139.8, '10.0', '318000.0', 'assets/pdfs/planos/Reino_de_Murcia_2A-3A.pdf', NOW()),
-(3, '3D B', 90.9, '—', '232000.0', 'assets/pdfs/planos/Reino_de_Murcia_2B-3B.pdf', NOW()),
-(3, '3º C', 137.15, '—', 'VENDIDO', NULL, NOW()),
-(3, 'ATICO A', 107.4, '—', 'VENDIDO', NULL, NOW()),
-(3, 'ATICO B', 69.6, '—', 'VENDIDO', NULL, NOW()),
-(3, 'GARAJES', 3, '—', '54000.0', 'assets/pdfs/planos/Reino_de_Mucia_Sotano-PB.pdf', NOW()),
-(3, 'LOCAL', 320, '—', '512000.0', 'assets/pdfs/planos/Reino_de_Mucia_Sotano-PB.pdf', NOW());
+-- Redes Sociales (ID 2)
+INSERT INTO `social_media_links` (nombreRedSocial, rutaArchivo, housingLocationId) VALUES 
+('Instagram', 'https://www.instagram.com/sirocoinmuebles/', 2),
+('TikTok', 'https://www.tiktok.com/@sirocoinmuebles', 2),
+('Linkedin', 'https://www.linkedin.com/in/antonio-hern%C3%A1ndez-2b4a2b1a7/', 2);
 
--- Galería para Vivienda ID 3
-INSERT INTO imagenes_galeria  (vivienda_id, url, createdAt)
-VALUES
-(3, 'assets/pdfs/fotos/ReinoDeMurcia/FRONTAL.jpg', NOW()),
-(3, 'assets/pdfs/fotos/ReinoDeMurcia/GENERAL.jpg', NOW()),
-(3, 'assets/pdfs/fotos/ReinoDeMurcia/PLANTA.jpg', NOW());
+-- Documentos (ID 2)
+INSERT INTO `download_documents` (nombreBoton, rutaArchivo, housingLocationId) VALUES 
+('Planos Globales', 'assets/pdfs/planos/Edificio_Global.pdf', 2),
+('Memoria de Calidades', 'assets/pdfs/memoria_calidades.pdf', 2);
 
--- Documentos para Vivienda ID 3
-INSERT INTO documentos_descargables  (vivienda_id, nombre_boton, ruta_archivo, createdAt)
-VALUES
-(3, 'Planos Globales', 'assets/pdfs/planos/Edificio_Global.pdf', NOW()),
-(3, 'Memoria de Calidades', 'assets/pdfs/memoria_calidades.pdf', NOW());
+-- Galería (ID 2)
+INSERT INTO `gallery_images` (url, housingLocationId) VALUES 
+('assets/pdfs/fotos/ReinoDeMurcia/FRONTAL.jpg', 2),
+('assets/pdfs/fotos/ReinoDeMurcia/GENERAL.jpg', 2),
+('assets/pdfs/fotos/ReinoDeMurcia/PLANTA.jpg', 2);
 
--- Redes Sociales para Vivienda ID 3
-INSERT INTO social_media_links  (vivienda_id, plataforma, url, createdAt)
-VALUES
-(3, 'Instagram', 'https://www.instagram.com/sirocoinmuebles/', NOW()),
-(3, 'TikTok', 'https://www.tiktok.com/@sirocoinmuebles', NOW()),
-(3, 'Linkedin', 'https://www.linkedin.com/in/antonio-hern%C3%A1ndez-2b4a2b1a7/', NOW());
+-- Unidades (ID 2)
+INSERT INTO `units` (vivienda, m2, terrazas, precio, planoPdfUrl, housingLocationId) VALUES
+('1º A', 170.20, '40.40', '275000.00', 'assets/pdfs/planos/Reino_de_Murcia_1A.pdf', 2),
+('1º B', 117.20, '26.30', '235000.00', 'assets/pdfs/planos/Reino_de_Murcia_1B.pdf', 2),
+('1º C', 147.15, '10.00', '257000.00', 'assets/pdfs/planos/Reino_de_Murcia_1C.pdf', 2),
+('2º A', 139.80, '10.00', '298000.00', 'assets/pdfs/planos/Reino_de_Murcia_2A-3A.pdf', 2),
+('2º B', 90.90, '—', '222000.00', 'assets/pdfs/planos/Reino_de_Murcia_2B-3B.pdf', 2),
+('2º C', 137.15, '—', 'VENDIDO', NULL, 2),
+('3º A', 139.80, '10.00', '318000.00', 'assets/pdfs/planos/Reino_de_Murcia_2A-3A.pdf', 2),
+('3º B', 90.90, '—', '232000.00', 'assets/pdfs/planos/Reino_de_Murcia_2B-3B.pdf', 2),
+('3º C', 137.15, '—', 'VENDIDO', NULL, 2),
+('ATICO A', 107.40, '—', 'VENDIDO', 'assets/pdfs/planos/Reino_de_Murcia_4A.pdf', 2),
+('ATICO B', 69.60, '—', 'VENDIDO', NULL, 2),
+('GARAJES', 3, '—', '54000.00', 'assets/pdfs/planos/Reino_de_Mucia_Sotano-PB.pdf', 2),
+('LOCAL', 320, '—', '512000.00', 'assets/pdfs/planos/Reino_de_Mucia_Sotano-PB.pdf', 2);
