@@ -6,116 +6,116 @@
 
 generator client {
   provider = "prisma-client-js"
-  // AÑADIMOS la ruta de salida.
-  // Esta ruta (relativa a este fichero) apunta a 'node_modules'
-  // y es donde 'server.ts' buscará el cliente.
- 
 }
 
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
-// --- MODELO 1: LAS OBRAS / VIVIENDAS ---
-model Vivienda {
-  id                 Int      @id @default(autoincrement())
-  nombre             String
-  ciudad             String
-  provinciaEstado    String   @map("provincia_estado")
-  fotoPrincipalUrl   String   @map("foto_principal_url")
-  inmobiliariaNombre String?  @map("inmobiliaria_nombre")
-  inmobiliariaUrl    String?  @map("inmobiliaria_url")
-  precioMinimo       String
-  resumen            String   @db.Text
-  mapLink            String?  @db.Text // URL de Google Maps
-  renderLink         String?  @db.Text // URL de Matterport
-  latitud            Float?
-  longitud           Float?
-  createdAt          DateTime @default(now())
+// --- MODELO 1: HOUSING LOCATION (Coincide con HousingLocationInfo) ---
+model HousingLocation {
+  id              Int      @id @default(autoincrement())
+  name            String
+  city            String
+  state           String
+  photo           String   @db.Text
+  realEstateName  String?  
+  realEstateLink  String?  @db.Text
+  minimunPrice    String
+  resume          String   @db.Text
+  renderLink      String?  @db.Text
+  mapLink         String?  @db.Text
+  lat             Float?
+  lng             Float?
+  createdAt       DateTime @default(now())
 
-  // --- Relaciones ---
-  unidades    Unidad[]
-  galeria     ImagenGaleria[]
-  solicitudes SolicitudInfo[]
-  documentos  DocumentoDescargable[] @relation("ViviendaToDocumentos")
-  socialLinks SocialMediaLink[] // <-- NUEVA RELACIÓN
+  // Relaciones (Arrays en tu interfaz)
+  units             Unit[]
+  downloadDocuments DownloadDocument[]
+  socialMediaLinks  SocialMediaLink[]
+  galleryImages     GalleryImage[] 
+  solicitudes       SolicitudInfo[] // Interno para el backend
 
-  @@map("viviendas")
+  @@map("housing_locations")
 }
 
-// --- MODELO 2: UNIDADES DE LA TABLA ---
-model Unidad {
-  id          Int      @id @default(autoincrement())
-  viviendaRef String   @map("vivienda_ref")
+// --- MODELO 2: UNIT (Coincide con Unit) ---
+model Unit {
+  id          Int     @id @default(autoincrement())
+  vivienda    String  // Antes 'viviendaRef'. Coincide con tu interfaz.
   m2          Float
-  terrazas    String?
-  precio      String
-  planoPdfUrl String?  @map("plano_pdf_url")
-  createdAt   DateTime @default(now())
+  terrazas    String? 
+  precio      String  
+  planoPdfUrl String? @db.Text
+  dormitorios Int?     // Número de habitaciones
+  banos       Int?     // Número de baños
+  precioConIva String? @map("precio_con_iva") // Opcional, calculado
 
-  vivienda    Vivienda @relation(fields: [viviendaId], references: [id], onDelete: Cascade)
-  viviendaId  Int      @map("vivienda_id")
+  // Relación con HousingLocation
+  housingLocation   HousingLocation @relation(fields: [housingLocationId], references: [id], onDelete: Cascade)
+  housingLocationId Int
 
-  @@map("unidades")
+  @@map("units")
 }
 
-// --- MODELO 3: GALERÍA DE IMÁGENES ---
-model ImagenGaleria {
-  id         Int      @id @default(autoincrement())
-  url        String   @db.Text // Usar Text por si la URL es muy larga
-  createdAt  DateTime @default(now())
+// --- MODELO 3: SOCIAL MEDIA LINK (Coincide con SocialMediaLink) ---
+model SocialMediaLink {
+  id              Int    @id @default(autoincrement())
+  nombreRedSocial String // Antes 'plataforma'
+  rutaArchivo     String @db.Text // Antes 'url'
 
-  vivienda   Vivienda @relation(fields: [viviendaId], references: [id], onDelete: Cascade)
-  viviendaId Int      @map("vivienda_id")
+  // Relación
+  housingLocation   HousingLocation @relation(fields: [housingLocationId], references: [id], onDelete: Cascade)
+  housingLocationId Int
 
-  @@map("imagenes_galeria")
+  @@map("social_media_links")
 }
 
-// --- MODELO 4: SOLICITUDES DE INFORMACIÓN ---
+// --- MODELO 4: DOWNLOAD DOCUMENT (Coincide con DownloadDocument) ---
+model DownloadDocument {
+  id          Int    @id @default(autoincrement())
+  nombreBoton String
+  rutaArchivo String @db.Text
+
+  // Relación
+  housingLocation   HousingLocation @relation(fields: [housingLocationId], references: [id], onDelete: Cascade)
+  housingLocationId Int
+
+  @@map("download_documents")
+}
+
+// --- MODELO 5: GALLERY IMAGES (Para galleryImages: string[]) ---
+// Nota: Como en la BD debe ser una tabla, usaremos el campo 'url' para mapearlo luego a string[]
+model GalleryImage {
+  id  Int    @id @default(autoincrement())
+  url String @db.Text
+
+  // Relación
+  housingLocation   HousingLocation @relation(fields: [housingLocationId], references: [id], onDelete: Cascade)
+  housingLocationId Int
+
+  @@map("gallery_images")
+}
+
+// --- MODELO 6: SOLICITUDES INFO (Formulario) ---
 model SolicitudInfo {
-  id         Int      @id @default(autoincrement())
-  nombre     String
-  email      String
-  telefono   String?
-  createdAt  DateTime @default(now())
+  id        Int      @id @default(autoincrement())
+  nombre    String
+  email     String
+  telefono  String?
+  createdAt DateTime @default(now())
 
-  vivienda   Vivienda @relation(fields: [viviendaId], references: [id])
-  viviendaId Int      @map("vivienda_id")
+  housingLocation   HousingLocation @relation(fields: [housingLocationId], references: [id])
+  housingLocationId Int
 
   @@map("solicitudes_info")
 }
 
-// --- MODELO 5: SUSCRIPCIONES ---
+// --- MODELO 7: SUSCRIPCIONES (Footer) ---
 model Suscripcion {
   id        Int      @id @default(autoincrement())
   email     String   @unique
   createdAt DateTime @default(now())
 
   @@map("suscripciones")
-}
-
-// --- MODELO 6: DOCUMENTOS DESCARGABLES ---
-model DocumentoDescargable {
-  id           Int      @id @default(autoincrement())
-  nombreBoton  String   @map("nombre_boton")
-  rutaArchivo  String   @map("ruta_archivo") @db.Text
-  createdAt    DateTime @default(now())
-
-  vivienda     Vivienda @relation("ViviendaToDocumentos", fields: [viviendaId], references: [id], onDelete: Cascade)
-  viviendaId   Int      @map("vivienda_id") 
-
-  @@map("documentos_descargables")
-}
-
-// --- MODELO 7: REDES SOCIALES (¡NUEVO!) ---
-model SocialMediaLink {
-  id          Int      @id @default(autoincrement())
-  plataforma  String   // Ej: "Instagram", "TikTok"
-  url         String   @db.Text
-  createdAt   DateTime @default(now())
-
-  vivienda    Vivienda @relation(fields: [viviendaId], references: [id], onDelete: Cascade)
-  viviendaId  Int      @map("vivienda_id")
-
-  @@map("social_media_links")
 }

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HousingLocationInfo } from "./housing-location";
-import { environment } from "src/enviroments/environment";
+import { environment } from "src/environments/environment";
 
 const apiUrl = environment.apiBaseUrl;
 
@@ -8,17 +8,18 @@ const apiUrl = environment.apiBaseUrl;
   providedIn: "root",
 })
 export class Housing {
-  getAllHousingLocations(): HousingLocationInfo[] {
+  /*getAllHousingLocations(): HousingLocationInfo[] {
     return this.housingLocationList;
   }
   getHousingLocationById(id: number): HousingLocationInfo | undefined {
     return this.housingLocationList.find(
       (housingLocation) => housingLocation.id === id
     );
-  }
+  }*/
 
   readonly baseUrl = "http://localhost:3000";
   readonly baseUrlAssets = "assets";
+  /*
   housingLocationList: HousingLocationInfo[] = [
     {
       id: 0,
@@ -209,72 +210,61 @@ export class Housing {
       city: "Murcia",
       state: "Barrio del progreso",
       photo: `${this.baseUrlAssets}/1_3-Foto.jpg`,
-      //realEstateName: "Anova Homes",
-      //realEstateLink: "https://www.anovahomes.com/",
-      minimunPrice: "250.000€",
+      minimunPrice: "125.000€",
       units: [
         {
           vivienda: "1°A",
           m2: 55.81,
           dormitorios: 2,
           precio: 155000,
-          planoPdfUrl: "N/D",
         },
         {
           vivienda: "1°B",
           m2: 58.15,
           dormitorios: 2,
           precio: 145000,
-          planoPdfUrl: "N/D",
         },
         {
           vivienda: "2°A",
           m2: 55.81,
           dormitorios: 2,
           precio: 160000,
-          planoPdfUrl: "N/D",
         },
         {
           vivienda: "2°B",
           m2: 55.15,
           dormitorios: 2,
           precio: 155000,
-          planoPdfUrl: "N/D",
         },
         {
           vivienda: "3°A",
           m2: 55.81,
           dormitorios: 2,
           precio: 170000,
-          planoPdfUrl: "N/D",
         },
         {
           vivienda: "3°B",
           m2: 50.18,
           dormitorios: 1,
           precio: 125000,
-          planoPdfUrl: "N/D",
         },
         {
           vivienda: "4°A",
           m2: 55.81,
           dormitorios: 2,
           precio: 175000,
-          planoPdfUrl: "N/D",
         },
         {
           vivienda: "4°B",
           m2: 50.18,
           dormitorios: 1,
           precio: 135000,
-          planoPdfUrl: "N/D",
         },
         {
           vivienda: "LOCAL",
           m2: 76.25,
           dormitorios: '-',
           precio: 70000,
-          planoPdfUrl: "N/D",
         },
       ],
       resume:
@@ -431,92 +421,82 @@ export class Housing {
       downloadDocuments: [
         {
           id: 1,
-          nombreBoton: "Planos Globales",
-          rutaArchivo: "assets/pdfs/planos/Edificio_Global.pdf",
+          nombreBoton: "Planos Básicos",
+          rutaArchivo: "assets/pdfs/descargas/ReinoDeMurcia/PLANOS_BASICO.pdf",
         },
         {
           id: 2,
-          nombreBoton: "Memoria de Calidades",
-          rutaArchivo: "assets/pdfs/memoria_calidades.pdf",
+          nombreBoton: "Memoria REBT",
+          rutaArchivo: "assets/pdfs/descargas/ReinoDeMurcia/598-MEMORIA_REBTfirmada.pdf",
         },
       ],
       mapLink:
         "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d665.4823069294587!2d-1.1181602905529737!3d38.0052129310496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6382378c4223b7%3A0xbcf245bc7bc0ac4c!2sDiseminado%20Diego%20Carmona%2C%202%2C%2030007%20Zarandona%2C%20Murcia!5e1!3m2!1ses!2ses!4v1762621605517!5m2!1ses!2ses",
     },
-  ];
+  ];*/
 
-  /*async getAllHousingLocations(): Promise<HousingLocationInfo[]> {
+  
+  /**
+   * GET /api/viviendas
+   * Recupera la lista. Al coincidir los nombres, la asignación es casi directa.
+   */
+  async getAllHousingLocations(): Promise<HousingLocationInfo[]> {
     try {
       const response = await fetch(`${apiUrl}/api/viviendas`);
       if (!response.ok) {
         throw new Error(`Error al cargar viviendas: ${response.statusText}`);
       }
       const data = await response.json();
-      // Asumimos que la API devuelve { success: true, data: [...] }
-      const viviendas: HousingLocationInfo[] = (data.data ?? []).map((v: any) => {
-        // Llamamos al traductor por cada vivienda
-        return this.mapBackendToFrontend(v);
-      });
-      //console.log(data.data);
-      return viviendas ?? []; 
+
+      // Mapeo mínimo solo para asegurar tipos y arrays
+      return (data.data ?? []).map((v: any) => this.processViviendaData(v));
+
     } catch (error) {
       console.error(error);
-      return []; // Devuelve un array vacío si falla
+      return [];
     }
-  }*/
-
-  private mapBackendToFrontend(v: any): HousingLocationInfo {
-    // Mapea las redes sociales (Objeto en lugar de Array)
-    const socialLinksMap: { [platform: string]: string } = {};
-    if (v.socialLinks) {
-      v.socialLinks.forEach((link: any) => {
-        // El HTML espera 'Instagram', no 'plataforma'
-        socialLinksMap[link.plataforma] = link.url;
-      });
-    }
-
-    return {
-      // Interfaz Frontend = Dato del Backend
-      id: v.id,
-      name: v.nombre, // <-- ¡MAPEO!
-      city: v.ciudad, // <-- ¡MAPEO!
-      state: v.provinciaEstado, // <-- ¡MAPEO!
-      photo: v.fotoPrincipalUrl, // <-- ¡MAPEO!
-      minimunPrice: v.precioMinimo, // <-- ¡MAPEO!
-      realEstateName: v.inmobiliariaNombre,
-      realEstateLink: v.inmobiliariaUrl || "",
-      units: v.unidades || [],
-      resume: v.resumen || "",
-      downloadDocuments: v.documentos || [],
-      // Mapea el array de objetos 'galeria' a un array de strings 'galleryImages'
-      galleryImages: v.galeria ? v.galeria.map((img: any) => img.url) : [],
-      renderLink: v.renderLink,
-      mapLink: v.mapLink,
-      socialMediaLinks: v.socialLinksMap || [], // <-- Mapeo de Redes Sociales
-    };
   }
+
   /**
-   * Endpoint 2: Obtiene el DETALLE de UNA vivienda (para Details)
-   * Llama a: GET /api/viviendas/:id
+   * GET /api/viviendas/:id
    */
-  /*async getHousingLocationById(id: number): Promise<HousingLocationInfo | undefined> {
+  async getHousingLocationById(id: number): Promise<HousingLocationInfo | undefined> {
     try {
       const response = await fetch(`${apiUrl}/api/viviendas/${id}`);
       if (!response.ok) {
         throw new Error(`Error al cargar vivienda ${id}: ${response.statusText}`);
       }
       const data = await response.json();
+
       if (!data.data) return undefined;
-      console.log(data.data);
-      // --- ¡AQUÍ OCURRE EL MAPEO! ---
-      // Llamamos al traductor para la vivienda individual
-      return this.mapBackendToFrontend(data.data);
+
+      return this.processViviendaData(data.data);
 
     } catch (error) {
       console.error(error);
       return undefined;
     }
-  }*/
+  }
+
+  /**
+   * Función auxiliar ligera
+   * Ya no "traduce" nombres, solo asegura que los arrays no sean null
+   * y transforma galleryImages de Objetos a Strings.
+   */
+  private processViviendaData(v: any): HousingLocationInfo {
+    return {
+      ...v, // Copia todas las propiedades coincidentes (id, name, city, etc.)
+      
+      // Aseguramos que los arrays nunca sean null/undefined
+      units: v.units || [],
+      downloadDocuments: v.downloadDocuments || [],
+      socialMediaLinks: v.socialMediaLinks || [],
+      
+      // ÚNICA TRANSFORMACIÓN NECESARIA:
+      // Convertir [{url: 'a'}, {url: 'b'}] -> ['a', 'b']
+      galleryImages: v.galleryImages ? v.galleryImages.map((img: any) => img.url) : [],
+    };
+  }
 
   async submitApplication(
     firstName: string,
