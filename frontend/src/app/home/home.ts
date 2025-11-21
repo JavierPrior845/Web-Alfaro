@@ -2,10 +2,11 @@ import { Component, inject, OnInit, OnDestroy } from "@angular/core"; // Importa
 import { HousingLocation } from "../housing-location/housing-location";
 import { Housing } from "../housing";
 import { HousingLocationInfo } from "../housing-location";
+import { GridMotionComponent } from "../grid-motion/grid-motion";
 
 @Component({
   selector: "app-home",
-  imports: [HousingLocation],
+  imports: [HousingLocation, GridMotionComponent],
   templateUrl: "./home.html",
   styleUrls: ["./home.css"],
 })

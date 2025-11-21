@@ -1,16 +1,13 @@
-<div class="hero-section" 
-         [style.background-image]="'url(' + currentHeroImage + ')'">
-      
-      <div class="hero-content">
-        <h1>Viviendas Obra Nueva</h1>
-        <p>Descubre las mejores promociones inmobiliarias en tu zona.</p>
-      </div>
+<div class="hero-wrapper">
+  
+  <app-grid-motion [items]="heroImages" gradientColor="#1a1a1a">
+    <div class="hero-content-overlay">
+      <h1>Viviendas Obra Nueva</h1>
+      <p>Descubre las mejores promociones.</p>
     </div>
-    
-    <section class="results">
-      @for(housingLocation of filteredLocationList; track $index) {
-      <app-housing-location
-        [housingLocation]="housingLocation"
-      ></app-housing-location>
-      }
-    </section>
+  </app-grid-motion>
+
+</div>
+
+<section class="results">
+   </section>

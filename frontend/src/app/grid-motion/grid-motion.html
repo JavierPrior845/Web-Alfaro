@@ -1,0 +1,32 @@
+<div class="noscroll loading">
+  <section class="intro" [style.background]="'radial-gradient(circle, ' + gradientColor + ' 0%, transparent 100%)'">
+    
+    <div class="gridMotion-container">
+      @for (rowIndex of [0, 1, 2, 3]; track rowIndex) {
+        <div class="row" #rowRef>
+          @for (colIndex of [0, 1, 2, 3, 4, 5, 6]; track colIndex) {
+            
+            @let itemContent = gridItems[(rowIndex * 7) + colIndex];
+
+            <div class="row__item">
+              <div class="row__item-inner">
+                @if (isImage(itemContent)) {
+                  <div class="row__item-img" 
+                       [style.background-image]="'url(' + itemContent + ')'">
+                  </div>
+                } @else {
+                  <div class="row__item-content">{{ itemContent }}</div>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="fullview">
+      <ng-content></ng-content>
+    </div>
+
+  </section>
+</div>
