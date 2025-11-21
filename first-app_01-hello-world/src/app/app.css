@@ -2,9 +2,30 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  color:white;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 12px 30px;
+  background-color: black;
+}
+
+.menu {
+  display: flex;
+  gap: 40px; /* Separación entre palabras */
+}
+
+.menu a {
+  text-decoration: none;
+  color: var(--primary-color, #333);
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-size: 18px;
+  transition: opacity 0.2s ease;
+}
+
+.menu a:hover {
+  opacity: 0.5;
+}
+
+.menu a.active {
+  border-bottom: 1px solid white;
 }
 
 .brand-name {
@@ -52,7 +73,7 @@
     font-size: 0.9rem;
     padding: 6px 12px;
   }
-  
+
   .brand-logo {
     height: 40px;
   }
@@ -62,7 +83,7 @@
   .phone-number span {
     display: none; /* Oculta el número en móviles muy pequeños */
   }
-  
+
   .phone-icon {
     width: 24px;
     height: 24px;
