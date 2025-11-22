@@ -16,7 +16,8 @@ export class Colab {
       website: "https://sirocoinmuebles.com/",
       description:
         "Siroco Inmuebles combina su experiencia como arquitecto y asesor inmobiliario para ofrecer un servicio integral: valoración, marketing profesional, home staging, asesoría jurídica y fiscal, y un acompañamiento cercano en todo el proceso de compraventa, con la seguridad y la transparencia que mereces.",
-      address: "C/ Sánchez Madrigal 9, Edificio Villaleal, Bajo, 30004, Murcia, España.",
+      address:
+        "C/ Sánchez Madrigal 9, Edificio Villaleal, Bajo, 30004, Murcia, España.",
       phone: "(+34) 610 89 41 63",
       email: "info@sirocoinmuebles.com",
       socialMediaLinks: [
@@ -45,6 +46,9 @@ export class Colab {
       website: "https://www.anovahomes.com/",
       description:
         "Anova Homes es una inmobiliaria moderna que ofrece un servicio integral en venta y alquiler: valoración gratuita, marketing profesional, home staging, tours virtuales y gestión jurídica completa, apostando siempre por la transparencia y una atención cercana.",
+      address: "C/ Marqués de Ordoño, 1, 4A, 30002 Murcia",
+      phone: "(+34) 644 03 32 19",
+      email: "hola@anovahomes.com",
       socialMediaLinks: [
         {
           id: 1,
@@ -62,9 +66,6 @@ export class Colab {
           rutaArchivo: "https://www.linkedin.com/company/anova-inmobiliaria/",
         },
       ],
-      address: "C. Marqués de Ordoño, 1, 4A, 30002 Murcia",
-      phone: "(+34) 644 03 32 19",
-      email: "hola@anovahomes.com",
     },
   ];
 
