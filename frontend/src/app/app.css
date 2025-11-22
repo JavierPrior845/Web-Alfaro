@@ -79,9 +79,83 @@
   }
 }
 
+/* --- BOTÓN HAMBURGUESA --- */
+.menu-toggle {
+  display: none;
+  font-size: 32px;
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+/* --- RESPONSIVE MENU (MÓVIL) --- */
+@media (max-width: 900px) {
+  .menu {
+    display: none; /* Ocultar menú horizontal */
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background: black;
+    width: 230px;
+    padding: 20px;
+    gap: 20px;
+    border-left: 1px solid var(--primary-color);
+    border-bottom: 1px solid var(--primary-color);
+    z-index: 9999; /* Para que no la superpongan */
+  }
+
+  .menu.open {
+    display: flex; /* Mostrar cuando la hamburguesa está activa */
+  }
+
+  .menu-toggle {
+    display: block;
+    z-index: 10000;
+  }
+
+
+  .top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* LOGO a la izquierda */
+  .brand-name {
+    order: 1;
+  }
+
+  /* TELÉFONO en el centro */
+  .contact-info {
+    order: 2;
+    display: flex !important;
+    flex: 1;
+    justify-content: center;
+  }
+
+  /* HAMBURGUESA a la derecha */
+  .menu-toggle {
+    order: 3;
+  }
+}
+
+/* Responsive ajustes pequeños */
+@media (max-width: 768px) {
+  .phone-number {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+
+  .brand-logo {
+    height: 40px;
+  }
+}
+
 @media (max-width: 480px) {
   .phone-number span {
-    display: none; /* Oculta el número en móviles muy pequeños */
+    display: none;
   }
 
   .phone-icon {
