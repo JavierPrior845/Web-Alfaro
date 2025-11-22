@@ -8,18 +8,18 @@ const apiUrl = environment.apiBaseUrl;
   providedIn: "root",
 })
 export class Housing {
-  /*getAllHousingLocations(): HousingLocationInfo[] {
+  getAllHousingLocations(): HousingLocationInfo[] {
     return this.housingLocationList;
   }
   getHousingLocationById(id: number): HousingLocationInfo | undefined {
     return this.housingLocationList.find(
       (housingLocation) => housingLocation.id === id
     );
-  }*/
+  }
 
   readonly baseUrl = "http://localhost:3000";
   readonly baseUrlAssets = "assets";
-  /*
+  
   housingLocationList: HousingLocationInfo[] = [
     {
       id: 0,
@@ -433,14 +433,14 @@ export class Housing {
       mapLink:
         "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d665.4823069294587!2d-1.1181602905529737!3d38.0052129310496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6382378c4223b7%3A0xbcf245bc7bc0ac4c!2sDiseminado%20Diego%20Carmona%2C%202%2C%2030007%20Zarandona%2C%20Murcia!5e1!3m2!1ses!2ses!4v1762621605517!5m2!1ses!2ses",
     },
-  ];*/
+  ];
 
   
   /**
    * GET /api/viviendas
    * Recupera la lista. Al coincidir los nombres, la asignación es casi directa.
    */
-  async getAllHousingLocations(): Promise<HousingLocationInfo[]> {
+  /*async getAllHousingLocations(): Promise<HousingLocationInfo[]> {
     try {
       const response = await fetch(`${apiUrl}/api/viviendas`);
       if (!response.ok) {
@@ -455,12 +455,12 @@ export class Housing {
       console.error(error);
       return [];
     }
-  }
+  }*/
 
   /**
    * GET /api/viviendas/:id
    */
-  async getHousingLocationById(id: number): Promise<HousingLocationInfo | undefined> {
+ /* async getHousingLocationById(id: number): Promise<HousingLocationInfo | undefined> {
     try {
       const response = await fetch(`${apiUrl}/api/viviendas/${id}`);
       if (!response.ok) {
@@ -476,7 +476,7 @@ export class Housing {
       console.error(error);
       return undefined;
     }
-  }
+  }*/
 
   /**
    * Función auxiliar ligera

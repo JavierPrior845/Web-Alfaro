@@ -1,0 +1,165 @@
+<section>
+  @for(colab of colabs; track colab.id; let i = $index) {
+
+  <section class="real-estate-card" [ngClass]="{ 'reverse': i % 2 === 1 }">
+    <a
+      class="listing-link"
+      [href]="colab.website"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <div class="real-estate-content">
+        <!-- LOGO A TODA ALTURA -->
+        <div class="real-estate-logo-container">
+          <img class="real-estate-logo" [src]="colab.logo" [alt]="colab.name" />
+        </div>
+
+        <!-- INFORMACIÓN -->
+        <div class="real-estate-info">
+          <h3 class="real-estate-name">{{ colab.name }}</h3>
+
+          <p class="real-estate-description">{{ colab.description }}</p>
+
+          <p class="agency-address">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+
+            {{ colab.address }}
+          </p>
+
+          <p class="agency-phone">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 
+       19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.09 4.18 
+       2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 
+       12.84 12.84 0 0 0 .7 2.81 
+       2 2 0 0 1-.45 2.11L8 9.91a16 16 0 0 0 6 6l1.27-1.38
+       a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 
+       A2 2 0 0 1 22 16.92z"
+              />
+            </svg>
+            {{ colab.phone }}
+          </p>
+          <p class="agency-email">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"
+              />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+            {{ colab.email }}
+          </p>
+
+          <div class="social-icons">
+            <!-- Icono de Instagram  -->
+
+            <a
+              *ngIf="getSocial(colab, 'Instagram')"
+              [href]="getSocial(colab, 'Instagram')"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-media-icon"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 
+             0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm10 2c1.654 0 3 
+             1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 
+             0-3-1.346-3-3V7c0-1.654 1.346-3 3-3h10zm-5 
+             3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 
+             6 3 3 0 010-6zm4.5-3a1.5 1.5 0 100 3 1.5 
+             1.5 0 000-3z"
+                />
+              </svg>
+            </a>
+            <!-- Icono de TikTok *ngIf="getSocialMediaUrl('TikTok')" -->
+            <a
+              *ngIf="getSocial(colab, 'TikTok')"
+              [href]="getSocial(colab, 'TikTok')"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-media-icon"
+            >
+              <svg
+                width="24px"
+                height="24px"
+                viewBox="0 0 512 512"
+                fill="currentColor"
+                id="icons"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M412.19,118.66a109.27,109.27,0,0,1-9.45-5.5,132.87,132.87,0,0,1-24.27-20.62c-18.1-20.71-24.86-41.72-27.35-56.43h.1C349.14,23.9,350,16,350.13,16H267.69V334.78c0,4.28,0,8.51-.18,12.69,0,.52-.05,1-.08,1.56,0,.23,0,.47-.05.71,0,.06,0,.12,0,.18a70,70,0,0,1-35.22,55.56,68.8,68.8,0,0,1-34.11,9c-38.41,0-69.54-31.32-69.54-70s31.13-70,69.54-70a68.9,68.9,0,0,1,21.41,3.39l.1-83.94a153.14,153.14,0,0,0-118,34.52,161.79,161.79,0,0,0-35.3,43.53c-3.48,6-16.61,30.11-18.2,69.24-1,22.21,5.67,45.22,8.85,54.73v.2c2,5.6,9.75,24.71,22.38,40.82A167.53,167.53,0,0,0,115,470.66v-.2l.2.2C155.11,497.78,199.36,496,199.36,496c7.66-.31,33.32,0,62.46-13.81,32.32-15.31,50.72-38.12,50.72-38.12a158.46,158.46,0,0,0,27.64-45.93c7.46-19.61,9.95-43.13,9.95-52.53V176.49c1,.6,14.32,9.41,14.32,9.41s19.19,12.3,49.13,20.31c21.48,5.7,50.42,6.9,50.42,6.9V131.27C453.86,132.37,433.27,129.17,412.19,118.66Z"
+                />
+              </svg>
+            </a>
+            <!-- Icono de Linkedin *ngIf="getSocialMediaUrl('Linkedin')" -->
+            <a
+              *ngIf="getSocial(colab, 'LinkedIn')"
+              [href]="getSocial(colab, 'LinkedIn')"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-media-icon"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M20,2H4C2.9,2,2,2.9,2,4v16c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V4C22,2.9,21.1,2,20,2z M8,19H5V8h3V19z M6.5,6.7 C5.5,6.7,4.7,5.9,4.7,5s0.8-1.7,1.8-1.7s1.8,0.8,1.8,1.7C8.3,5.9,7.5,6.7,6.5,6.7z M19,19h-3v-5.4c0-1.3-0.5-2.2-1.6-2.2 c-0.9,0-1.4,0.6-1.6,1.2C12.7,13,12.8,13.5,12.8,14v5H10V8h3v1.3c0.4-0.6,1.1-1.3,2.7-1.3c2,0,3.3,1.3,3.3,4.1V19z"
+                />
+              </svg>
+            </a>
+          </div>
+
+          <p class="real-estate-link">
+            Pincha en la etiqueta para ir a la página de {{ colab.name }}
+          </p>
+        </div>
+      </div>
+    </a>
+  </section>
+  }
+</section>
