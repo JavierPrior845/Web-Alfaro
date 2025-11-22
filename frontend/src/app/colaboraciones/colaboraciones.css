@@ -1,3 +1,8 @@
+.titulo{
+  color: var(--primary-color);
+  text-align: center;
+  margin-top: 50px;
+}
 .real-estate-card {
   background: var(--card-bg);
   border: 1px solid var(--primary-color);
@@ -8,6 +13,7 @@
 
 .real-estate-card:hover {
   background: rgba(0, 0, 0, 0.03);
+  transform: scale(1.02);
   cursor: pointer;
 }
 
@@ -25,7 +31,8 @@
 /* LOGO A IZQUIERDA, OCUPANDO TODA LA ALTURA */
 .real-estate-logo-container {
   width: 30%;
-  background: white;
+  min-width: 160px; 
+  background: var(--primary-color);
   border-right: 1px solid var(--primary-color);
   display: flex;
   justify-content: center;
@@ -38,10 +45,11 @@
 }
 
 .real-estate-logo {
-  width: 50%;
-  height: 50%;
+  width: 50%; 
+  height: auto;
   object-fit: contain;
-  padding: 50px;
+  padding: 40px;
+  min-width: 160px; 
 }
 
 /* COLUMNA DERECHA */
