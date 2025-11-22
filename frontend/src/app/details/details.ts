@@ -4,16 +4,15 @@ import { Housing } from "../housing";
 import { HousingLocationInfo } from "../housing-location";
 import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { UnitTableComponent } from "../unit-table/unit-table";
-import { ImageGalleryComponent } from "../image-gallery/image-gallery";
-import * as L from "leaflet";
 import { CommonModule } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { GridGalleryComponent } from "../grid-gallery/grid-gallery";
 
 @Component({
   selector: "app-details",
   standalone: true,
-  imports: [ReactiveFormsModule, UnitTableComponent, ImageGalleryComponent, CommonModule, ],
+  imports: [ReactiveFormsModule, UnitTableComponent, CommonModule, GridGalleryComponent],
   templateUrl: "./details.html",
   styleUrls: ["./details.css"],
 })
@@ -26,6 +25,8 @@ export class Details implements OnInit {
   housingLocationId = -1;
   housingLocation: HousingLocationInfo | undefined;
   safeMapUrl: SafeResourceUrl | string = '';
+
+  lastClicked: string = '';
 
   applyForm = new FormGroup({
     firstName: new FormControl(""),
@@ -80,5 +81,12 @@ export class Details implements OnInit {
       this.applyForm.value.email ?? "",
       this.housingLocationId
     );
+  }
+
+  navegarA(imagen: string) {
+    this.lastClicked = imagen;
+    console.log("Navegando a la imagen:", imagen);
+    // Aquí pondrías tu router:
+    // this.router.navigate(['/detalle'], { queryParams: { img: imagen } });
   }
 }

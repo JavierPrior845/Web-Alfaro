@@ -1,0 +1,21 @@
+<div class="list" #masonryContainer [style.height.px]="containerHeight">
+  
+  @for (item of gridItems; track item.id) {
+    <div 
+      class="item-wrapper" 
+      [attr.data-id]="item.id"
+      (click)="openImage(item.src)"
+      (mouseenter)="onMouseEnter($event, item)"
+      (mouseleave)="onMouseLeave($event, item)">
+      
+      <div class="item-img" [style.background-image]="'url(' + item.src + ')'">
+        
+        @if (colorShiftOnHover) {
+          <div class="color-overlay"></div>
+        }
+        
+      </div>
+
+    </div>
+  }
+</div>

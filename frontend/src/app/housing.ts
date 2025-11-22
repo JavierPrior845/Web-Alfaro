@@ -61,7 +61,6 @@ export class Housing {
           vivienda: "1ºA",
           m2: 151.72,
           terrazas: 15.12,
-          precio: "N/D",
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-6-7.pdf",
         },
@@ -69,7 +68,6 @@ export class Housing {
           vivienda: "1ºB",
           m2: 90.16,
           terrazas: "—",
-          precio: "N/D",
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-8-9.pdf",
         },
@@ -77,7 +75,6 @@ export class Housing {
           vivienda: "2ºA",
           m2: 163.55,
           terrazas: "—",
-          precio: "N/D",
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-10-11.pdf",
         },
@@ -85,7 +82,6 @@ export class Housing {
           vivienda: "2ºB",
           m2: 56.75,
           terrazas: "—",
-          precio: "N/D",
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-12-13.pdf",
         },
@@ -93,7 +89,6 @@ export class Housing {
           vivienda: "2ºC",
           m2: 143.27,
           terrazas: "—",
-          precio: "N/D",
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-14-15.pdf",
         },
@@ -101,7 +96,6 @@ export class Housing {
           vivienda: "3ºA",
           m2: 163.55,
           terrazas: "—",
-          precio: "N/D",
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-10-11.pdf",
         },
@@ -109,7 +103,6 @@ export class Housing {
           vivienda: "3ºB",
           m2: 56.75,
           terrazas: "—",
-          precio: "N/D",
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-12-13.pdf",
         },
@@ -117,7 +110,6 @@ export class Housing {
           vivienda: "3ºC",
           m2: 143.27,
           terrazas: "—",
-          precio: "N/D",
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-14-15.pdf",
         },
@@ -125,7 +117,6 @@ export class Housing {
           vivienda: "4ºA",
           m2: 163.55,
           terrazas: "—",
-          precio: "N/D",
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-10-11.pdf",
         },
@@ -133,7 +124,6 @@ export class Housing {
           vivienda: "4ºB",
           m2: 56.75,
           terrazas: "—",
-          precio: "N/D",
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-12-13.pdf",
         },
@@ -141,7 +131,7 @@ export class Housing {
           vivienda: "4ºC",
           m2: 143.27,
           terrazas: "—",
-          precio: "N/D",
+
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-14-15.pdf",
         },
@@ -149,7 +139,7 @@ export class Housing {
           vivienda: "5ºA",
           m2: 285.09,
           terrazas: 23.67,
-          precio: "N/D",
+
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-16-17.pdf",
         },
@@ -157,7 +147,7 @@ export class Housing {
           vivienda: "5ºB",
           m2: 101.27,
           terrazas: 23.34,
-          precio: "N/D",
+
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-18-19.pdf",
         },
@@ -165,7 +155,7 @@ export class Housing {
           vivienda: "5ºC",
           m2: 238.16,
           terrazas: 18.94,
-          precio: "N/D",
+
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-20-21.pdf",
         },
@@ -174,7 +164,7 @@ export class Housing {
           vivienda: "Local A",
           m2: 398.69,
           terrazas: "—",
-          precio: "N/D",
+
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-LOCAL.pdf",
         },
@@ -182,7 +172,7 @@ export class Housing {
           vivienda: "Sótano",
           m2: 3,
           terrazas: "—",
-          precio: "N/D",
+
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-GARAGE.pdf",
         },
@@ -226,55 +216,46 @@ export class Housing {
           vivienda: "1°A",
           m2: 55.81,
           dormitorios: 2,
-          precio: 155000,
         },
         {
           vivienda: "1°B",
           m2: 58.15,
           dormitorios: 2,
-          precio: 145000,
         },
         {
           vivienda: "2°A",
           m2: 55.81,
           dormitorios: 2,
-          precio: 160000,
         },
         {
           vivienda: "2°B",
           m2: 55.15,
           dormitorios: 2,
-          precio: 155000,
         },
         {
           vivienda: "3°A",
           m2: 55.81,
           dormitorios: 2,
-          precio: 170000,
         },
         {
           vivienda: "3°B",
           m2: 50.18,
           dormitorios: 1,
-          precio: 125000,
         },
         {
           vivienda: "4°A",
           m2: 55.81,
           dormitorios: 2,
-          precio: 175000,
         },
         {
           vivienda: "4°B",
           m2: 50.18,
           dormitorios: 1,
-          precio: 135000,
         },
         {
           vivienda: "LOCAL",
           m2: 76.25,
           dormitorios: '-',
-          precio: 70000,
         },
       ],
       resume:
@@ -334,91 +315,78 @@ export class Housing {
           vivienda: "1º A",
           m2: 170.2,
           terrazas: 40.4,
-          precio: 275000.0,
           planoPdfUrl: `${this.baseUrlAssets}/pdfs/planos/Reino_de_Murcia_1A.pdf`,
         },
         {
           vivienda: "1º B",
           m2: 117.2,
           terrazas: 26.3,
-          precio: 235000.0,
           planoPdfUrl: `${this.baseUrlAssets}/pdfs/planos/Reino_de_Murcia_1B.pdf`,
         },
         {
           vivienda: "1º C",
           m2: 147.15,
           terrazas: 10.0,
-          precio: 257000.0,
           planoPdfUrl: `${this.baseUrlAssets}/pdfs/planos/Reino_de_Murcia_1C.pdf`,
         },
         {
           vivienda: "2º A",
           m2: 139.8,
           terrazas: 10.0,
-          precio: 298000.0,
           planoPdfUrl: `${this.baseUrlAssets}/pdfs/planos/Reino_de_Murcia_2A-3A.pdf`,
         },
         {
           vivienda: "2º B",
           m2: 90.9,
           terrazas: "—", // Dejé el guion en la columna del PDF, por lo que aquí es nulo.
-          precio: 222000.0,
           planoPdfUrl: `${this.baseUrlAssets}/pdfs/planos/Reino_de_Murcia_2B-3B`,
         },
         {
           vivienda: "2º C",
           m2: 137.15,
           terrazas: "—",
-          precio: "VENDIDO",
           planoPdfUrl: undefined, // No se puede descargar si está vendido
         },
         {
           vivienda: "3º A",
           m2: 139.8,
           terrazas: 10.0,
-          precio: 318000.0,
           planoPdfUrl: `${this.baseUrlAssets}/pdfs/planos/Reino_de_Murcia_2A-3A.pdf`,
         },
         {
           vivienda: "3º B",
           m2: 90.9,
           terrazas: "—",
-          precio: 232000.0,
           planoPdfUrl: `${this.baseUrlAssets}/pdfs/planos/Reino_de_Murcia_2B-3B.pdf`,
         },
         {
           vivienda: "3º C",
           m2: 137.15,
           terrazas: "—",
-          precio: "VENDIDO",
           planoPdfUrl: undefined,
         },
         {
           vivienda: "ATICO A",
           m2: 107.4,
           terrazas: "—",
-          precio: "VENDIDO",
           planoPdfUrl: undefined,
         },
         {
           vivienda: "ATICO B",
           m2: 69.6,
           terrazas: "—",
-          precio: "VENDIDO",
           planoPdfUrl: undefined,
         },
         {
           vivienda: "GARAJES",
           m2: 3,
           terrazas: "—",
-          precio: 54000.0,
           planoPdfUrl: `${this.baseUrlAssets}/pdfs/planos/Reino_de_Mucia_Sotano-PB.pdf`,
         },
         {
           vivienda: "LOCAL",
           m2: 320,
           terrazas: "—",
-          precio: 512000.0,
           planoPdfUrl: `${this.baseUrlAssets}/pdfs/planos/Reino_de_Mucia_Sotano-PB.pdf`,
         },
       ],

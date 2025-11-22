@@ -1,84 +1,61 @@
 .unit-table-container {
-    padding: 20px 0;
-    margin-top: 60px;
+  padding: 20px 0;
+  margin-top: 60px;
 }
 
 .table-title {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: var(--primary-color);
-    margin-bottom: 20px;
-    border-bottom: 2px solid var(--accent-color);
-    padding-bottom: 10px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--accent-color);
+  padding-bottom: 10px;
+  text-align: center;   /* ← centrado */
 }
 
 .table-wrapper {
-    /* Permite el scroll horizontal en dispositivos móviles */
-    overflow-x: auto; 
+  overflow-x: auto;
 }
 
 .unit-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 1rem;
-    min-width: 600px; /* Asegura que no se comprima demasiado en móvil antes del scroll */
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+  min-width: 700px;
 }
 
 .unit-table thead th {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 12px 15px;
-    text-align: left;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    border: none;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .unit-table tbody td {
-    padding: 12px 15px;
-    border-bottom: 1px solid var(--shadow-color); /* Sombra suave para las líneas */
-    color: #333;
-    /* Evita el centrado por defecto en el cuerpo */
-    text-align: left; 
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--shadow-color);
+  color: #333;
 }
 
 .unit-table tbody tr:hover {
-    background-color: var(--accent-color); /* Resaltar fila al pasar el mouse */
+  background-color: var(--accent-color);
 }
 
-/* Alineación de columnas de números */
-.text-right {
-    text-align: right !important;
-}
-.text-center {
-    text-align: center !important;
-}
+.text-right { text-align: right !important; }
+.text-center { text-align: center !important; }
 
-/* Estilo para las unidades VENDIDO */
-.sold {
-    background-color: #FAFAFA;
-    opacity: 0.6;
-}
-
-.sold-tag {
-    font-weight: 600;
-    color: #CC0000;
-    letter-spacing: 0.1em;
-}
-
-/* --- Icono de Plano PDF --- */
 .plan-link {
-    display: inline-block;
-    color: var(--primary-color);
-}
-
-.pdf-icon {
-    width: 24px;
-    height: 24px;
-    vertical-align: middle;
+  color: var(--primary-color);
 }
 
 .plan-link:hover {
-    color: var(--secondary-color);
+  color: var(--secondary-color);
+}
+
+.pdf-icon {
+  width: 24px;
+  height: 24px;
 }
