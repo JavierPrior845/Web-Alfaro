@@ -2,6 +2,8 @@ import { DownloadDocument } from './download-document';
 import { SocialMediaLink } from './social-media-link';
 import { Unit } from './unit';
 
+//export enum estado { 'trabajo', 'venta', 'proyecto'};
+
 export interface HousingLocationInfo {
     id: number;
     name: string;
@@ -18,4 +20,6 @@ export interface HousingLocationInfo {
     renderLink?: string;
     mapLink?: string;
     socialMediaLinks?: SocialMediaLink[];
+
+    estado?: string; 
 }
