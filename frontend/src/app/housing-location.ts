@@ -12,7 +12,6 @@ export interface HousingLocationInfo {
     photo: string;
     realEstateName?: string;
     realEstateLink?: string;
-    minimunPrice: string;
     units?: Unit[]; 
     resume: string;
     downloadDocuments?: DownloadDocument[];  

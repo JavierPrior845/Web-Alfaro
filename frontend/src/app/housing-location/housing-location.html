@@ -1,4 +1,7 @@
-<a class="listing-link" [routerLink]="['/vivienda-obra-nueva', housingLocation().id]">
+<a
+  class="listing-link"
+  [routerLink]="['/vivienda-obra-nueva', housingLocation().id]"
+>
   <section class="listing">
     <img
       class="listing-photo"
@@ -10,7 +13,10 @@
     <p class="listing-location">
       {{ housingLocation().city }}, {{ housingLocation().state }}
     </p>
-    <p class="minimun-price">Desde: {{ housingLocation().minimunPrice }}</p>
+    @if (housingLocation().realEstateName) {
+    <p class="listing-colab">
+      Comercializado por: {{ housingLocation().realEstateName }}
+    </p>
+    }
   </section>
 </a>
-

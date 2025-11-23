@@ -15,6 +15,10 @@
   margin: 50px 20px 50px 20px;
 }
 
+.resul:hover {
+transform: scale(1.02);
+}
+
 /* INPUTS (sin esquinas redondeadas) */
 input[type="text"],
 input[type="email"],
