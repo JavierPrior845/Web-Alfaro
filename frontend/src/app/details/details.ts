@@ -8,6 +8,8 @@ import { CommonModule } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { GridGalleryComponent } from "../grid-gallery/grid-gallery";
+import { Colab } from "../colab";
+import { ColabsLocationInfo } from "../colabs-location";
 
 @Component({
   selector: "app-details",
@@ -19,8 +21,10 @@ import { GridGalleryComponent } from "../grid-gallery/grid-gallery";
 export class Details implements OnInit {
   route: ActivatedRoute = inject(ActivatedRoute);
   housingService = inject(Housing);
+  colabService = inject(Colab);
   titleService: Title = inject(Title);
   sanitizer: DomSanitizer = inject(DomSanitizer);
+  colab: ColabsLocationInfo | undefined;
 
   housingLocationId = -1;
   housingLocation: HousingLocationInfo | undefined;
@@ -44,6 +48,9 @@ export class Details implements OnInit {
     this.housingLocation = await this.housingService.getHousingLocationById(
       this.housingLocationId
     );
+    if (this.housingLocation?.realEstateId){
+      this.colab = await this.colabService.getColabById(this.housingLocation?.realEstateId);
+    }
     if (this.housingLocation?.mapLink) {
       // Le decimos a Angular que esta URL es segura para 'iframes'
       this.safeMapUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
@@ -58,16 +65,6 @@ export class Details implements OnInit {
   }
 
 
-  getSocialMediaUrl(plataforma: string): string | null {
-    if (!this.housingLocation?.socialMediaLinks) return null;
-
-    // Usamos 'plataforma' y 'url' (como en la BD)
-    const link = this.housingLocation.socialMediaLinks.find(
-      (s) => s.nombreRedSocial.toLowerCase() === plataforma.toLowerCase()
-    );
-
-    return link?.rutaArchivo || null;
-  }
 
   submitApplication() {
     if (!this.applyForm.value.termsAccepted) {

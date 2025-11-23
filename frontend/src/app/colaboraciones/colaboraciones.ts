@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Colab } from '../colab';
 import { ColabsLocationInfo } from '../colabs-location';
 import { CommonModule } from '@angular/common';
+import { Colaboracion } from '../colaboracion/colaboracion';
 
 @Component({
   standalone: true,

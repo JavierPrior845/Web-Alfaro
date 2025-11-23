@@ -36,25 +36,7 @@ export class Housing {
       city: "Murcia",
       state: "Barrio del Carmen",
       photo: "assets/gonzalez conde_5-Foto.jpg",
-      realEstateName: "AnovaHomes",
-      realEstateLink: "https://www.anovahomes.com/",
-      socialMediaLinks: [
-        {
-          id: 0,
-          nombreRedSocial: "Instagram",
-          rutaArchivo: "https://www.instagram.com/anova_homes/",
-        },
-        {
-          id: 1,
-          nombreRedSocial: "TikTok",
-          rutaArchivo: "https://www.tiktok.com/@anova_homes",
-        },
-        {
-          id: 2,
-          nombreRedSocial: "Linkedin",
-          rutaArchivo: "https://www.linkedin.com/company/anova-inmobiliaria/",
-        },
-      ],
+      realEstateId: 1,
       units: [
         {
           vivienda: "1ºA",
@@ -304,27 +286,8 @@ export class Housing {
       city: "Murcia",
       state: "Reino de Murcia",
       photo: `${this.baseUrlAssets}/PERPECTIVA_DETALLE.jpg`,
-      realEstateName: "Siroco",
-      realEstateLink: "https://sirocoinmuebles.com/",
+      realEstateId: 0,
       renderLink: "https://my.matterport.com/show/?m=poxMa2bcLc2",
-      socialMediaLinks: [
-        {
-          id: 1,
-          nombreRedSocial: "Instagram",
-          rutaArchivo: "https://www.instagram.com/sirocoinmuebles/",
-        },
-        {
-          id: 2,
-          nombreRedSocial: "TikTok",
-          rutaArchivo: "https://www.tiktok.com/@sirocoinmuebles",
-        },
-        {
-          id: 2,
-          nombreRedSocial: "Linkedin",
-          rutaArchivo:
-            "https://www.linkedin.com/in/antonio-hern%C3%A1ndez-2b4a2b1a7/",
-        },
-      ],
       units: [
         {
           vivienda: "1º A",

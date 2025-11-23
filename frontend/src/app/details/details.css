@@ -1,3 +1,109 @@
+article {
+  max-width: 1500px;
+  margin: 40px auto;
+  padding: 0 30px;
+  box-sizing: border-box;
+}
+
+/* --- 1. IMAGEN HEADER --- */
+.header-image-container {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.listing-photo-header {
+  width: 100%;
+  height: 500px; /* Altura fija para efecto banner */
+  object-fit: cover;
+  display: block;
+}
+
+/* --- 2. LAYOUT SUPERIOR (Mapa + Texto) --- */
+.top-split-container {
+  display: flex;
+  /* IMPORTANTE: row-reverse pone el 2º elemento (mapa) a la izquierda 
+     y el 1º elemento (texto) a la derecha en escritorio */
+  flex-direction: row-reverse; 
+  gap: 40px;
+  margin-bottom: 50px;
+  align-items: flex-start;
+}
+
+.info-column {
+  flex: 1; /* Ocupa el espacio restante */
+}
+
+.map-column-top {
+  width: 40%; /* El mapa ocupará el 40% del ancho */
+  min-width: 300px;
+}
+
+/* Ajustes de texto */
+.listing-heading {
+  font-size: 38pt; /* Ajustado un poco */
+  font-weight: bold;
+  margin-top: 0;
+  line-height: 1.1;
+}
+
+/* --- 3. LAYOUT INFERIOR (Inmobiliaria + Formulario) --- */
+.bottom-grid-apply {
+  display: flex;
+  gap: 40px;
+  margin-top: 50px;
+  border-top: 1px solid #eee;
+  padding-top: 40px;
+}
+
+.real-estate-column {
+  flex: 1; /* La inmobiliaria ocupa espacio flexible */
+}
+
+.form-column {
+  width: 35%; /* El formulario un poco más estrecho */
+  min-width: 300px;
+}
+
+/* Estilos de inputs (Mantenidos de tu original) */
+input {
+  font-size: 16pt;
+  margin-bottom: 15px;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-bottom: solid 1px #ccc;
+  box-sizing: border-box; /* Importante para que no se salga */
+}
+
+/* --- RESPONSIVE --- */
+
+@media (max-width: 1024px) {
+  .listing-photo-header {
+    height: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* En móvil, cambiamos a columna normal */
+  .top-split-container {
+    flex-direction: column; /* Texto arriba (1º), Mapa abajo (2º) */
+  }
+  
+  .map-column-top {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .bottom-grid-apply {
+    flex-direction: column-reverse; /* Formulario arriba, Inmobiliaria abajo (opcional) o column normal */
+    flex-direction: column; 
+  }
+  
+  .form-column, .real-estate-column {
+    width: 100%;
+  }
+}
+
 /* ===== CONTENEDOR PRINCIPAL ===== */
 article {
   max-width: 1500px;              /* Ancho máximo para centrar el contenido */

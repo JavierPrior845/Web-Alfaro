@@ -11,15 +11,12 @@ export interface HousingLocationInfo {
     city: string;
     state: string;
     photo: string;
-    realEstateName?: string;
-    realEstateLink?: string;
+    realEstateId?: number;
     units?: Unit[]; 
     resume: string;
     downloadDocuments?: DownloadDocument[];  
     galleryImages?: string[]; // Array de rutas a las imágenes de la galería
     renderLink?: string;
     mapLink?: string;
-    socialMediaLinks?: SocialMediaLink[];
-
     estado?: string; 
 }

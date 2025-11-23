@@ -36,10 +36,10 @@ import { FooterContact } from "./footer-contact/footer-contact";
             >TRABAJOS</a>
             
             <a 
-              [routerLink]="['/colaboracion', 'COLABORACION']" 
-              routerLinkActive="active" 
-              class="nav-link"
-            >COLABORACIONES</a>
+              routerLink="/colaboraciones"
+              routerLinkActive="active"
+              >COLABORACIONES</a
+            >
             
             <!-- Asumiendo que 'En Venta' es un filtro específico -->
             <a 

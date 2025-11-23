@@ -1,22 +1,22 @@
 <a
   class="listing-link"
-  [routerLink]="['/vivienda-obra-nueva', housingLocation().id]"
+  [routerLink]="['/vivienda-obra-nueva', housingLocation.id]"
 >
   <section class="listing">
     <img
       class="listing-photo"
-      [src]="housingLocation().photo"
-      alt="Exterior photo of {{ housingLocation().name }}"
+      [src]="housingLocation.photo"
+      alt="Exterior photo of {{ housingLocation.name }}"
       crossorigin
     />
-    <h2 class="listing-heading">{{ housingLocation().name }}</h2>
+    <h2 class="listing-heading">{{ housingLocation.name }}</h2>
     <p class="listing-location">
-      {{ housingLocation().city }}, {{ housingLocation().state }}
+      {{ housingLocation.city }}, {{ housingLocation.state }}
     </p>
-    @if (housingLocation().realEstateName) {
-    <p class="listing-colab">
-      Comercializado por: {{ housingLocation().realEstateName }}
-    </p>
+    @if (realEstateName) {
+      <p class="listing-colab">
+        Comercializado por: {{ realEstateName }}
+      </p>
     }
   </section>
 </a>

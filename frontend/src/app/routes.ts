@@ -22,7 +22,10 @@ const routeConfig: Routes = [
   },
   { path: "terms", component: Terms },
 
-  { path: "colaboraciones", component: Colaboraciones }
- 
+  { 
+    path: "colaboraciones",
+    component: Colaboraciones
+  }
+
 ];
 export default routeConfig;

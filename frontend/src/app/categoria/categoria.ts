@@ -44,12 +44,7 @@ export class Categoria implements OnInit, OnDestroy { // Implementar OnInit y On
         // MODO CATEGORÍA: Filtramos por el tipo recibido
         this.filteredLocationList = this.housingService.getHousingLocationsByType(type);
         this.updatePageContent(type);
-      } else {
-        // MODO HOME: Mostramos todo
-        this.filteredLocationList = this.housingService.getAllHousingLocations();
-        this.pageTitle = "Viviendas Obra Nueva";
-      }
-      
+      }       
       // Inicializamos el carrusel (se reinicia al cambiar de ruta)
       this.setupHeroCarousel();
     });

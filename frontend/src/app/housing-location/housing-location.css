@@ -1,5 +1,6 @@
 /* TARJETA PRINCIPAL */
 .listing {
+  text-align: center;
   background: var(--card-bg);
   border-radius: 0;
   padding-bottom: 30px;
