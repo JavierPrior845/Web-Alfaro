@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@angular/build": "^20.2.0-next",
-    "@angular/cli": "^20.2.0-next",
+    "@angular/cli": "^20.3.11",
     "@angular/compiler-cli": "^20.2.0-next",
     "@types/leaflet": "^1.9.21",
     "@types/node": "^16.11.35",
