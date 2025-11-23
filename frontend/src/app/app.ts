@@ -18,6 +18,11 @@ import { FooterContact } from "./footer-contact/footer-contact";
           />
         </a>
 
+        <!-- BOTÓN HAMBURGUESA (MENU) -->
+        <button class="menu-toggle" (click)="isMenuOpen = !isMenuOpen">
+          &#9776;
+        </button>
+
         <!-- MENÚ -->
         <nav class="menu">
           <!-- 
@@ -82,4 +87,5 @@ import { FooterContact } from "./footer-contact/footer-contact";
 })
 export class App {
   title = "Homes";
+  isMenuOpen = false;
 }

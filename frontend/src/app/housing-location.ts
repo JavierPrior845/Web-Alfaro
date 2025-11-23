@@ -1,3 +1,4 @@
+import { ColabsLocationInfo } from './colabs-location';
 import { DownloadDocument } from './download-document';
 import { SocialMediaLink } from './social-media-link';
 import { Unit } from './unit';

@@ -3,6 +3,7 @@ import { Home } from "./home/home";
 import { Details } from "./details/details";
 import { Terms } from "./terms/terms";
 import { Categoria } from "./categoria/categoria"
+import { Colaboraciones } from "./colaboraciones/colaboraciones";
 
 const routeConfig: Routes = [
   {
@@ -20,5 +21,8 @@ const routeConfig: Routes = [
     component: Details,
   },
   { path: "terms", component: Terms },
+
+  { path: "colaboraciones", component: Colaboraciones }
+ 
 ];
 export default routeConfig;
