@@ -7,24 +7,16 @@ import { Colaboracion } from '../colaboracion/colaboracion';
 @Component({
   standalone: true,
   selector: 'app-colaboraciones',
-  imports: [ CommonModule, ],
+  imports: [ CommonModule, Colaboracion],
   templateUrl: './colaboraciones.html',
   styleUrls: ['./colaboraciones.css'],
 })
 export class Colaboraciones implements OnInit {
-
   colabService = inject(Colab);
-  colabs: ColabsLocationInfo[] = [];   // ← AQUÍ GUARDAREMOS TODAS LAS INMOBILIARIAS
+  colabs: ColabsLocationInfo[] = [];
 
   ngOnInit(): void {
-    this.colabs = this.colabService.getAllColabs();  
-    // ← AHORA colabs tiene Siroco y Anova
-  }
-
-  getSocial(colab: ColabsLocationInfo, red: string) {
-    return colab.socialMediaLinks?.find(
-      (s) => s.nombreRedSocial.toLowerCase() === red.toLowerCase()
-    )?.rutaArchivo;
+    this.colabs = this.colabService.getAllColabs();
   }
 }
 

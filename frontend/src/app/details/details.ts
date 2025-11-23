@@ -10,11 +10,12 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { GridGalleryComponent } from "../grid-gallery/grid-gallery";
 import { Colab } from "../colab";
 import { ColabsLocationInfo } from "../colabs-location";
+import { Colaboracion } from "../colaboracion/colaboracion";
 
 @Component({
   selector: "app-details",
   standalone: true,
-  imports: [ReactiveFormsModule, UnitTableComponent, CommonModule, GridGalleryComponent],
+  imports: [ReactiveFormsModule, UnitTableComponent, CommonModule, GridGalleryComponent, Colaboracion],
   templateUrl: "./details.html",
   styleUrls: ["./details.css"],
 })
@@ -48,7 +49,7 @@ export class Details implements OnInit {
     this.housingLocation = await this.housingService.getHousingLocationById(
       this.housingLocationId
     );
-    if (this.housingLocation?.realEstateId){
+    if (this.housingLocation?.realEstateId != null){
       this.colab = await this.colabService.getColabById(this.housingLocation?.realEstateId);
     }
     if (this.housingLocation?.mapLink) {

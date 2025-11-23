@@ -232,6 +232,7 @@ input {
   text-align: center;
 }
 
+
 .form-column form {
   display: flex;
   flex-direction: column;
@@ -312,7 +313,12 @@ input {
   border-left: 4px solid var(--primary-color);
   margin-top: 20px;
 }
-
+.real-estate-column .section-heading {
+  color: var(--secondary-color);
+  font-size: 18pt;
+  margin-bottom: 15px;
+  text-align: center;
+}
 .real-estate-heading {
   font-size: 16pt;
   color: var(--secondary-color);
@@ -441,4 +447,5 @@ input {
   .real-estate-name {
     font-size: 18pt;
   }
+
 }

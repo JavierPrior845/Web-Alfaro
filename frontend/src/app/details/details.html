@@ -78,11 +78,12 @@
   }
 
   <section class="bottom-grid-apply">
-    
-    <div class="real-estate-column">
-       <h2 class="section-heading">Inmobiliarias Colaboradoras</h2>
-       <p>Aquí cargará tu componente de inmobiliarias...</p>
-    </div>
+    @if(this.colab){
+      <div class="real-estate-column">
+       <h2 class="section-heading">Descubre la inmobiliaria</h2>
+       <app-colaboracion [colab]="colab"> </app-colaboracion>
+      </div>
+    }
 
     <div class="form-column">
       <h2 class="section-heading">Contacta con nosotros</h2>
@@ -107,7 +108,7 @@
       </form>
     </div>
   </section>
-  
+
   <section class="unit-table-section clearfix">
     @if (housingLocation?.units; as availableUnits) {
       <app-unit-table [units]="availableUnits" />
