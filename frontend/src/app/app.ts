@@ -24,14 +24,37 @@ import { FooterContact } from "./footer-contact/footer-contact";
         </button>
 
         <!-- MENÚ -->
-        <nav class="menu" [class.open]="isMenuOpen">
-          <a routerLink="/trabajos" routerLinkActive="active">TRABAJOS</a>
-          <a routerLink="/colaboraciones" routerLinkActive="active"
-            >COLABORACIONES</a
-          >
-          <a routerLink="/en-venta" routerLinkActive="active">EN VENTA</a>
-          <a routerLink="/proyectos" routerLinkActive="active">PROYECTOS</a>
+        <nav class="menu">
+          <!-- 
+              Usamos routerLinkActive="active" para resaltar la sección actual.
+              Los enlaces apuntan a las rutas dinámicas que creamos.
+            -->
+            <a 
+              [routerLink]="['/categoria', 'TRABAJO']" 
+              routerLinkActive="active" 
+              class="nav-link"
+            >TRABAJOS</a>
+            
+            <a 
+              [routerLink]="['/colaboracion', 'COLABORACION']" 
+              routerLinkActive="active" 
+              class="nav-link"
+            >COLABORACIONES</a>
+            
+            <!-- Asumiendo que 'En Venta' es un filtro específico -->
+            <a 
+              [routerLink]="['/categoria', 'VENTA']" 
+              routerLinkActive="active" 
+              class="nav-link"
+            >EN VENTA</a>
+            
+            <a 
+              [routerLink]="['/categoria', 'PROYECTO']" 
+              routerLinkActive="active" 
+              class="nav-link"
+            >PROYECTOS</a>
         </nav>
+
         <div class="contact-info">
           <a href="tel:+34968355053" class="phone-number">
             <svg

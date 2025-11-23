@@ -2,10 +2,11 @@ import { Component, inject, OnInit, OnDestroy } from "@angular/core"; // Importa
 import { HousingLocation } from "../housing-location/housing-location";
 import { Housing } from "../housing";
 import { HousingLocationInfo } from "../housing-location";
+import { GridMotionComponent } from "../grid-motion/grid-motion";
 
 @Component({
   selector: "app-home",
-  imports: [HousingLocation],
+  imports: [GridMotionComponent],
   templateUrl: "./home.html",
   styleUrls: ["./home.css"],
 })
@@ -28,14 +29,6 @@ export class Home implements OnInit, OnDestroy { // Implementar OnInit y OnDestr
   }
 
   async ngOnInit() {
-    // 1. Cargar todas las viviendas
-    this.housingLocationList = await this.housingService.getAllHousingLocations();
-    this.filteredLocationList = this.housingLocationList;
-    // 2. Preparar el carrusel
-    this.setupHeroCarousel();
-  }
-
-  setupHeroCarousel() {
     // --- ¡CAMBIO AQUÍ! ---
     // Ya no tomamos las imágenes del servicio.
     // Definimos 3 URLs estáticas (en crudo) para la rotación.
@@ -56,6 +49,7 @@ export class Home implements OnInit, OnDestroy { // Implementar OnInit y OnDestr
     this.currentHeroImage = this.heroImages[0];
     this.startImageRotation();
   }
+
 
   startImageRotation(): void {
     // Cambiar la imagen cada 5 segundos (5000 ms)

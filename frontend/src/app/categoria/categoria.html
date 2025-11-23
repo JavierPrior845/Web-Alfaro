@@ -1,0 +1,14 @@
+<div class="hero-section" [style.background-image]="'url(' + currentHeroImage + ')'">
+  <div class="hero-content">
+    <h1>{{ pageTitle }}</h1>
+    <h2>{{ pageSubtitle }}</h2>
+  </div>
+</div>
+
+<section class="results">
+      @for(housingLocation of filteredLocationList; track $index) {
+      <app-housing-location class= "resul"
+        [housingLocation]="housingLocation"
+      ></app-housing-location>
+      }
+</section>

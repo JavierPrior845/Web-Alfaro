@@ -16,6 +16,7 @@
     "@angular/google-maps": "^20.2.11",
     "@angular/platform-browser": "^20.2.0-next",
     "@angular/router": "^20.2.0-next",
+    "gsap": "^3.13.0",
     "leaflet": "^1.9.4",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

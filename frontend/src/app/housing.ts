@@ -17,12 +17,21 @@ export class Housing {
     );
   }
 
+  // --- NUEVO MÉTODO DE FILTRADO ---
+  getHousingLocationsByType(type: string): HousingLocationInfo[] {
+  const normalizedType = type.toLowerCase();
+  return this.housingLocationList.filter(
+    location => location.estado?.toLowerCase() === normalizedType
+  );
+}
+
   readonly baseUrl = "http://localhost:3000";
   readonly baseUrlAssets = "assets";
   
   housingLocationList: HousingLocationInfo[] = [
     {
       id: 0,
+      estado: "venta",
       name: "Edificio Aurora Redondo",
       city: "Murcia",
       state: "Barrio del Carmen",
@@ -46,13 +55,12 @@ export class Housing {
           rutaArchivo: "https://www.linkedin.com/company/anova-inmobiliaria/",
         },
       ],
-      minimunPrice: "10000€",
       units: [
         {
           vivienda: "1ºA",
           m2: 151.72,
           terrazas: 15.12,
-          precio: "N/D",
+          dormitorios: 2,
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-6-7.pdf",
         },
@@ -60,7 +68,7 @@ export class Housing {
           vivienda: "1ºB",
           m2: 90.16,
           terrazas: "—",
-          precio: "N/D",
+          dormitorios: 2,
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-8-9.pdf",
         },
@@ -68,7 +76,7 @@ export class Housing {
           vivienda: "2ºA",
           m2: 163.55,
           terrazas: "—",
-          precio: "N/D",
+          dormitorios: 3,
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-10-11.pdf",
         },
@@ -76,7 +84,7 @@ export class Housing {
           vivienda: "2ºB",
           m2: 56.75,
           terrazas: "—",
-          precio: "N/D",
+          dormitorios: 1,
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-12-13.pdf",
         },
@@ -84,7 +92,7 @@ export class Housing {
           vivienda: "2ºC",
           m2: 143.27,
           terrazas: "—",
-          precio: "N/D",
+          dormitorios: 3,
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-14-15.pdf",
         },
@@ -92,7 +100,7 @@ export class Housing {
           vivienda: "3ºA",
           m2: 163.55,
           terrazas: "—",
-          precio: "N/D",
+          dormitorios: 3,
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-10-11.pdf",
         },
@@ -100,7 +108,7 @@ export class Housing {
           vivienda: "3ºB",
           m2: 56.75,
           terrazas: "—",
-          precio: "N/D",
+          dormitorios: 1,
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-12-13.pdf",
         },
@@ -108,7 +116,7 @@ export class Housing {
           vivienda: "3ºC",
           m2: 143.27,
           terrazas: "—",
-          precio: "N/D",
+          dormitorios: 3,
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-14-15.pdf",
         },
@@ -116,7 +124,7 @@ export class Housing {
           vivienda: "4ºA",
           m2: 163.55,
           terrazas: "—",
-          precio: "N/D",
+          dormitorios: 3,
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-10-11.pdf",
         },
@@ -124,7 +132,7 @@ export class Housing {
           vivienda: "4ºB",
           m2: 56.75,
           terrazas: "—",
-          precio: "N/D",
+          dormitorios: 1,
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-12-13.pdf",
         },
@@ -132,7 +140,7 @@ export class Housing {
           vivienda: "4ºC",
           m2: 143.27,
           terrazas: "—",
-          precio: "N/D",
+          dormitorios: 3,
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-14-15.pdf",
         },
@@ -140,7 +148,7 @@ export class Housing {
           vivienda: "5ºA",
           m2: 285.09,
           terrazas: 23.67,
-          precio: "N/D",
+          dormitorios: 5,
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-16-17.pdf",
         },
@@ -148,7 +156,7 @@ export class Housing {
           vivienda: "5ºB",
           m2: 101.27,
           terrazas: 23.34,
-          precio: "N/D",
+          dormitorios: 3,
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-18-19.pdf",
         },
@@ -156,7 +164,7 @@ export class Housing {
           vivienda: "5ºC",
           m2: 238.16,
           terrazas: 18.94,
-          precio: "N/D",
+          dormitorios: 4,
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-20-21.pdf",
         },
@@ -165,7 +173,7 @@ export class Housing {
           vivienda: "Local A",
           m2: 398.69,
           terrazas: "—",
-          precio: "N/D",
+
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-LOCAL.pdf",
         },
@@ -173,7 +181,7 @@ export class Housing {
           vivienda: "Sótano",
           m2: 3,
           terrazas: "—",
-          precio: "N/D",
+
           planoPdfUrl:
             "assets/pdfs/planos/GonzalezConde/COMERCIALIZACION-GARAGE.pdf",
         },
@@ -206,65 +214,64 @@ export class Housing {
     },
     {
       id: 1,
+      estado: "proyecto",
       name: "Edificio Barrio del Progreso",
       city: "Murcia",
       state: "Barrio del progreso",
       photo: `${this.baseUrlAssets}/1_3-Foto.jpg`,
-      minimunPrice: "125.000€",
       units: [
         {
           vivienda: "1°A",
           m2: 55.81,
           dormitorios: 2,
-          precio: 155000,
+          banos: 1,
         },
         {
           vivienda: "1°B",
           m2: 58.15,
           dormitorios: 2,
-          precio: 145000,
+          banos: 1,
         },
         {
           vivienda: "2°A",
           m2: 55.81,
           dormitorios: 2,
-          precio: 160000,
+          banos: 1,
         },
         {
           vivienda: "2°B",
           m2: 55.15,
           dormitorios: 2,
-          precio: 155000,
+          banos: 1,
         },
         {
           vivienda: "3°A",
           m2: 55.81,
           dormitorios: 2,
-          precio: 170000,
+          banos: 1,
         },
         {
           vivienda: "3°B",
           m2: 50.18,
           dormitorios: 1,
-          precio: 125000,
+          banos: 1,
         },
         {
           vivienda: "4°A",
           m2: 55.81,
           dormitorios: 2,
-          precio: 175000,
+          banos: 1,
         },
         {
           vivienda: "4°B",
           m2: 50.18,
           dormitorios: 1,
-          precio: 135000,
+          banos: 1,
         },
         {
           vivienda: "LOCAL",
           m2: 76.25,
           dormitorios: '-',
-          precio: 70000,
         },
       ],
       resume:
@@ -292,6 +299,7 @@ export class Housing {
 
     {
       id: 2,
+      estado: "venta",
       name: "Edificio Reino de Murcia",
       city: "Murcia",
       state: "Reino de Murcia",
@@ -299,7 +307,6 @@ export class Housing {
       realEstateName: "Siroco",
       realEstateLink: "https://sirocoinmuebles.com/",
       renderLink: "https://my.matterport.com/show/?m=poxMa2bcLc2",
-      minimunPrice: "222,000€",
       socialMediaLinks: [
         {
           id: 1,
@@ -323,91 +330,92 @@ export class Housing {
           vivienda: "1º A",
           m2: 170.2,
           terrazas: 40.4,
-          precio: 275000.0,
+          dormitorios: 3,
+          banos: 2,
           planoPdfUrl: `${this.baseUrlAssets}/pdfs/planos/Reino_de_Murcia_1A.pdf`,
         },
         {
           vivienda: "1º B",
           m2: 117.2,
           terrazas: 26.3,
-          precio: 235000.0,
+          dormitorios: 2,
+          banos: 2,
           planoPdfUrl: `${this.baseUrlAssets}/pdfs/planos/Reino_de_Murcia_1B.pdf`,
         },
         {
           vivienda: "1º C",
           m2: 147.15,
           terrazas: 10.0,
-          precio: 257000.0,
+          dormitorios: 3,
+          banos: 2,
           planoPdfUrl: `${this.baseUrlAssets}/pdfs/planos/Reino_de_Murcia_1C.pdf`,
         },
         {
           vivienda: "2º A",
           m2: 139.8,
           terrazas: 10.0,
-          precio: 298000.0,
+          dormitorios: 3,
+          banos: 2,
           planoPdfUrl: `${this.baseUrlAssets}/pdfs/planos/Reino_de_Murcia_2A-3A.pdf`,
         },
         {
           vivienda: "2º B",
           m2: 90.9,
           terrazas: "—", // Dejé el guion en la columna del PDF, por lo que aquí es nulo.
-          precio: 222000.0,
+          dormitorios: 2,
+          banos: 2,
           planoPdfUrl: `${this.baseUrlAssets}/pdfs/planos/Reino_de_Murcia_2B-3B`,
         },
         {
           vivienda: "2º C",
           m2: 137.15,
           terrazas: "—",
-          precio: "VENDIDO",
           planoPdfUrl: undefined, // No se puede descargar si está vendido
         },
         {
           vivienda: "3º A",
           m2: 139.8,
           terrazas: 10.0,
-          precio: 318000.0,
+          dormitorios: 3,
+          banos: 2,
           planoPdfUrl: `${this.baseUrlAssets}/pdfs/planos/Reino_de_Murcia_2A-3A.pdf`,
         },
         {
           vivienda: "3º B",
           m2: 90.9,
           terrazas: "—",
-          precio: 232000.0,
+          dormitorios: 2,
+          banos: 2,
           planoPdfUrl: `${this.baseUrlAssets}/pdfs/planos/Reino_de_Murcia_2B-3B.pdf`,
         },
         {
           vivienda: "3º C",
           m2: 137.15,
           terrazas: "—",
-          precio: "VENDIDO",
           planoPdfUrl: undefined,
         },
         {
           vivienda: "ATICO A",
           m2: 107.4,
           terrazas: "—",
-          precio: "VENDIDO",
           planoPdfUrl: undefined,
         },
         {
           vivienda: "ATICO B",
           m2: 69.6,
           terrazas: "—",
-          precio: "VENDIDO",
           planoPdfUrl: undefined,
         },
         {
           vivienda: "GARAJES",
           m2: 3,
           terrazas: "—",
-          precio: 54000.0,
           planoPdfUrl: `${this.baseUrlAssets}/pdfs/planos/Reino_de_Mucia_Sotano-PB.pdf`,
         },
         {
           vivienda: "LOCAL",
           m2: 320,
           terrazas: "—",
-          precio: 512000.0,
           planoPdfUrl: `${this.baseUrlAssets}/pdfs/planos/Reino_de_Mucia_Sotano-PB.pdf`,
         },
       ],
@@ -440,7 +448,8 @@ export class Housing {
    * GET /api/viviendas
    * Recupera la lista. Al coincidir los nombres, la asignación es casi directa.
    */
-  /*async getAllHousingLocations(): Promise<HousingLocationInfo[]> {
+  /*
+  async getAllHousingLocations(): Promise<HousingLocationInfo[]> {
     try {
       const response = await fetch(`${apiUrl}/api/viviendas`);
       if (!response.ok) {
@@ -460,7 +469,8 @@ export class Housing {
   /**
    * GET /api/viviendas/:id
    */
- /* async getHousingLocationById(id: number): Promise<HousingLocationInfo | undefined> {
+  /*
+  async getHousingLocationById(id: number): Promise<HousingLocationInfo | undefined> {
     try {
       const response = await fetch(`${apiUrl}/api/viviendas/${id}`);
       if (!response.ok) {
@@ -483,6 +493,7 @@ export class Housing {
    * Ya no "traduce" nombres, solo asegura que los arrays no sean null
    * y transforma galleryImages de Objetos a Strings.
    */
+  /*
   private processViviendaData(v: any): HousingLocationInfo {
     return {
       ...v, // Copia todas las propiedades coincidentes (id, name, city, etc.)
@@ -496,7 +507,7 @@ export class Housing {
       // Convertir [{url: 'a'}, {url: 'b'}] -> ['a', 'b']
       galleryImages: v.galleryImages ? v.galleryImages.map((img: any) => img.url) : [],
     };
-  }
+  }*/
 
   async submitApplication(
     firstName: string,

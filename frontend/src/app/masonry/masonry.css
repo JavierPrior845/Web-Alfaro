@@ -1,0 +1,39 @@
+.list {
+  position: relative;
+  width: 100%;
+  /* Altura manejada dinámicamente por TS */
+  transition: height 0.3s ease; 
+  margin-top: 20px;
+}
+
+.item-wrapper {
+  position: absolute; /* CLAVE: GSAP mueve esto con top/left (transform) */
+  top: 0;
+  left: 0;
+  padding: 0; /* React tenía padding 6px, aquí usamos 'gap' en el cálculo */
+  cursor: pointer;
+  will-change: transform, width, height, opacity;
+}
+
+.item-img {
+  position: relative;
+  background-size: cover;
+  background-position: center center;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  box-shadow: 0px 10px 50px -10px rgba(0, 0, 0, 0.2);
+  overflow: hidden; /* Para recortar el overlay */
+}
+
+.color-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(255,0,150,0.5), rgba(0,150,255,0.5));
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}

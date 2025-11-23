@@ -2,6 +2,7 @@ import { Routes } from "@angular/router";
 import { Home } from "./home/home";
 import { Details } from "./details/details";
 import { Terms } from "./terms/terms";
+import { Categoria } from "./categoria/categoria"
 import { Colaboraciones } from "./colaboraciones/colaboraciones";
 
 const routeConfig: Routes = [
@@ -11,9 +12,13 @@ const routeConfig: Routes = [
     title: "ALFARO",
   },
   {
+    path: 'categoria/:type',
+    component: Categoria,
+    title: 'Alfaro - Categoría'
+  },
+  {
     path: "vivienda-obra-nueva/:id",
     component: Details,
-    //title: "Home details",
   },
   { path: "terms", component: Terms },
 

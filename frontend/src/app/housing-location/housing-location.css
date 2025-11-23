@@ -32,14 +32,15 @@
   content: url("/assets/location-pin.svg") / "";
 }
 
-/* PRECIO MÍNIMO */
-.minimun-price {
+/* INMOBILIARIA */
+.listing-colab {
   padding: 0 20px 15px 20px;
   color: var(--primary-color);
   font-size: 1.2rem;
   font-weight: 700;
   margin: 0;
 }
+
 
 /* TARJETA CLICABLE COMPLETA */
 .listing-link {

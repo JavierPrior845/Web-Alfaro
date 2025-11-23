@@ -12,7 +12,7 @@
   grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
 
   /* margen a los lados */
-  margin: 50px 20px 0 20px;
+  margin: 0px 20px 0 20px;
 }
 
 /* INPUTS (sin esquinas redondeadas) */
@@ -58,45 +58,49 @@ button:hover {
   }    
 }
 
-/* HERO */
-.hero-section {
-    width: 100%; 
-    height: 300px;
-    margin-bottom: 50px;
-    
-    background-image: url('/assets/GONZALEZ_CONDE.jpg'); 
-    background-size: cover;
-    background-position: center;
+.hero-wrapper {
+  width: 100%;
+  /* OPCIÓN A: Altura relativa a la pantalla */
+  height: 60vh; /* Ocupa el 45% de la altura de la pantalla */
+  
+  /* OPCIÓN B: Altura fija en píxeles (si prefieres) */
+  /* height: 400px; */
 
-    background-color: rgba(0, 0, 0, 0.4);
-    background-blend-mode: darken;
-    
-    /* --- CAMBIO AQUÍ: Añadida la línea dorada superior --- */
-    border-top: 3px solid var(--primary-color);
-    border-bottom: 3px solid var(--primary-color);
-
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+  min-height: 350px; /* Para que no quede ridículo en móviles muy apaisados */
+  position: relative;
 }
 
-.hero-content {
-    color: white;
-    padding: 20px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+/* Ajuste del texto superpuesto para que quepa bien en este espacio más pequeño */
+.hero-content-overlay {
+  /* ... tus estilos de fondo ... */
+  padding: 1.5rem;
+  margin-top: 0; /* Asegurar que no se empuje hacia abajo */
 }
 
-.hero-content h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    letter-spacing: 1px;
+.hero-content-overlay {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.6);
+  
+  /* Reducimos el padding para que quepa mejor en la altura reducida */
+  padding: 1.5rem 2rem; /* Antes era 3rem */
+  
+  border-radius: 15px;
+  backdrop-filter: blur(5px);
+  color: white;
+  max-width: 700px;
+  
+  /* Truco: Centrado absoluto por si acaso */
+  margin: 0 auto;
 }
 
-.hero-content p {
-    font-size: 1.2rem;
-    font-weight: 300;
-    opacity: 0.9;
+.hero-content-overlay h1 {
+  /* Reducimos un poco la fuente del título */
+  font-size: 2.2rem; /* Antes 3rem */
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.hero-content-overlay p {
+  font-size: 1.1rem;
+  margin: 0; /* Quitamos margen extra */
 }

@@ -3,6 +3,8 @@ import { DownloadDocument } from './download-document';
 import { SocialMediaLink } from './social-media-link';
 import { Unit } from './unit';
 
+//export enum estado { 'trabajo', 'venta', 'proyecto'};
+
 export interface HousingLocationInfo {
     id: number;
     name: string;
@@ -11,7 +13,6 @@ export interface HousingLocationInfo {
     photo: string;
     realEstateName?: string;
     realEstateLink?: string;
-    minimunPrice: string;
     units?: Unit[]; 
     resume: string;
     downloadDocuments?: DownloadDocument[];  
@@ -19,4 +20,6 @@ export interface HousingLocationInfo {
     renderLink?: string;
     mapLink?: string;
     socialMediaLinks?: SocialMediaLink[];
+
+    estado?: string; 
 }
