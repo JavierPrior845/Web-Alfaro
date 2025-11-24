@@ -24,7 +24,8 @@ import { FooterContact } from "./footer-contact/footer-contact";
         </button>
 
         <!-- MENÚ -->
-        <nav class="menu">
+        <nav class="menu" [class.open]="isMenuOpen">
+          
           <!-- 
               Usamos routerLinkActive="active" para resaltar la sección actual.
               Los enlaces apuntan a las rutas dinámicas que creamos.

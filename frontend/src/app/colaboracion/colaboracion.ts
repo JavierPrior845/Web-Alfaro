@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { ColabsLocationInfo } from '../colabs-location';
 import { CommonModule } from '@angular/common';
 
@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-colaboracion',
   templateUrl: './colaboracion.html',
   styleUrls: ['./colaboracion.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class Colaboracion {
   @Input() colab!: ColabsLocationInfo;
