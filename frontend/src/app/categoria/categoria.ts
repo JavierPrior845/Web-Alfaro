@@ -3,10 +3,14 @@ import { HousingLocation } from "../housing-location/housing-location";
 import { Housing } from "../housing";
 import { HousingLocationInfo } from "../housing-location";
 import { ActivatedRoute } from "@angular/router";
+import { ColabsLocationInfo } from "../colabs-location";
+import { Colab } from "../colab";
+import { Colaboracion } from "../colaboracion/colaboracion";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: "app-details",
-  imports: [HousingLocation],
+  imports: [HousingLocation, Colaboracion, CommonModule],
   templateUrl: "./categoria.html",
   styleUrls: ["./categoria.css"],
 })
@@ -19,6 +23,8 @@ export class Categoria implements OnInit, OnDestroy { // Implementar OnInit y On
   housingService: Housing = inject(Housing);
   route: ActivatedRoute = inject(ActivatedRoute);
 
+  colabService = inject(Colab);
+  colabs: ColabsLocationInfo[] = [];
 
   pageTitle: string = "Viviendas Obra Nueva";
   pageSubtitle: string = "Descubre las mejores promociones inmobiliarias en tu zona.";
@@ -39,12 +45,17 @@ export class Categoria implements OnInit, OnDestroy { // Implementar OnInit y On
     // Esto permite que al hacer clic en el menú, la página se actualice sin recargar.
     this.route.paramMap.subscribe(params => {
       const type = params.get('type'); // Lee el parámetro :type de la ruta
+      
+      
 
-      if (type) {
+      if (type === "COLABORACION") {
         // MODO CATEGORÍA: Filtramos por el tipo recibido
+        this.colabs = this.colabService.getAllColabs();
+        this.updatePageContent(type);
+      }else if(type){
         this.filteredLocationList = this.housingService.getHousingLocationsByType(type);
         this.updatePageContent(type);
-      }       
+      }
       // Inicializamos el carrusel (se reinicia al cambiar de ruta)
       this.setupHeroCarousel();
     });

@@ -436,7 +436,7 @@ input {
 
   .btn-download,
   .btn-real-estate {
-    width: 100%;
+    width: auto;
     justify-content: center;
   }
 

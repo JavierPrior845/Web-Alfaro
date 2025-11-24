@@ -1,14 +1,29 @@
-<div class="hero-section" [style.background-image]="'url(' + currentHeroImage + ')'">
+<div
+  class="hero-section"
+  [style.background-image]="'url(' + currentHeroImage + ')'"
+>
   <div class="hero-content">
     <h1>{{ pageTitle }}</h1>
     <h2>{{ pageSubtitle }}</h2>
   </div>
 </div>
 
-<section class="results">
-      @for(housingLocation of filteredLocationList; track $index) {
-      <app-housing-location class= "resul"
-        [housingLocation]="housingLocation"
-      ></app-housing-location>
-      }
+@if (pageTitle === "Nuestras Colaboraciones") {
+
+<section>
+  @for(colab of colabs; track colab.id; let i = $index) {
+  <section class="real-estate-card" [ngClass]="{ 'reverse': i % 2 === 1 }">
+    <app-colaboracion [colab]="colab"></app-colaboracion>
+  </section>
+  }
 </section>
+}@else{
+<section class="results">
+  @for(housingLocation of filteredLocationList; track $index) {
+  <app-housing-location
+    class="resul"
+    [housingLocation]="housingLocation"
+  ></app-housing-location>
+  }
+</section>
+}

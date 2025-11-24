@@ -37,7 +37,7 @@ import { FooterContact } from "./footer-contact/footer-contact";
             >TRABAJOS</a>
             
             <a 
-              routerLink="/colaboraciones"
+              [routerLink]="['/categoria', 'COLABORACION']" 
               routerLinkActive="active"
               >COLABORACIONES</a
             >
