@@ -62,6 +62,12 @@ button:hover {
   }    
 }
 
+@media (max-width: 768px) {
+  .results {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* HERO */
 .hero-section {
     width: 100%; 

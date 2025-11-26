@@ -166,6 +166,7 @@
     flex-direction: column-reverse;
     gap: 25px;
     text-align: center;
+    align-items: center;
   }
   
   .footer-right, .footer-left, .contact-form, .info-right {
