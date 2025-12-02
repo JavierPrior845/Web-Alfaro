@@ -3,6 +3,7 @@ import { Home } from "./home/home";
 import { Details } from "./details/details";
 import { Terms } from "./terms/terms";
 import { Categoria } from "./categoria/categoria"
+import { Work } from "./work/work";
 
 const routeConfig: Routes = [
   {
@@ -19,7 +20,15 @@ const routeConfig: Routes = [
     path: "vivienda-obra-nueva/:id",
     component: Details,
   },
-  { path: "terms", component: Terms },
+  { 
+    path: "terms",
+    component: Terms
+  },
+  {
+    path: "trabajos",
+    component: Work,
+    title: 'Alfaro - Trabajos'
+  }
 
 ];
 export default routeConfig;

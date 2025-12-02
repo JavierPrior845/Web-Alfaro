@@ -2,175 +2,247 @@ import fastify from 'fastify';
 import { PrismaClient } from '@prisma/client';
 import cors from '@fastify/cors';
 
-// Definición de Interfaces para los cuerpos (body) de las peticiones
+// --- INTERFACES ---
+
+// Query Params para filtrar viviendas (ej: ?estado=venta)
+interface HousingQuery {
+  estado?: string;
+}
+
+// Body para el formulario de contacto
 interface SolicitudInfoBody {
   nombre: string;
   telefono?: string;
   email: string;
-  viviendaId: number; // ID de la casa que están viendo
+  viviendaId: number; // ID de la vivienda
 }
 
+// Body para suscripción
 interface SuscripcionBody {
   email: string;
 }
 
-// Inicializa Fastify y Prisma
+// Inicialización
 const app = fastify({ logger: true });
 const prisma = new PrismaClient();
 
-// --- Configuración Esencial ---
-
-// 1. Registro de CORS (Vital para que Angular se conecte)
+// Registro de CORS
 app.register(cors, {
-  origin: '*', // Permite todas las peticiones (para desarrollo)
+  origin: '*', 
 });
 
-
-// --- ENDPOINTS PÚBLICOS (LECTURA) ---
-
+// ==========================================
+// ENDPOINTS: COLABS (INMOBILIARIAS)
+// ==========================================
 /**
- * Endpoint de LISTA (Rápido)
- * Devuelve solo la info necesaria para las tarjetas del Home.
- * Ruta: GET /api/viviendas
+ * GET /api/colabs
+ * Devuelve todas las inmobiliarias y sus redes sociales.
  */
-app.get('/api/viviendas', async (request, reply) => {
+app.get('/api/colabs', async (request, reply) => {
   try {
-    // Usamos el nuevo modelo 'housingLocation' (en inglés, como en el schema)
-    const viviendas = await prisma.housingLocation.findMany({
-      select: {
-        id: true,
-        name: true,           // Antes 'nombre'
-        city: true,           // Antes 'ciudad'
-        state: true,          // Antes 'provinciaEstado'
-        photo: true,          // Antes 'fotoPrincipalUrl'
-        minimunPrice: true,   // Antes 'precioMinimo'
-      },
-      orderBy: {
-        id: 'asc'
-      }
-    });
-    reply.code(200).send({ success: true, data: viviendas });
-  } catch (error) {
-    app.log.error(error);
-    reply.code(500).send({ error: 'Error interno del servidor al obtener las viviendas.' });
-  }
-});
-
-/**
- * Endpoint de DETALLE (Completo)
- * Devuelve UNA vivienda por ID, con TODAS sus relaciones.
- * Ruta: GET /api/viviendas/:id
- */
-app.get<{ Params: { id: string } }>('/api/viviendas/:id', async (request, reply) => {
-  try {
-    const viviendaId = parseInt(request.params.id);
-
-    if (isNaN(viviendaId)) {
-      reply.code(400).send({ error: 'ID de vivienda inválido.' });
-      return;
-    }
-
-    const vivienda = await prisma.housingLocation.findUnique({
-      where: { id: viviendaId },
+    const colabs = await prisma.colab.findMany({
       include: {
-        units: true,             // Tabla 'Unit'
-        galleryImages: true,     // Tabla 'GalleryImage'
-        downloadDocuments: true, // Tabla 'DownloadDocument'
-        socialMediaLinks: true,  // Tabla 'SocialMediaLink'
+        socialMediaLinks: true, // Incluimos las redes sociales (Instagram, etc.)
       },
     });
-
-    if (!vivienda) {
-      reply.code(404).send({ error: 'Vivienda no encontrada.' });
-      return;
-    }
-
-    reply.code(200).send({ success: true, data: vivienda });
+    return colabs; // Fastify serializa automáticamente a JSON
   } catch (error) {
     app.log.error(error);
-    reply.code(500).send({ error: 'Error interno del servidor.' });
+    reply.code(500).send({ error: 'Error al obtener colaboraciones' });
   }
 });
 
+/**
+ * GET /api/colabs/:id
+ * Detalle de una inmobiliaria específica
+ */
+app.get<{ Params: { id: string } }>('/api/colabs/:id', async (request, reply) => {
+  try {
+    const id = parseInt(request.params.id);
 
-// --- ENDPOINTS DE ESCRITURA (FORMULARIOS) ---
+    if (isNaN(id)) {
+      return reply.code(400).send({ error: 'ID inválido' });
+    }
+
+    const colab = await prisma.colab.findUnique({
+      where: { id },
+      include: {
+        socialMediaLinks: true, // Incluimos sus redes sociales
+        // Opcional: Si quieres mostrar qué casas tiene esta inmobiliaria en su perfil
+        // housingLocations: true 
+      },
+    });
+
+    if (!colab) {
+      return reply.code(404).send({ error: 'Inmobiliaria no encontrada' });
+    }
+
+    return colab;
+
+  } catch (error) {
+    app.log.error(error);
+    reply.code(500).send({ error: 'Error interno al obtener la inmobiliaria' });
+  }
+});
+
+// ==========================================
+// ENDPOINTS: HOUSING (VIVIENDAS)
+// ==========================================
 
 /**
- * Endpoint POST para el formulario "Solicitud de Información"
- * Ruta: POST /api/solicitud-info
+ * GET /api/housing
+ * Lista de viviendas. Soporta filtro: /api/housing?estado=venta
+ */
+app.get<{ Querystring: HousingQuery }>('/api/housing', async (request, reply) => {
+  try {
+    const { estado } = request.query;
+
+    // Construimos el filtro dinámicamente
+    const whereClause = estado ? { estado: String(estado) } : {};
+
+    const housings = await prisma.housingLocation.findMany({
+      where: whereClause,
+      orderBy: { id: 'asc' },
+      include: {
+        // Incluimos relaciones necesarias para la tarjeta o listado
+        units: true, 
+        galleryImages: true,
+        realEstate: { // Traemos datos básicos de la inmobiliaria
+          include: { socialMediaLinks: true }
+        },
+        downloadDocuments: true
+      },
+    });
+
+    // TRANSFORMACIÓN DE DATOS:
+    // Convertimos galleryImages de objetos [{url:'...'}] a array de strings ['...']
+    const formattedResponse = housings.map((housing) => ({
+      ...housing,
+      galleryImages: housing.galleryImages.map((img) => img.url),
+    }));
+
+    return formattedResponse;
+
+  } catch (error) {
+    app.log.error(error);
+    reply.code(500).send({ error: 'Error al obtener las viviendas' });
+  }
+});
+
+/**
+ * GET /api/housing/:id
+ * Detalle completo de una vivienda.
+ */
+app.get<{ Params: { id: string } }>('/api/housing/:id', async (request, reply) => {
+  try {
+    const id = parseInt(request.params.id);
+
+    if (isNaN(id)) {
+      return reply.code(400).send({ error: 'ID inválido' });
+    }
+
+    const housing = await prisma.housingLocation.findUnique({
+      where: { id },
+      include: {
+        units: true,
+        downloadDocuments: true,
+        galleryImages: true,
+        realEstate: {
+          include: { socialMediaLinks: true },
+        },
+      },
+    });
+
+    if (!housing) {
+      return reply.code(404).send({ error: 'Vivienda no encontrada' });
+    }
+
+    // Misma transformación para las imágenes en el detalle
+    const formattedHousing = {
+      ...housing,
+      galleryImages: housing.galleryImages.map((img) => img.url),
+    };
+
+    return formattedHousing;
+
+  } catch (error) {
+    app.log.error(error);
+    reply.code(500).send({ error: 'Error interno del servidor' });
+  }
+});
+
+// ==========================================
+// ENDPOINTS: FORMULARIOS (POST)
+// ==========================================
+
+/**
+ * POST /api/solicitud-info
+ * Formulario de contacto de una vivienda específica
  */
 app.post<{ Body: SolicitudInfoBody }>('/api/solicitud-info', async (request, reply) => {
   try {
     const { nombre, telefono, email, viviendaId } = request.body;
 
     if (!nombre || !email || !viviendaId) {
-      reply.code(400).send({ error: 'Nombre, Email y viviendaId son obligatorios.' });
-      return;
+      return reply.code(400).send({ error: 'Faltan campos obligatorios' });
     }
 
-    // Guardamos en la tabla 'SolicitudInfo'
-    // Mapeamos 'viviendaId' (del frontend) a 'housingLocationId' (de la BD)
     const nuevaSolicitud = await prisma.solicitudInfo.create({
       data: {
-        nombre: nombre,
-        telefono: telefono,
-        email: email,
-        housingLocationId: viviendaId, // <-- Conexión correcta con la Foreign Key
+        nombre,
+        telefono,
+        email,
+        housingLocationId: Number(viviendaId), // Aseguramos que sea número
       },
     });
 
-    app.log.info(`Solicitud de info guardada: ${nuevaSolicitud.email}`);
-    reply.code(201).send({ success: true, data: nuevaSolicitud });
+    app.log.info(`Solicitud creada para vivienda ID: ${viviendaId}`);
+    return reply.code(201).send({ success: true, data: nuevaSolicitud });
 
   } catch (error: any) {
     app.log.error(error);
-    // P2003 es el código de error de Prisma para fallo de clave foránea
-    if (error.code === 'P2003') { 
-      reply.code(404).send({ error: 'La vivienda especificada no existe.' });
+    if (error.code === 'P2003') {
+      reply.code(404).send({ error: 'La vivienda indicada no existe' });
     } else {
-      reply.code(500).send({ error: 'Error interno del servidor.' });
+      reply.code(500).send({ error: 'Error al guardar solicitud' });
     }
   }
 });
 
 /**
- * Endpoint POST para el formulario "Suscripción" (Footer)
- * Ruta: POST /api/suscripcion
+ * POST /api/suscripcion
+ * Footer newsletter
  */
 app.post<{ Body: SuscripcionBody }>('/api/suscripcion', async (request, reply) => {
   try {
     const { email } = request.body;
 
     if (!email) {
-      reply.code(400).send({ error: 'Email es obligatorio.' });
-      return;
+      return reply.code(400).send({ error: 'El email es obligatorio' });
     }
 
     const nuevaSuscripcion = await prisma.suscripcion.create({
-      data: {
-        email: email,
-      },
+      data: { email },
     });
 
-    app.log.info(`Suscripción guardada: ${nuevaSuscripcion.email}`);
-    reply.code(201).send({ success: true, data: nuevaSuscripcion });
+    return reply.code(201).send({ success: true, data: nuevaSuscripcion });
 
   } catch (error: any) {
     app.log.error(error);
-    if (error.code === 'P2002') { 
-      reply.code(409).send({ error: 'Este correo electrónico ya está suscrito.' });
+    if (error.code === 'P2002') {
+      reply.code(409).send({ error: 'Este email ya está registrado' });
     } else {
-      reply.code(500).send({ error: 'Error interno del servidor.' });
+      reply.code(500).send({ error: 'Error al suscribir' });
     }
   }
 });
 
-// --- Lanzar el Servidor ---
+// --- ARRANCAR SERVIDOR ---
 
 const start = async () => {
   try {
     await app.listen({ port: 3000 });
-    app.log.info(`Servidor escuchando en http://localhost:3000`);
+    console.log('🚀 Servidor corriendo en http://localhost:3000');
   } catch (err) {
     app.log.error(err);
     process.exit(1);

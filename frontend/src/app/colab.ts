@@ -77,4 +77,54 @@ export class Colab {
   getColabById(id: number): ColabsLocationInfo | undefined {
     return this.colabs.find((c) => c.id === id);
   }
+
+  /**
+     * GET /api/colabs
+     * Recupera la lista de inmobiliarias (Colabs).
+     */
+    /*async getAllColabs(): Promise<ColabsLocationInfo[]> {
+      try {
+        const response = await fetch(`${this.apiUrl}/api/colabs`);
+  
+        if (!response.ok) {
+          throw new Error(
+            `Error al cargar colaboraciones: ${response.statusText}`
+          );
+        }
+  
+        const data = await response.json();
+  
+        // Devolvemos el array directamente (asegurando que sea array)
+        return Array.isArray(data) ? data : [];
+      } catch (error) {
+        console.error("Error en getAllColabs:", error);
+        return [];
+      }
+    }*/
+
+    /**
+   * GET /api/colabs/:id
+   * Recupera el detalle de una inmobiliaria específica.
+   */
+  /*async getColabById(id: number): Promise<ColabsLocationInfo | undefined> {
+    try {
+      const response = await fetch(`${this.apiUrl}/api/colabs/${id}`);
+
+      if (!response.ok) {
+        throw new Error(`Error al cargar la inmobiliaria ${id}: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+
+      // Si no hay datos, retornamos undefined
+      if (!data) return undefined;
+
+      // No requiere transformación compleja, los arrays ya vienen listos desde el backend
+      return data;
+
+    } catch (error) {
+      console.error('Error en getColabById:', error);
+      return undefined;
+    }
+  }*/
 }

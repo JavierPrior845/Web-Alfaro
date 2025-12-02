@@ -31,7 +31,7 @@ import { FooterContact } from "./footer-contact/footer-contact";
               Los enlaces apuntan a las rutas dinámicas que creamos.
             -->
             <a 
-              [routerLink]="['/categoria', 'TRABAJO']" 
+              [routerLink]="['/trabajos']" 
               routerLinkActive="active" 
               class="nav-link"
             >TRABAJOS</a>

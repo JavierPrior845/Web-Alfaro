@@ -12,66 +12,89 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
-// --- MODELO 1: HOUSING LOCATION (Coincide con HousingLocationInfo) ---
-model HousingLocation {
-  id              Int      @id @default(autoincrement())
-  name            String
-  city            String
-  state           String
-  photo           String   @db.Text
-  realEstateName  String?  
-  realEstateLink  String?  @db.Text
-  minimunPrice    String
-  resume          String   @db.Text
-  renderLink      String?  @db.Text
-  mapLink         String?  @db.Text
-  lat             Float?
-  lng             Float?
-  createdAt       DateTime @default(now())
+// --- MODELO 1: COLAB (Coincide con ColabsLocationInfo) ---
+model Colab {
+  id               Int     @id @default(autoincrement())
+  name             String
+  logo             String  @db.Text
+  website          String  @db.Text
+  description      String  @db.Text
+  address          String
+  phone            String
+  email            String
 
-  // Relaciones (Arrays en tu interfaz)
+  // Relaciones
+  socialMediaLinks SocialMediaLink[]
+  housingLocations HousingLocation[] // Una inmobiliaria tiene muchas promociones
+
+  @@map("colabs")
+}
+
+// --- MODELO 2: SOCIAL MEDIA LINK (Ahora pertenece a Colab) ---
+model SocialMediaLink {
+  id              Int    @id @default(autoincrement())
+  nombreRedSocial String
+  rutaArchivo     String @db.Text
+
+  // Relación con Colab
+  colab   Colab @relation(fields: [colabId], references: [id], onDelete: Cascade)
+  colabId Int
+
+  @@map("social_media_links")
+}
+
+// --- MODELO 3: HOUSING LOCATION (Coincide con HousingLocationInfo) ---
+model HousingLocation {
+  id         Int     @id @default(autoincrement())
+  estado     String  // 'venta', 'proyecto', etc.
+  name       String
+  city       String
+  state      String  // Barrio/Zona
+  photo      String  @db.Text
+  resume     String  @db.Text
+  renderLink String? @db.Text
+  mapLink    String? @db.Text
+  
+  // Relación con Colab (Inmobiliaria)
+  // En tus datos se llama 'realEstateId'
+  realEstate   Colab? @relation(fields: [realEstateId], references: [id])
+  realEstateId Int?
+
+  // Relaciones (Arrays)
   units             Unit[]
   downloadDocuments DownloadDocument[]
-  socialMediaLinks  SocialMediaLink[]
-  galleryImages     GalleryImage[] 
-  solicitudes       SolicitudInfo[] // Interno para el backend
+  galleryImages     GalleryImage[]
+  
+  // Formulario de contacto (Interno)
+  solicitudes       SolicitudInfo[] 
+  
+  createdAt  DateTime @default(now())
 
   @@map("housing_locations")
 }
 
-// --- MODELO 2: UNIT (Coincide con Unit) ---
+// --- MODELO 4: UNIT (Coincide con Unit) ---
 model Unit {
   id          Int     @id @default(autoincrement())
-  vivienda    String  // Antes 'viviendaRef'. Coincide con tu interfaz.
+  vivienda    String
   m2          Float
+  
+  // Se usan String porque tus datos contienen guiones ("—" o "-")
+  // además de números. Prisma fallará si forzamos Int/Float con guiones.
   terrazas    String? 
-  precio      String  
+  dormitorios String? 
+  
+  banos       Int?
   planoPdfUrl String? @db.Text
-  dormitorios Int?     // Número de habitaciones
-  banos       Int?     // Número de baños
-  precioConIva String? @map("precio_con_iva") // Opcional, calculado
 
-  // Relación con HousingLocation
+  // Relación
   housingLocation   HousingLocation @relation(fields: [housingLocationId], references: [id], onDelete: Cascade)
   housingLocationId Int
 
   @@map("units")
 }
 
-// --- MODELO 3: SOCIAL MEDIA LINK (Coincide con SocialMediaLink) ---
-model SocialMediaLink {
-  id              Int    @id @default(autoincrement())
-  nombreRedSocial String // Antes 'plataforma'
-  rutaArchivo     String @db.Text // Antes 'url'
-
-  // Relación
-  housingLocation   HousingLocation @relation(fields: [housingLocationId], references: [id], onDelete: Cascade)
-  housingLocationId Int
-
-  @@map("social_media_links")
-}
-
-// --- MODELO 4: DOWNLOAD DOCUMENT (Coincide con DownloadDocument) ---
+// --- MODELO 5: DOWNLOAD DOCUMENT ---
 model DownloadDocument {
   id          Int    @id @default(autoincrement())
   nombreBoton String
@@ -84,11 +107,14 @@ model DownloadDocument {
   @@map("download_documents")
 }
 
-// --- MODELO 5: GALLERY IMAGES (Para galleryImages: string[]) ---
-// Nota: Como en la BD debe ser una tabla, usaremos el campo 'url' para mapearlo luego a string[]
+// --- MODELO 6: GALLERY IMAGES ---
+// Nota: SQL no soporta arrays de strings simples. 
+// Esto devolverá objetos { "url": "..." }. 
+// En el frontend recibirás un array de objetos, no de strings, 
+// a menos que hagas un map() en el backend.
 model GalleryImage {
   id  Int    @id @default(autoincrement())
-  url String @db.Text
+  url String @db.Text // Corresponde a los strings del array galleryImages
 
   // Relación
   housingLocation   HousingLocation @relation(fields: [housingLocationId], references: [id], onDelete: Cascade)
@@ -97,7 +123,7 @@ model GalleryImage {
   @@map("gallery_images")
 }
 
-// --- MODELO 6: SOLICITUDES INFO (Formulario) ---
+// --- MODELO 7: SOLICITUDES INFO ---
 model SolicitudInfo {
   id        Int      @id @default(autoincrement())
   nombre    String
@@ -111,7 +137,7 @@ model SolicitudInfo {
   @@map("solicitudes_info")
 }
 
-// --- MODELO 7: SUSCRIPCIONES (Footer) ---
+// --- MODELO 8: SUSCRIPCIONES ---
 model Suscripcion {
   id        Int      @id @default(autoincrement())
   email     String   @unique
