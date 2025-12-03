@@ -1,0 +1,57 @@
+.works-list {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  column-count: 3;
+  column-gap: 2rem;
+}
+
+@media (max-width: 1100px) {
+  .works-list { column-count: 2; }
+}
+@media (max-width: 700px) {
+  .works-list { column-count: 1; }
+}
+
+article {
+  background: transparent;
+  margin-bottom: 2rem;
+  break-inside: avoid;
+  display: inline-block;
+  width: 100%;
+}
+
+/* Tarjeta para el texto del trabajo */
+.work-header-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 1.2rem 1.4rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  margin-bottom: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.work-header-card h2 {
+  margin: 0 0 0.3rem;
+  font-size: 1.1rem;
+}
+
+.work-header-card h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #777;
+}
+
+/* Contenedor de la galería */
+.work-gallery {
+  display: flex;
+  justify-content: center;
+}
+
+/* Limitar ancho de las fotos dentro de cada tarjeta */
+.work-gallery app-masonry {
+  width: 100%;
+  max-width: 420px; /* ajusta al gusto */
+  display: block;
+}

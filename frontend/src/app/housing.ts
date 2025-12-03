@@ -720,70 +720,95 @@ export class Housing {
   ];
 
   /**
-   * GET /api/viviendas
-   * Recupera la lista. Al coincidir los nombres, la asignación es casi directa.
+   * GET /api/housing
+   * Recupera la lista. Acepta un filtro opcional por estado (ej: 'venta', 'proyecto').
    */
   /*
-  async getAllHousingLocations(): Promise<HousingLocationInfo[]> {
+  async getAllHousingLocations(
+    estado?: string
+  ): Promise<HousingLocationInfo[]> {
     try {
-      const response = await fetch(`${apiUrl}/api/viviendas`);
+      // Construimos la URL. Si hay estado, añadimos el query param.
+      const url = estado
+        ? `${this.apiUrl}/api/housing?estado=${estado}`
+        : `${this.apiUrl}/api/housing`;
+
+      const response = await fetch(url);
+
       if (!response.ok) {
         throw new Error(`Error al cargar viviendas: ${response.statusText}`);
       }
+
+      // El backend devuelve directamente el array, sin envoltorio ".data"
       const data = await response.json();
 
-      // Mapeo mínimo solo para asegurar tipos y arrays
-      return (data.data ?? []).map((v: any) => this.processViviendaData(v));
-
+      // Mapeo para asegurar tipos y estructuras seguras
+      return (Array.isArray(data) ? data : []).map((v: any) =>
+        this.processViviendaData(v)
+      );
     } catch (error) {
-      console.error(error);
+      console.error("Error en getAllHousingLocations:", error);
       return [];
     }
-  }*/
-
+  }
+*/
   /**
-   * GET /api/viviendas/:id
+   * GET /api/housing/:id
+   * Recupera el detalle de una vivienda.
    */
   /*
-  async getHousingLocationById(id: number): Promise<HousingLocationInfo | undefined> {
+  async getHousingLocationById(
+    id: number
+  ): Promise<HousingLocationInfo | undefined> {
     try {
-      const response = await fetch(`${apiUrl}/api/viviendas/${id}`);
+      const response = await fetch(`${this.apiUrl}/api/housing/${id}`);
+
       if (!response.ok) {
-        throw new Error(`Error al cargar vivienda ${id}: ${response.statusText}`);
+        // Si es un 404 u otro error, lanzamos excepción o devolvemos undefined
+        throw new Error(
+          `Error al cargar vivienda ${id}: ${response.statusText}`
+        );
       }
+
       const data = await response.json();
 
-      if (!data.data) return undefined;
+      // Si data está vacío o es null
+      if (!data) return undefined;
 
-      return this.processViviendaData(data.data);
-
+      return this.processViviendaData(data);
     } catch (error) {
-      console.error(error);
+      console.error("Error en getHousingLocationById:", error);
       return undefined;
     }
   }*/
 
+  
+
   /**
-   * Función auxiliar ligera
-   * Ya no "traduce" nombres, solo asegura que los arrays no sean null
-   * y transforma galleryImages de Objetos a Strings.
+   * Función auxiliar para limpiar y asegurar datos
    */
-  /*
   private processViviendaData(v: any): HousingLocationInfo {
     return {
-      ...v, // Copia todas las propiedades coincidentes (id, name, city, etc.)
-      
-      // Aseguramos que los arrays nunca sean null/undefined
+      ...v, // Copia id, name, city, description, etc.
+
+      // Arrays vacíos por defecto si vienen nulos
       units: v.units || [],
       downloadDocuments: v.downloadDocuments || [],
-      socialMediaLinks: v.socialMediaLinks || [],
-      
-      // ÚNICA TRANSFORMACIÓN NECESARIA:
-      // Convertir [{url: 'a'}, {url: 'b'}] -> ['a', 'b']
-      galleryImages: v.galleryImages ? v.galleryImages.map((img: any) => img.url) : [],
-    };
-  }*/
 
+      // NOTA: En el nuevo esquema, las viviendas NO tienen socialMediaLinks directos.
+      // (Pertenecen a la inmobiliaria `realEstate`).
+      // Si tu interfaz HousingLocationInfo los requiere obligatoriamente,
+      // puedes dejarlos vacíos o extraerlos de v.realEstate?.socialMediaLinks
+      socialMediaLinks: v.realEstate?.socialMediaLinks || [],
+
+      // IMÁGENES:
+      // Como en el backend ya hicimos el .map() para devolver strings,
+      // aquí v.galleryImages debería ser ['url1', 'url2'].
+      // Lo dejamos tal cual, o ponemos [] si es null.
+      galleryImages: v.galleryImages || [],
+    };
+  }
+  
   async submitApplication(
     firstName: string,
     phone: string,

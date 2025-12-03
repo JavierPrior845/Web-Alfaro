@@ -1,39 +1,128 @@
 .list {
   position: relative;
   width: 100%;
-  /* Altura manejada dinámicamente por TS */
-  transition: height 0.3s ease; 
-  margin-top: 20px;
+  margin: 0 auto;
 }
 
 .item-wrapper {
-  position: absolute; /* CLAVE: GSAP mueve esto con top/left (transform) */
-  top: 0;
-  left: 0;
-  padding: 0; /* React tenía padding 6px, aquí usamos 'gap' en el cálculo */
+  position: absolute; /* posicionamiento con translate */
+  box-sizing: border-box;
   cursor: pointer;
-  will-change: transform, width, height, opacity;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  background: #fff;
+  transition: box-shadow 0.3s ease;
+}
+
+.item-wrapper:hover {
+  box-shadow: 0 6px 20px rgb(0 0 0 / 0.3);
+  z-index: 10;
 }
 
 .item-img {
-  position: relative;
-  background-size: cover;
-  background-position: center center;
   width: 100%;
   height: 100%;
-  border-radius: 10px;
-  box-shadow: 0px 10px 50px -10px rgba(0, 0, 0, 0.2);
-  overflow: hidden; /* Para recortar el overlay */
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
 }
 
+/* Texto tarjeta look */
+.text-card {
+  background: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+  text-align: center;
+}
+
+.text-card .text-content h4 {
+  margin: 0 0 0.5rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.text-card .text-content p {
+  margin: 0.2rem 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Overlay hover color */
 .color-overlay {
   position: absolute;
+  inset: 0;
+  background-color: #007bff;
+  opacity: 0;
+  border-radius: 8px;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+
+/* --- ESTILOS NUEVOS DEL MODAL --- */
+.modal-overlay {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg, rgba(255,0,150,0.5), rgba(0,150,255,0.5));
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s;
+  background-color: rgba(0, 0, 0, 0.9); /* Fondo oscuro semitransparente */
+  z-index: 9999; /* Muy alto para tapar todo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+  backdrop-filter: blur(5px); /* Efecto blur moderno */
+}
+
+.modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  animation: scaleIn 0.3s ease;
+}
+
+.modal-content img {
+  display: block;
+  max-width: 100%;
+  max-height: 90vh; /* La imagen nunca será más alta que la pantalla */
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  z-index: 10000;
+  padding: 10px;
+  border-radius: 50%;
+  background-color: rgba(255,255,255,0.1);
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  background-color: rgba(255,255,255,0.3);
+}
+
+/* Animaciones del modal */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }

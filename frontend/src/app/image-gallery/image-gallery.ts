@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Necesario para @if y @for
-
+//! El que usabamos antes
 @Component({
   selector: 'app-image-gallery',
   standalone: true,
