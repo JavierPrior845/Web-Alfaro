@@ -1,20 +1,20 @@
-<!-- Recorres tus obras -->
-@for (item of works; track item.obra) {
-  
-  <article>
-    <h2>{{ item.obra }}</h2>
-    <h3>{{ item.localizacion }}</h3>
-    <!-- 3. AQUÍ PASAS LOS DATOS -->
-    <!-- [items] es el input del hijo -->
-    <!-- item.imagenes es el array de strings de tu padre -->
-    @if (item.imagenes && item.imagenes.length > 0) {
-      <app-masonry 
-        [items]="item.imagenes" 
-        [gap]="15"
-        [animateFrom]="'bottom'">
-      </app-masonry>
-    }
-    
-  </article>
+<div class="works-list">
+  @for (item of works; track item.obra) {
+    <article>
+      <div class="work-header-card">
+        <h2>{{ item.obra }}</h2>
+        <h3>{{ item.localizacion }}</h3>
+      </div>
 
-}
+      @if (item.imagenes && item.imagenes.length > 0) {
+        <div class="work-gallery">
+          <app-masonry
+            [items]="item.imagenes"
+            [gap]="15"
+            [animateFrom]="'bottom'">
+          </app-masonry>
+        </div>
+      }
+    </article>
+  }
+</div>

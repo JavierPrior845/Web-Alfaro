@@ -1,15 +1,11 @@
-/* Contenedor principal de la lista */
 .works-list {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 20px;
-  
-  /* PROPIEDADES CLAVE PARA EFECTO COLUMNAS */
-  column-count: 3;       /* Número de columnas deseado */
-  column-gap: 2rem;      /* Espacio entre columnas */
+  column-count: 3;
+  column-gap: 2rem;
 }
 
-/* Responsive: reducir columnas en pantallas más pequeñas */
 @media (max-width: 1100px) {
   .works-list { column-count: 2; }
 }
@@ -17,17 +13,45 @@
   .works-list { column-count: 1; }
 }
 
-/* Cada tarjeta individual (article) */
 article {
-  /* Estilos base */
-  background: white;
+  background: transparent;
   margin-bottom: 2rem;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  break-inside: avoid;
+  display: inline-block;
+  width: 100%;
+}
 
-  /* PROPIEDADES CLAVE PARA EVITAR CORTES */
-  break-inside: avoid;   /* Evita que una tarjeta se corte entre dos columnas */
-  display: inline-block; /* Ayuda a mantener la integridad del bloque en algunos navegadores */
-  width: 100%;           /* Asegura que llene el ancho de la columna asignada */
+/* Tarjeta para el texto del trabajo */
+.work-header-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 1.2rem 1.4rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  margin-bottom: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.work-header-card h2 {
+  margin: 0 0 0.3rem;
+  font-size: 1.1rem;
+}
+
+.work-header-card h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #777;
+}
+
+/* Contenedor de la galería */
+.work-gallery {
+  display: flex;
+  justify-content: center;
+}
+
+/* Limitar ancho de las fotos dentro de cada tarjeta */
+.work-gallery app-masonry {
+  width: 100%;
+  max-width: 420px; /* ajusta al gusto */
+  display: block;
 }

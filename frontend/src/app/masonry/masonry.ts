@@ -2,17 +2,17 @@ import { Component, ElementRef, Input, OnInit, AfterViewInit, OnDestroy, NgZone,
 import { CommonModule } from '@angular/common';
 import gsap from 'gsap';
 
-// Interfaz interna para manejar la geometría
 interface MasonryItem {
   id: number;
   src: string;
-  x: number; // Posición calculada X
-  y: number; // Posición calculada Y
-  w: number; // Ancho calculado
-  h: number; // Alto calculado
-  naturalWidth: number; // Dimensiones reales de la imagen
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  naturalWidth: number;
   naturalHeight: number;
 }
+
 
 @Component({
   selector: 'app-masonry',
@@ -40,6 +40,8 @@ export class MasonryComponent implements OnInit, AfterViewInit, OnDestroy {
   containerHeight = 0;
   private resizeObserver: ResizeObserver | null = null;
   private initialized = false;
+
+  selectedImage: string | null = null;
 
   @ViewChild('masonryContainer') containerRef!: ElementRef;
 
@@ -70,74 +72,73 @@ export class MasonryComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // --- LÓGICA CORE ---
 
-  // Transforma tus URLs en objetos con dimensiones
   private preloadImages(urls: string[]): Promise<MasonryItem[]> {
-    const promises = urls.map((src, index) => {
-      return new Promise<MasonryItem>((resolve) => {
-        const img = new Image();
-        img.src = src;
-        img.onload = () => {
-          resolve({
-            id: index,
-            src: src,
-            x: 0, y: 0, w: 0, h: 0,
-            naturalWidth: img.width,
-            naturalHeight: img.height
-          });
-        };
-        img.onerror = () => {
-          // Fallback si la imagen falla
-          resolve({
-            id: index,
-            src: src,
-            x: 0, y: 0, w: 0, h: 0,
-            naturalWidth: 500, naturalHeight: 500
-          });
-        };
-      });
+  const promises = urls.map((src, index) => {
+    return new Promise<MasonryItem>((resolve) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        resolve({
+          id: index,
+          src,
+          x: 0, y: 0, w: 0, h: 0,
+          naturalWidth: img.width,
+          naturalHeight: img.height
+        });
+      };
+      img.onerror = () => {
+        resolve({
+          id: index,
+          src,
+          x: 0, y: 0, w: 0, h: 0,
+          naturalWidth: 500,
+          naturalHeight: 500
+        });
+      };
     });
-    return Promise.all(promises);
-  }
+  });
+  return Promise.all(promises);
+}
 
-  // El algoritmo "Masonry" (Mampostería)
+// En ngAfterViewInit usa preloadImages(this.items) como ya hacías.
+
+
+
   calculateLayout(isFirstRender: boolean) {
     if (!this.containerRef) return;
-
     const containerWidth = this.containerRef.nativeElement.offsetWidth;
     if (!containerWidth) return;
 
-    const columns = this.getColumnCount(containerWidth);
-    const columnWidth = (containerWidth - (columns - 1) * this.gap) / columns;
-    
-    // Array para rastrear la altura acumulada de cada columna
-    const colHeights = new Array(columns).fill(0);
+    let yPos = 0;
+    const newGridItems = this.gridItems.map(item => {
+      const x = 0;
+      const w = containerWidth;
 
-    // Recorremos items y asignamos coordenadas
-    this.gridItems = this.gridItems.map(item => {
-      // Buscar la columna más baja
-      const minHeight = Math.min(...colHeights);
-      const colIndex = colHeights.indexOf(minHeight);
+      let h = 0;
 
-      const x = colIndex * (columnWidth + this.gap);
-      const y = minHeight;
+      
+        // imagen
+        if (item.naturalWidth && item.naturalHeight) {
+          const aspectRatio = item.naturalHeight / item.naturalWidth;
+          h = w * aspectRatio;
+        } else {
+          h = 200; // fallback altura
+        }
+      
 
-      // Calculamos altura proporcional basada en el ancho de columna
-      const aspectRatio = item.naturalHeight / item.naturalWidth;
-      const h = columnWidth * aspectRatio;
+      const y = yPos;
+      yPos += h + this.gap;
 
-      // Actualizamos la altura de esa columna
-      colHeights[colIndex] += h + this.gap;
-
-      return { ...item, x, y, w: columnWidth, h };
+      return { ...item, x, y, w, h };
     });
 
-    // Altura total del contenedor
-    this.containerHeight = Math.max(...colHeights);
-    this.cdr.detectChanges(); // Actualizar HTML
+    this.gridItems = newGridItems;
+    this.containerHeight = yPos - this.gap; // sin gap al final
+    this.cdr.detectChanges();
 
-    // Disparar GSAP
     this.animateItems(isFirstRender);
   }
+
 
   animateItems(isFirstRender: boolean) {
   // 1. Forzar a Angular a pintar el HTML antes de que GSAP busque los elementos
@@ -222,15 +223,6 @@ export class MasonryComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  getColumnCount(width: number): number {
-    // Mismos breakpoints que en React
-    if (width >= 1500) return 5;
-    if (width >= 1000) return 4;
-    if (width >= 600) return 3;
-    if (width >= 400) return 2;
-    return 1;
-  }
-
   // --- EVENTOS HOVER ---
   onMouseEnter(e: MouseEvent, item: MasonryItem) {
     const el = e.currentTarget as HTMLElement;
@@ -253,9 +245,12 @@ export class MasonryComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   openImage(url: string) {
-    window.open(url, '_blank');
+    this.selectedImage = url;
   }
 
+  closeModal() {
+    this.selectedImage = null;
+  }
   ngOnDestroy() {
     if (this.resizeObserver) this.resizeObserver.disconnect();
   }

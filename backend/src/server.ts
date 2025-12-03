@@ -178,7 +178,7 @@ app.get<{ Params: { id: string } }>('/api/housing/:id', async (request, reply) =
 /**
  * POST /api/solicitud-info
  * Formulario de contacto de una vivienda específica
- */
+ 
 app.post<{ Body: SolicitudInfoBody }>('/api/solicitud-info', async (request, reply) => {
   try {
     const { nombre, telefono, email, viviendaId } = request.body;
@@ -208,11 +208,11 @@ app.post<{ Body: SolicitudInfoBody }>('/api/solicitud-info', async (request, rep
     }
   }
 });
-
+  */
 /**
  * POST /api/suscripcion
  * Footer newsletter
- */
+ 
 app.post<{ Body: SuscripcionBody }>('/api/suscripcion', async (request, reply) => {
   try {
     const { email } = request.body;
@@ -235,7 +235,7 @@ app.post<{ Body: SuscripcionBody }>('/api/suscripcion', async (request, reply) =
       reply.code(500).send({ error: 'Error al suscribir' });
     }
   }
-});
+});*/
 
 // --- ARRANCAR SERVIDOR ---
 

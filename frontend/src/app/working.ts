@@ -45,7 +45,8 @@ export class Working {
       localizacion: "ZARANDONA. MURCIA",
       imagenes: [
         "assets/works/w5-1.png",
-        "assets/works/w5-2.png"
+        "assets/works/w5-2.png",
+        "assets/works/w5-3.png"
       ]
     },
     {
@@ -88,19 +89,168 @@ export class Working {
     },
     {
       obra: "RECONSTRUCCIÓN: 8 VIVIENDAS, LOCALES Y TRASTEROS",
-      localizacion: "MURCIA (C/ Alfaro, 8)"
+      localizacion: "MURCIA (C/ Alfaro, 8)",
+      imagenes: [
+        "assets/works/w11-1.png",
+        "assets/works/w11-2.png"
+      ]
     },
     {
       obra: "8 VIVIENDAS, LOCAL Y TRASTEROS",
-      localizacion: "MURCIA (C/ Vistalegre, 10)"
+      localizacion: "MURCIA (C/ Vistalegre, 10)",
+      imagenes: [
+        "assets/works/w12-1.png",
+        "assets/works/w12-2.png"
+      ]
+    },
+    {
+      obra: "REHABILTACIÓN CONVENTO SAN JOAQUIN Y SAN PASCUAL",
+      localizacion: "CIEZA - MURCIA",
+      imagenes: [
+        "assets/works/w14-1.png",
+      ]
+    },
+    {
+      obra: "REHABILITACIÓN EDIFICIO FACHADA Y ZAGUÁN",
+      localizacion: "PLAZA CARDENAL BELLUGA MURCIA",
+      imagenes: [
+        "assets/works/w15-1.png",
+        "assets/works/w15-2.png",
+        "assets/works/w15-3.png",
+        "assets/works/w15-4.png",
+        "assets/works/w15-5.png"
+      ]
+    },
+    {
+      obra: "REPARACIÓN IGLESIA PARROQUIAL NUESTRA SEÑORA DE LA CONSOLACIÓN",
+      localizacion: "COPA DE BULLAS. BULLAS - MURCIA",
+      imagenes: [
+        "assets/works/w16-1.png"
+      ]
+    },
+    {
+      obra: "REHABILITACIÓN EDIFICIO FACHADA, ZAGUÁN, ASCENSOR Y CUBIERTAS",
+      localizacion: "CALLE VIDRIEROS - SAN ANTOLIN. MURCIA",
+      imagenes: [
+        "assets/works/w17-1.png",
+        "assets/works/w17-2.png"
+      ]
+    },
+    {
+      obra: "REHABILITACIÓN EDIFICIO FACHADA Y ZAGUÁN",
+      localizacion: "CALLE JARA CARRILLO. MURCIA",
+      imagenes: [
+        "assets/works/w18-1.png",
+        "assets/works/w18-2.png"
+      ]
+    },
+    {
+      obra: "REHABILITACIÓN EDIFICIO",
+      localizacion: "AVD. ALFONSO X. MURCIA",
+      imagenes: [
+        "assets/works/w19-1.png",
+        "assets/works/w19-2.png"
+      ]
+    },
+    {
+      obra: "REHABILITACIÓN EDIFICIO FACHADA Y ZAGUÁN",
+      localizacion: "PLAZA DE SANTO DOMINGO. MURCIA",
+      imagenes: [
+        "assets/works/w20-1.png",
+        "assets/works/w20-2.png"
+      ]
+    },
+    {
+      obra: "REHABILITACIÓN EDIFICIO EXTERIOR E INTERIOR COLEGIO JESUS MARÍA",
+      localizacion: "AVD. ALFONSO X. MURCIA",
+      imagenes: [
+        "assets/works/w22-1.png",
+        "assets/works/w22-2.png"
+      ]
+    },
+    {
+      obra: "REHABILITACIÓN EDIFICIO FACHADA Y ZAGUÁN",
+      localizacion: "CALLE QUITERIA (JUNTO A GERENCIA DE URBANISMO). MURCIA",
+      imagenes: [
+        "assets/works/w23-1.png",
+        "assets/works/w23-2.png"
+      ]
+    },
+    {
+      obra: "REHABILITACIÓN EDIFICIO FACHADA, ZAGUÁN Y CUBIERTAS",
+      localizacion: "CALLE SAN BENITO. MURCIA",
+      imagenes: [
+        "assets/works/w24-1.png",
+        "assets/works/w24-2.png"
+
+      ]
+    },
+    {
+      obra: "REHABILITACIÓN EDIFICIO COLEGIO EL BUEN PASTOR",
+      localizacion: "PLAZA DE SAN AGUSTÍN. MURCIA",
+      imagenes: [
+        "assets/works/w25-1.png",
+        "assets/works/w25-2.png"
+      ]
+    },
+    {
+      obra: "REHABILITACIÓN EDIFICIO FACHADA Y ZAGUÁN",
+      localizacion: "CALLE ALEJANDRO SÉIQUER. MURCIA",
+      imagenes: [
+        "assets/works/w26-1.png",
+        "assets/works/w26-2.png"
+      ]
+    },
+    {
+      obra: "CONSTRUCCIÓN OBRAS VARIAS PARA PROMOTORA INMOBILIARIA GRUPO LÓPEZ REJAS Desde 1975 a 2005",
+      localizacion: "MURCIA",
+      imagenes: [
+        "assets/works/w27-1.png",
+        "assets/works/w27-2.png",
+        "assets/works/w27-3.png",
+        "assets/works/w27-4.png",
+        "assets/works/w27-5.png",
+        "assets/works/w27-6.png"
+      ]
+    },
+    {
+      obra: "REHABILITACIÓN EDIFICIO FACHADA Y CUBIERTAS",
+      localizacion: "CALLE GRAN VÍA. MURCIA",
+      imagenes: [
+        "assets/works/w28-1.png",
+        "assets/works/w28-2.png"
+      ]
+    },
+    {
+      obra: "REHABILITACIÓN EDIFICIO FACHADA Y CUBIERTA",
+      localizacion: "CALLE SOCIEDAD. MURCIA",
+      imagenes: [
+        "assets/works/w29-1.png"
+      ]
+    },
+    {
+      obra: "REHABILITACIÓN EDIFICIO FACHADA, ZAGUÁN Y CUBIERTAS",
+      localizacion: "CALLE PASCUAL ESQUINA CALLE MADRE DE DIOS. MURCIA",
+      imagenes: [
+        "assets/works/w30-1.png",
+        "assets/works/w30-2.png"
+      ]
     },
     {
       obra: "CONSTRUCCIÓN 18 DUPLEX",
-      localizacion: "LORQUÍ. MURCIA"
+      localizacion: "LORQUÍ. MURCIA",
+      imagenes: [
+        "assets/works/w31-1.png",
+        "assets/works/w31-2.png"
+      ]
     },
     {
       obra: "CONSTRUCCIÓN DUPLEX",
-      localizacion: "RONDA ESTE – MOLINA DE SEGURA. MURCIA"
+      localizacion: "RONDA ESTE – MOLINA DE SEGURA. MURCIA",
+      imagenes: [
+        "assets/works/w32-1.png",
+        "assets/works/w32-2.png"
+      ]
     },
     {
       obra: "COOPERATIVA: 26 viviendas locales y Garajes",

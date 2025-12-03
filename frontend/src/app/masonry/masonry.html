@@ -1,21 +1,33 @@
 <div class="list" #masonryContainer [style.height.px]="containerHeight">
-  
   @for (item of gridItems; track item.id) {
-    <div 
-      class="item-wrapper" 
+    <div
+      class="item-wrapper"
       [attr.data-id]="item.id"
       (click)="openImage(item.src)"
       (mouseenter)="onMouseEnter($event, item)"
       (mouseleave)="onMouseLeave($event, item)">
-      
+
       <div class="item-img" [style.background-image]="'url(' + item.src + ')'">
-        
         @if (colorShiftOnHover) {
           <div class="color-overlay"></div>
         }
-        
       </div>
 
     </div>
   }
 </div>
+
+<!-- MODAL / OVERLAY (Nuevo) -->
+@if (selectedImage) {
+  <div class="modal-overlay" (click)="closeModal()">
+    <!-- Botón cerrar -->
+    <button class="close-btn" (click)="closeModal()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    
+    <!-- Contenido Imagen -->
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <img [src]="selectedImage" alt="Vista detallada">
+    </div>
+  </div>
+}

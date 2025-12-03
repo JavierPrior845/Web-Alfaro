@@ -123,25 +123,3 @@ model GalleryImage {
   @@map("gallery_images")
 }
 
-// --- MODELO 7: SOLICITUDES INFO ---
-model SolicitudInfo {
-  id        Int      @id @default(autoincrement())
-  nombre    String
-  email     String
-  telefono  String?
-  createdAt DateTime @default(now())
-
-  housingLocation   HousingLocation @relation(fields: [housingLocationId], references: [id])
-  housingLocationId Int
-
-  @@map("solicitudes_info")
-}
-
-// --- MODELO 8: SUSCRIPCIONES ---
-model Suscripcion {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  createdAt DateTime @default(now())
-
-  @@map("suscripciones")
-}
