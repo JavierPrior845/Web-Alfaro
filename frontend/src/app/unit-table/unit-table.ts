@@ -13,20 +13,39 @@ export class UnitTableComponent {
   // Recibe la lista de unidades
   units = input.required<Unit[]>();
 
-  shouldDisplayTerraza = computed(() => this.hasValidData('terrazas'));
-  shouldDisplayDormitorios = computed(() => this.hasValidData('dormitorios'));
-  shouldDisplayBanos = computed(() => this.hasValidData('banos'));
-  shouldDisplayTrastero = computed(() => this.hasValidData('trastero'));
-  shouldDisplayGarage = computed(() => this.hasValidData('garage'));
-  shouldDisplayPlano = computed(() => this.hasValidData('planoPdfUrl'));
+  shouldDisplayUtiles = computed(() => this.hasValidData("m2utiles"));
+  shouldDisplayTerraza = computed(() => this.hasValidData("m2terraza"));
+  shouldDisplayDormitorios = computed(() => this.hasValidData("dormitorios"));
+  shouldDisplayBanos = computed(() => this.hasValidData("banos"));
+  shouldDisplayTrastero = computed(() => this.hasValidData("trastero"));
+  shouldDisplayGarage = computed(() => this.hasValidData("garage"));
+  shouldDisplayPlano = computed(() => this.hasValidData("planoPdfUrl"));
 
-  private hasValidData(fieldKey: 'terrazas' | 'dormitorios' | 'banos' | 'trastero' | 'garage' | 'planoPdfUrl'): boolean {
+  private hasValidData(
+    fieldKey:
+      | "m2utiles"
+      | "m2terraza"
+      | "dormitorios"
+      | "banos"
+      | "trastero"
+      | "garage"
+      | "planoPdfUrl"
+  ): boolean {
     const units = this.units();
     if (!units || units.length === 0) return false;
 
     return units.some((unit: any) => {
       const value = unit[fieldKey];
-      return value !== null && value !== undefined && value !== '—';
+      return value !== null && value !== undefined && value !== "—";
     });
+  }
+
+  get unitsGrouped() {
+    const groups: { [key: string]: Unit[] } = {};
+    for (const u of this.units()) {
+      if (!groups[u.planta!]) groups[u.planta!] = [];
+      groups[u.planta!].push(u);
+    }
+    return Object.entries(groups); 
   }
 }

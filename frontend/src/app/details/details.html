@@ -9,7 +9,6 @@
   </div>
 
   <div class="top-split-container">
-    
     <div class="info-column">
       <section class="listing-description">
         <h2 class="listing-heading">{{ housingLocation?.name }}</h2>
@@ -20,56 +19,93 @@
 
       <section class="listing-features">
         <h2 class="section-heading">Sobre el edificio</h2>
-        @if (housingLocation?.resume; as texto) {
+
+        @if (housingLocation?.resume) {
         <div class="building-resume">
-          <p>{{ texto }}</p>
+          <p [innerHTML]="resumeHtml"></p>
         </div>
-        } 
-        
-        @if (housingLocation?.downloadDocuments; as documentos) { 
-          @if (documentos.length > 0) {
-          <section class="download-section clearfix">
-            <h3 class="real-estate-heading">Documentación</h3>
-            <div class="download-buttons">
-              @for (doc of documentos; track doc.id) {
-              <a [href]="doc.rutaArchivo" target="_blank" download class="btn-download">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                  <polyline points="7 10 12 15 17 10"></polyline>
-                  <line x1="12" y1="15" x2="12" y2="3"></line>
-                </svg>
-                {{ doc.nombreBoton }}
-              </a>
-              }
-            </div>
-          </section>
-          } 
         }
       </section>
     </div>
 
     <div class="map-column-top">
       @if(safeMapUrl){
-        <h2 class="section-heading">Ubicación</h2>
-        <iframe
-          [src]="safeMapUrl"
-          height="450"
-          width="100%"
-          style="border: 0"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-        ></iframe>
+      <h2 class="section-heading">Ubicación</h2>
+      <iframe
+        [src]="safeMapUrl"
+        height="450"
+        width="100%"
+        style="border: 0"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
       }
     </div>
   </div>
 
-  <app-grid-gallery [images]="housingLocation?.galleryImages"></app-grid-gallery>
+  <div>
+    @if (housingLocation?.downloadDocuments; as documentos) { @if
+    (documentos.length > 0) {
+
+    <!-- SECCIÓN SEPARADA Y CENTRADA -->
+    <section class="download-section clearfix">
+      <h3 class="real-doc-heading">Documentación</h3>
+
+      <div class="pdf-gallery">
+        @for (doc of documentos; track doc.id) {
+        <div class="pdf-item">
+          <!-- Vista previa -->
+          <div class="pdf-preview-wrapper">
+            <embed
+              [src]="doc.rutaArchivoSanitizada"
+              type="application/pdf"
+              class="pdf-preview"
+            />
+          </div>
+
+          <!-- Nombre del documento -->
+          <p class="pdf-title">{{ doc.nombreBoton }}</p>
+
+          <!-- Botones -->
+          <div class="pdf-actions">
+            <a [href]="doc.rutaArchivo" target="_blank" class="btn-view">
+              Ampliar
+            </a>
+          </div>
+        </div>
+        }
+      </div>
+    </section>
+    } }
+  </div>
+
+  <app-grid-gallery
+    [images]="housingLocation?.galleryImages"
+  ></app-grid-gallery>
 
   @if(housingLocation?.renderLink; as link3d){
-  <a [href]="link3d" target="_blank" rel="noopener noreferrer" class="btn-real-estate" style="margin: 20px 0; display:inline-flex;">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+  <a
+    [href]="link3d"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="btn-real-estate"
+    style="margin: 20px 0; display: inline-flex"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path
+        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+      />
       <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
       <line x1="12" y1="22.08" x2="12" y2="12" />
     </svg>
@@ -79,43 +115,18 @@
 
   <section class="bottom-grid-apply">
     @if(this.colab){
-      <div class="real-estate-column">
-       <h2 class="section-heading">Descubre la inmobiliaria</h2>
-       <app-colaboracion [colab]="colab"> </app-colaboracion>
-      </div>
-    }
-
-    <div class="form-column">
-      <h2 class="section-heading">Contacta con nosotros</h2>
-      <form [formGroup]="applyForm" (ngSubmit)="submitApplication()">
-        <label for="first-name">Nombre</label>
-        <input id="first-name" type="text" formControlName="firstName" />
-
-        <label for="phone">Telefono</label>
-        <input id="phone" type="text" formControlName="phone" />
-
-        <label for="email">Email</label>
-        <input id="email" type="email" formControlName="email" />
-
-        <div class="terms-container">
-          <input type="checkbox" id="terms" formControlName="termsAccepted" />
-          <label for="terms">
-            Acepto los <a href="/terms" target="_blank">términos</a>
-          </label>
-        </div>
-
-        <button type="submit" class="primary">Confirmar información</button>
-      </form>
+    <div class="real-estate-column">
+      <h2 class="section-heading">Descubre la inmobiliaria</h2>
+      <app-colaboracion [colab]="colab"> </app-colaboracion>
     </div>
+    }
   </section>
 
   <section class="unit-table-section clearfix">
     @if (housingLocation?.units; as availableUnits) {
-      <app-unit-table [units]="availableUnits" />
+    <app-unit-table [units]="availableUnits" />
     } @else {
-      <p class="unit-p">No hay información disponible.</p>
+    <p class="unit-p">No hay información disponible.</p>
     }
   </section>
-
-  
 </article>

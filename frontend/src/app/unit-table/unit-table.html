@@ -1,73 +1,115 @@
 <section class="unit-table-container">
-  <h3 class="table-title">información de las unidades</h3>
+  <h3 class="table-title">Información de los pisos</h3>
 
   <div class="table-wrapper">
     <table class="unit-table">
       <thead>
         <tr>
-          <th>Vivienda</th>
-          <th class="text-right">M²</th>
-
-          @if (shouldDisplayTerraza()) {
-            <th class="text-right">Terrazas (M²)</th>
-          }
+          <th>PLANTA</th>
+          <th>TIPOLOGIA</th>
 
           @if (shouldDisplayDormitorios()) {
-            <th class="text-right">Dormitorios</th>
+            <th>DORMITORIOS</th>
           }
 
           @if (shouldDisplayBanos()) {
-            <th class="text-right">Baños</th>
+            <th>BAÑOS</th>
+          }
+          
+          <th>PISCINA</th>
+
+          <th>M² CONSTRUIDOS</th>
+          <th>M² UTILES</th>
+          
+          @if (shouldDisplayTerraza()) {
+            <th>M² TERRAZA</th>
+          }
+
+          <th>ORIENTACIÓN</th>
+          
+          <th>EFICIENCIA ENERGÉTICA</th>
+
+          @if (shouldDisplayGarage()) {
+            <th>GARAJE</th>
           }
 
           @if (shouldDisplayTrastero()) {
-            <th class="text-right">Trastero</th>
+            <th>TRASTERO</th>
           }
 
           @if (shouldDisplayPlano()) {
-            <th class="text-center">Plano</th>
+            <th>PLANO</th>
           }
         </tr>
       </thead>
 
       <tbody>
-        @for (unit of units(); track unit.vivienda) {
-          <tr>
-            <td>{{ unit.vivienda }}</td>
 
-            <td class="text-right">{{ unit.m2 | number:'1.2-2' }}</td>
+        <!-- AGRUPACIÓN POR PLANTA -->
+        @for (group of unitsGrouped; track group[0]) {
+          <!-- group[0] = nombre planta / group[1] = unidades -->
 
-            @if (shouldDisplayTerraza()) {
-              <td class="text-right">{{ unit.terrazas || '—' }}</td>
-            }
+          @for (unit of group[1]; let i = $index; track unit) {
+            <tr>
 
-            @if (shouldDisplayDormitorios()) {
-              <td class="text-right">{{ unit.dormitorios || '—' }}</td>
-            }
+              <!-- SOLO MOSTRAR PLANTA EN LA PRIMERA FILA DE CADA GRUPO -->
+              @if (i === 0) {
+                <td [attr.rowspan]="group[1].length">
+                  {{ unit.planta }}
+                </td>
+              }
 
-            @if (shouldDisplayBanos()) {
-              <td class="text-right">{{ unit.banos || '—' }}</td>
-            }
+              <td>{{ unit.tipologia }}</td>
 
-            @if (shouldDisplayTrastero()) {
-              <td class="text-right">{{ unit.trastero || '—' }}</td>
-            }
+              @if (shouldDisplayDormitorios()) {
+                <td>{{ unit.dormitorios || '—' }}</td>
+              }
 
-            @if (shouldDisplayPlano()) {
-              <td class="text-center">
-                @if (unit.planoPdfUrl && unit.planoPdfUrl !== 'N/D') {
-                  <a [href]="unit.planoPdfUrl" target="_blank" class="plan-link">
-                    <svg class="pdf-icon" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18h14v2H5z"/>
-                    </svg>
-                  </a>
-                } @else {
-                  <span>N/D</span>
-                }
-              </td>
-            }
-          </tr>
+              @if (shouldDisplayBanos()) {
+                <td>{{ unit.banos || '—' }}</td>
+              }
+
+              <td>{{ unit.piscina }}</td>
+
+              <td>{{ unit.m2construidos }}</td>
+
+              @if (shouldDisplayUtiles()) {
+                <td>{{ unit.m2utiles || '—' }}</td>
+              }
+
+              @if (shouldDisplayTerraza()) {
+                <td>{{ unit.m2terraza || '—' }}</td>
+              }
+
+              <td>{{ unit.orientacion }}</td>
+              <td>{{ unit.eficEnergetica }}</td>
+
+              @if (shouldDisplayGarage()) {
+                <td class="text-center">{{ unit.garage }}</td>
+              }
+
+              @if (shouldDisplayTrastero()) {
+                <td class="text-center">{{ unit.trastero }}</td>
+              }
+
+              @if (shouldDisplayPlano()) {
+                <td class="text-center">
+                  @if (unit.planoPdfUrl && unit.planoPdfUrl !== 'N/D') {
+                    <a [href]="unit.planoPdfUrl" target="_blank" class="plan-link">
+                      <svg class="pdf-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18h14v2H5z"/>
+                      </svg>
+                    </a>
+                  } @else {
+                    <span>N/D</span>
+                  }
+                </td>
+              }
+
+            </tr>
+          }
         }
+
       </tbody>
     </table>
   </div>

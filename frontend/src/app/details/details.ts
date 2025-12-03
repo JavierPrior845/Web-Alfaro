@@ -1,12 +1,12 @@
-import { Component, inject, AfterViewInit, OnInit} from "@angular/core";
+import { Component, inject, AfterViewInit, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Housing } from "../housing";
 import { HousingLocationInfo } from "../housing-location";
 import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { UnitTableComponent } from "../unit-table/unit-table";
-import { CommonModule } from '@angular/common';
-import { Title } from '@angular/platform-browser';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { CommonModule } from "@angular/common";
+import { Title } from "@angular/platform-browser";
+import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 import { GridGalleryComponent } from "../grid-gallery/grid-gallery";
 import { Colab } from "../colab";
 import { ColabsLocationInfo } from "../colabs-location";
@@ -15,7 +15,13 @@ import { Colaboracion } from "../colaboracion/colaboracion";
 @Component({
   selector: "app-details",
   standalone: true,
-  imports: [ReactiveFormsModule, UnitTableComponent, CommonModule, GridGalleryComponent, Colaboracion],
+  imports: [
+    ReactiveFormsModule,
+    UnitTableComponent,
+    CommonModule,
+    GridGalleryComponent,
+    Colaboracion,
+  ],
   templateUrl: "./details.html",
   styleUrls: ["./details.css"],
 })
@@ -29,9 +35,10 @@ export class Details implements OnInit {
 
   housingLocationId = -1;
   housingLocation: HousingLocationInfo | undefined;
-  safeMapUrl: SafeResourceUrl | string = '';
+  safeMapUrl: SafeResourceUrl | string = "";
 
-  lastClicked: string = '';
+  lastClicked: string = "";
+  resumeHtml: string = "";
 
   applyForm = new FormGroup({
     firstName: new FormControl(""),
@@ -42,18 +49,18 @@ export class Details implements OnInit {
 
   constructor() {
     this.housingLocationId = Number(this.route.snapshot.params["id"]);
-    
   }
 
   async ngOnInit(): Promise<void> {
     this.housingLocation = await this.housingService.getHousingLocationById(
       this.housingLocationId
     );
-    if (this.housingLocation?.realEstateId != null){
-      this.colab = await this.colabService.getColabById(this.housingLocation?.realEstateId);
+    if (this.housingLocation?.realEstateId != null) {
+      this.colab = await this.colabService.getColabById(
+        this.housingLocation?.realEstateId
+      );
     }
     if (this.housingLocation?.mapLink) {
-      // Le decimos a Angular que esta URL es segura para 'iframes'
       this.safeMapUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
         this.housingLocation.mapLink
       );
@@ -61,11 +68,24 @@ export class Details implements OnInit {
     if (this.housingLocation) {
       this.titleService.setTitle(`ALFARO - ${this.housingLocation.name}`);
     } else {
-      this.titleService.setTitle('ALFARO');
+      this.titleService.setTitle("ALFARO");
     }
+    if (this.housingLocation?.resume) {
+      this.resumeHtml = this.housingLocation.resume.replace(/\n/g, "<br>");
+    }
+    if (this.housingLocation?.downloadDocuments) {
+    this.housingLocation.downloadDocuments =
+      this.housingLocation.downloadDocuments.map(doc => ({
+        ...doc,
+        rutaArchivoSanitizada: this.sanitizeUrl(doc.rutaArchivo)
+      }));
+  }
   }
 
-
+  //  MÉTODO NUEVO PARA SANEAR PDFs
+  sanitizeUrl(url: string): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
 
   submitApplication() {
     if (!this.applyForm.value.termsAccepted) {
@@ -84,7 +104,5 @@ export class Details implements OnInit {
   navegarA(imagen: string) {
     this.lastClicked = imagen;
     console.log("Navegando a la imagen:", imagen);
-    // Aquí pondrías tu router:
-    // this.router.navigate(['/detalle'], { queryParams: { img: imagen } });
   }
 }
