@@ -7,8 +7,9 @@ const apiUrl = environment.apiBaseUrl;
 @Injectable({
   providedIn: "root",
 })
+
 export class Housing {
-  getAllHousingLocations(): HousingLocationInfo[] {
+  /*getAllHousingLocations(): HousingLocationInfo[] {
     return this.housingLocationList;
   }
   getHousingLocationById(id: number): HousingLocationInfo | undefined {
@@ -23,7 +24,7 @@ export class Housing {
     return this.housingLocationList.filter(
       (location) => location.estado?.toLowerCase() === normalizedType
     );
-  }
+  }*/
 
   readonly baseUrl = "http://localhost:3000";
   readonly baseUrlAssets = "assets";
@@ -723,15 +724,15 @@ export class Housing {
    * GET /api/housing
    * Recupera la lista. Acepta un filtro opcional por estado (ej: 'venta', 'proyecto').
    */
-  /*
+  
   async getAllHousingLocations(
     estado?: string
   ): Promise<HousingLocationInfo[]> {
     try {
       // Construimos la URL. Si hay estado, añadimos el query param.
       const url = estado
-        ? `${this.apiUrl}/api/housing?estado=${estado}`
-        : `${this.apiUrl}/api/housing`;
+        ? `${apiUrl}/api/housing?estado=${estado}`
+        : `${apiUrl}/api/housing`;
 
       const response = await fetch(url);
 
@@ -751,17 +752,17 @@ export class Housing {
       return [];
     }
   }
-*/
+
   /**
    * GET /api/housing/:id
    * Recupera el detalle de una vivienda.
    */
-  /*
+  
   async getHousingLocationById(
     id: number
   ): Promise<HousingLocationInfo | undefined> {
     try {
-      const response = await fetch(`${this.apiUrl}/api/housing/${id}`);
+      const response = await fetch(`${apiUrl}/api/housing/${id}`);
 
       if (!response.ok) {
         // Si es un 404 u otro error, lanzamos excepción o devolvemos undefined
@@ -780,7 +781,7 @@ export class Housing {
       console.error("Error en getHousingLocationById:", error);
       return undefined;
     }
-  }*/
+  }
 
   
 

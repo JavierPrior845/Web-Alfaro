@@ -9,19 +9,6 @@ interface HousingQuery {
   estado?: string;
 }
 
-// Body para el formulario de contacto
-interface SolicitudInfoBody {
-  nombre: string;
-  telefono?: string;
-  email: string;
-  viviendaId: number; // ID de la vivienda
-}
-
-// Body para suscripción
-interface SuscripcionBody {
-  email: string;
-}
-
 // Inicialización
 const app = fastify({ logger: true });
 const prisma = new PrismaClient();

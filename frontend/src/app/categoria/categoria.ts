@@ -43,17 +43,15 @@ export class Categoria implements OnInit, OnDestroy { // Implementar OnInit y On
   async ngOnInit() {
     // Nos suscribimos a los cambios en la URL.
     // Esto permite que al hacer clic en el menú, la página se actualice sin recargar.
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe(async params => {
       const type = params.get('type'); // Lee el parámetro :type de la ruta
       
-      
-
       if (type === "COLABORACION") {
         // MODO CATEGORÍA: Filtramos por el tipo recibido
-        this.colabs = this.colabService.getAllColabs();
+        this.colabs = await this.colabService.getAllColabs();
         this.updatePageContent(type);
       }else if(type){
-        this.filteredLocationList = this.housingService.getHousingLocationsByType(type);
+        this.filteredLocationList = await this.housingService.getAllHousingLocations(type);
         this.updatePageContent(type);
       }
       // Inicializamos el carrusel (se reinicia al cambiar de ruta)
@@ -70,10 +68,6 @@ export class Categoria implements OnInit, OnDestroy { // Implementar OnInit y On
       case 'COLABORACION': 
         this.pageTitle = 'Nuestras Colaboraciones';
         this.pageSubtitle = 'Proyectos exclusivos desarrollados junto a nuestros socios estratégicos.';
-        break;
-      case 'TRABAJO': 
-        this.pageTitle = 'Trabajos Realizados';
-        this.pageSubtitle = 'Nuestra trayectoria y experiencia reflejada en cada edificación.';
         break;
       case 'PROYECTO': 
         this.pageTitle = 'Proyectos Futuros';
@@ -109,6 +103,10 @@ export class Categoria implements OnInit, OnDestroy { // Implementar OnInit y On
 
   startImageRotation(): void {
     // Cambiar la imagen cada 5 segundos (5000 ms)
+    if (this.intervalId) {
+    clearInterval(this.intervalId);
+  }
+
     this.intervalId = setInterval(() => {
       this.currentIndex = (this.currentIndex + 1) % this.heroImages.length;
       this.currentHeroImage = this.heroImages[this.currentIndex];

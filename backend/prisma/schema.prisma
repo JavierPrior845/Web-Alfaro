@@ -65,27 +65,32 @@ model HousingLocation {
   downloadDocuments DownloadDocument[]
   galleryImages     GalleryImage[]
   
-  // Formulario de contacto (Interno)
-  solicitudes       SolicitudInfo[] 
-  
   createdAt  DateTime @default(now())
 
   @@map("housing_locations")
 }
 
-// --- MODELO 4: UNIT (Coincide con Unit) ---
+// --- MODELO 4: UNIT (Actualizado) ---
 model Unit {
-  id          Int     @id @default(autoincrement())
-  vivienda    String
-  m2          Float
+  id             Int     @id @default(autoincrement())
   
-  // Se usan String porque tus datos contienen guiones ("—" o "-")
-  // además de números. Prisma fallará si forzamos Int/Float con guiones.
-  terrazas    String? 
-  dormitorios String? 
+  // Nuevos campos según tu interfaz
+  planta         String? // Ej: "1", "Bajo", "Ático"
+  tipologia      String? // Ej: "A", "B", "Local" (Antes vivienda)
+  dormitorios    String? // String para soportar números y guiones
+  banos          String? 
+  piscina        String? // Ej: "Sí", "No", "Comunitaria"
   
-  banos       Int?
-  planoPdfUrl String? @db.Text
+  m2construidos  String? // Antes m2
+  m2utiles       String? // Nuevo campo
+  m2terraza      String? // Antes terrazas
+  
+  orientacion    String? // Ej: "Norte", "Sur"
+  eficEnergetica String? // Ej: "A", "B"
+  garage         String? // Ej: "Incluido", "Opcional"
+  trastero       String? // Ej: "Incluido"
+  
+  planoPdfUrl    String? @db.Text
 
   // Relación
   housingLocation   HousingLocation @relation(fields: [housingLocationId], references: [id], onDelete: Cascade)
