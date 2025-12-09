@@ -29,10 +29,6 @@
   color: var(--text-color);
 }
 
-.listing-location::before {
-  content: url("/assets/location-pin.svg") / "";
-}
-
 /* INMOBILIARIA */
 .listing-colab {
   padding: 0 20px 15px 20px;

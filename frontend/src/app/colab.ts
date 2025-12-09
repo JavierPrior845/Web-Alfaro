@@ -73,18 +73,19 @@ export class Colab {
   ];
 
   // Métodos públicos
-  /*getAllColabs(): ColabsLocationInfo[] {
+  getAllColabs(): ColabsLocationInfo[] {
     return this.colabs;
   }
 
   getColabById(id: number): ColabsLocationInfo | undefined {
     return this.colabs.find((c) => c.id === id);
-  }*/
+  }
 
   /**
      * GET /api/colabs
      * Recupera la lista de inmobiliarias (Colabs).
      */
+    /*
     async getAllColabs(): Promise<ColabsLocationInfo[]> {
       try {
         const response = await fetch(`${apiUrl}/api/colabs`);
@@ -103,12 +104,13 @@ export class Colab {
         console.error("Error en getAllColabs:", error);
         return [];
       }
-    }
+    }*/
 
     /**
    * GET /api/colabs/:id
    * Recupera el detalle de una inmobiliaria específica.
    */
+  /*
   async getColabById(id: number): Promise<ColabsLocationInfo | undefined> {
     try {
       const response = await fetch(`${apiUrl}/api/colabs/${id}`);
@@ -129,5 +131,5 @@ export class Colab {
       console.error('Error en getColabById:', error);
       return undefined;
     }
-  }
+  }*/
 }

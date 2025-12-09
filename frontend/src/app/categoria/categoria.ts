@@ -51,7 +51,7 @@ export class Categoria implements OnInit, OnDestroy { // Implementar OnInit y On
         this.colabs = await this.colabService.getAllColabs();
         this.updatePageContent(type);
       }else if(type){
-        this.filteredLocationList = await this.housingService.getAllHousingLocations(type);
+        this.filteredLocationList = await this.housingService.getHousingLocationsByType(type);
         this.updatePageContent(type);
       }
       // Inicializamos el carrusel (se reinicia al cambiar de ruta)

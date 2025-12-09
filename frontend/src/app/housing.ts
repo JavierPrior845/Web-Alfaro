@@ -9,7 +9,7 @@ const apiUrl = environment.apiBaseUrl;
 })
 
 export class Housing {
-  /*getAllHousingLocations(): HousingLocationInfo[] {
+  getAllHousingLocations(): HousingLocationInfo[] {
     return this.housingLocationList;
   }
   getHousingLocationById(id: number): HousingLocationInfo | undefined {
@@ -24,7 +24,7 @@ export class Housing {
     return this.housingLocationList.filter(
       (location) => location.estado?.toLowerCase() === normalizedType
     );
-  }*/
+  }
 
   readonly baseUrl = "http://localhost:3000";
   readonly baseUrlAssets = "assets";
@@ -724,14 +724,14 @@ export class Housing {
    * GET /api/housing
    * Recupera la lista. Acepta un filtro opcional por estado (ej: 'venta', 'proyecto').
    */
-  
+  /*
   async getAllHousingLocations(
     estado?: string
   ): Promise<HousingLocationInfo[]> {
     try {
       // Construimos la URL. Si hay estado, añadimos el query param.
       const url = estado
-        ? `${apiUrl}/api/housing?estado=${estado}`
+        ? `${apiUrl}/api/housing?estado=${estado.toLocaleLowerCase()}`
         : `${apiUrl}/api/housing`;
 
       const response = await fetch(url);
@@ -752,12 +752,12 @@ export class Housing {
       return [];
     }
   }
-
+  */
   /**
    * GET /api/housing/:id
    * Recupera el detalle de una vivienda.
    */
-  
+  /*
   async getHousingLocationById(
     id: number
   ): Promise<HousingLocationInfo | undefined> {
@@ -782,12 +782,13 @@ export class Housing {
       return undefined;
     }
   }
-
+  */
   
 
   /**
    * Función auxiliar para limpiar y asegurar datos
    */
+  /*
   private processViviendaData(v: any): HousingLocationInfo {
     return {
       ...v, // Copia id, name, city, description, etc.
@@ -809,7 +810,7 @@ export class Housing {
       galleryImages: v.galleryImages || [],
     };
   }
-  
+  */
   async submitApplication(
     firstName: string,
     phone: string,
