@@ -5,8 +5,14 @@
     <table class="unit-table">
       <thead>
         <tr>
-          <th>PLANTA</th>
-          <th>TIPOLOGIA</th>
+
+          @if (shouldDisplayPlanta()) {
+            <th>PLANTA</th>
+          }
+          
+          @if (shouldDisplayTipologia()) {
+            <th>TIPOLOGIA</th>
+          }
 
           @if (shouldDisplayDormitorios()) {
             <th>DORMITORIOS</th>
@@ -16,19 +22,30 @@
             <th>BAÑOS</th>
           }
           
-          <th>PISCINA</th>
+          @if (shouldDisplayPiscina()) {
+            <th>PISCINA</th>
+          }
+          
+          @if (shouldDisplayConstruidos()) {
+            <th>M² CONSTRUIDOS</th>
+          }
 
-          <th>M² CONSTRUIDOS</th>
-          <th>M² UTILES</th>
+          @if (shouldDisplayUtiles()) {
+            <th>M² UTILES</th>
+          }
           
           @if (shouldDisplayTerraza()) {
             <th>M² TERRAZA</th>
           }
 
-          <th>ORIENTACIÓN</th>
-          
-          <th>EFICIENCIA ENERGÉTICA</th>
+          @if (shouldDisplayOrientacion()) {
+            <th>ORIENTACIÓN</th>
+          }
 
+          @if (shouldDisplayEficEnergetica()) {
+            <th>EFICIENCIA ENERGÉTICA</th>
+          }
+          
           @if (shouldDisplayGarage()) {
             <th>GARAJE</th>
           }
@@ -53,13 +70,15 @@
             <tr>
 
               <!-- SOLO MOSTRAR PLANTA EN LA PRIMERA FILA DE CADA GRUPO -->
-              @if (i === 0) {
+              @if (i === 0 && shouldDisplayPlanta()) {
                 <td [attr.rowspan]="group[1].length">
                   {{ unit.planta }}
                 </td>
               }
-
-              <td>{{ unit.tipologia }}</td>
+              
+              @if (shouldDisplayTipologia()) {
+                <td>{{ unit.tipologia }}</td>
+              }
 
               @if (shouldDisplayDormitorios()) {
                 <td>{{ unit.dormitorios || '—' }}</td>
@@ -69,9 +88,13 @@
                 <td>{{ unit.banos || '—' }}</td>
               }
 
-              <td>{{ unit.piscina }}</td>
+              @if (shouldDisplayPiscina()) {
+                <td>{{ unit.piscina }}</td>
+              }
 
-              <td>{{ unit.m2construidos }}</td>
+              @if (shouldDisplayConstruidos()) {
+                <td>{{ unit.m2construidos || '—' }}</td>
+              }
 
               @if (shouldDisplayUtiles()) {
                 <td>{{ unit.m2utiles || '—' }}</td>
@@ -81,8 +104,13 @@
                 <td>{{ unit.m2terraza || '—' }}</td>
               }
 
-              <td>{{ unit.orientacion }}</td>
-              <td>{{ unit.eficEnergetica }}</td>
+              @if (shouldDisplayOrientacion()) {
+                <td>{{ unit.orientacion }}</td>
+              }
+
+              @if (shouldDisplayEficEnergetica()) {
+                <td>{{ unit.eficEnergetica }}</td>
+              }
 
               @if (shouldDisplayGarage()) {
                 <td class="text-center">{{ unit.garage }}</td>

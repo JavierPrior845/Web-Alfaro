@@ -13,22 +13,35 @@ export class UnitTableComponent {
   // Recibe la lista de unidades
   units = input.required<Unit[]>();
 
-  shouldDisplayUtiles = computed(() => this.hasValidData("m2utiles"));
-  shouldDisplayTerraza = computed(() => this.hasValidData("m2terraza"));
+  shouldDisplayPlanta = computed(() => this.hasValidData("planta"));
+  shouldDisplayTipologia = computed(() => this.hasValidData("tipologia"));
   shouldDisplayDormitorios = computed(() => this.hasValidData("dormitorios"));
   shouldDisplayBanos = computed(() => this.hasValidData("banos"));
-  shouldDisplayTrastero = computed(() => this.hasValidData("trastero"));
+  shouldDisplayPiscina = computed(() => this.hasValidData("piscina"));
+  shouldDisplayConstruidos = computed(() => this.hasValidData("m2construidos"));
+  shouldDisplayUtiles = computed(() => this.hasValidData("m2utiles"));
+  shouldDisplayTerraza = computed(() => this.hasValidData("m2terraza"));
+  shouldDisplayOrientacion = computed(() => this.hasValidData("orientacion"));
+  shouldDisplayEficEnergetica = computed(() => this.hasValidData("eficEnergetica"));
   shouldDisplayGarage = computed(() => this.hasValidData("garage"));
+  shouldDisplayTrastero = computed(() => this.hasValidData("trastero"));
   shouldDisplayPlano = computed(() => this.hasValidData("planoPdfUrl"));
+
 
   private hasValidData(
     fieldKey:
-      | "m2utiles"
-      | "m2terraza"
+      | "planta"
+      | "tipologia"
       | "dormitorios"
       | "banos"
-      | "trastero"
+      | "piscina"
+      | "m2construidos"
+      | "m2utiles"
+      | "m2terraza"
+      | "orientacion"
+      | "eficEnergetica"
       | "garage"
+      | "trastero"
       | "planoPdfUrl"
   ): boolean {
     const units = this.units();

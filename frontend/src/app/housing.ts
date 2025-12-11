@@ -705,14 +705,14 @@ export class Housing {
       downloadDocuments: [
         {
           id: 1,
-          nombreBoton: "Planos Básicos",
-          rutaArchivo: "assets/pdfs/descargas/ReinoDeMurcia/PLANOS_BASICO.pdf",
+          nombreBoton: "Comercialización",
+          rutaArchivo: "assets/pdfs/descargas/ReinoDeMurcia/REINO_DE_MURCIA_PLANOS.pdf",
         },
         {
           id: 2,
-          nombreBoton: "Memoria REBT",
+          nombreBoton: "Memoria de Calidades",
           rutaArchivo:
-            "assets/pdfs/descargas/ReinoDeMurcia/598-MEMORIA_REBTfirmada.pdf",
+            "assets/pdfs/descargas/ReinoDeMurcia/MEMORIA_DE_CALIDADES_REINO_DE_MURCIA.pdf",
         },
       ],
       mapLink:

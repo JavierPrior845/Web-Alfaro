@@ -60,3 +60,27 @@
   width: 24px;
   height: 24px;
 }
+@media (min-width: 1024px) {
+  .unit-table {
+    font-size: 0.75rem !important;
+    min-width: unset !important;
+    table-layout: fixed;
+  }
+
+  .unit-table th,
+  .unit-table td {
+    padding: 6px 4px !important;
+    word-wrap: break-word;
+    white-space: normal;
+  }
+
+  .pdf-icon,
+  .plan-link svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  .table-wrapper {
+    overflow-x: hidden; 
+  }
+}
