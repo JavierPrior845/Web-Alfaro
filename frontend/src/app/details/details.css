@@ -1,3 +1,6 @@
+/* =========================================================
+   CONTENEDOR PRINCIPAL
+   ========================================================= */
 article {
   max-width: 1500px;
   margin: 40px auto;
@@ -5,7 +8,13 @@ article {
   box-sizing: border-box;
 }
 
-/* --- 1. IMAGEN HEADER --- */
+section {
+  margin-bottom: 40px;
+}
+
+/* =========================================================
+   HEADER / IMAGEN PRINCIPAL
+   ========================================================= */
 .header-image-container {
   width: 100%;
   margin-bottom: 40px;
@@ -13,40 +22,66 @@ article {
 
 .listing-photo-header {
   width: 100%;
-  height: 500px; /* Altura fija para efecto banner */
+  height: 500px;
   object-fit: cover;
   display: block;
 }
 
-/* --- 2. LAYOUT SUPERIOR (Mapa + Texto) --- */
+/* =========================================================
+   TITULOS Y TEXTOS
+   ========================================================= */
+.listing-heading {
+  font-size: 38pt;
+  font-weight: bold;
+  margin-top: 0;
+  line-height: 1.1;
+}
+
+.listing-location {
+  font-size: 24pt;
+  margin-bottom: 15px;
+}
+
+.section-heading {
+  color: var(--primary-color);
+  font-size: 24pt;
+  margin-bottom: 15px;
+}
+
+/* =========================================================
+   LAYOUT SUPERIOR (Texto + Mapa)
+   ========================================================= */
 .top-split-container {
   display: flex;
-  /* IMPORTANTE: row-reverse pone el 2º elemento (mapa) a la izquierda 
-     y el 1º elemento (texto) a la derecha en escritorio */
-  flex-direction: row-reverse; 
+  flex-direction: row-reverse;
   gap: 40px;
   margin-bottom: 50px;
   align-items: center;
 }
 
 .info-column {
-  flex: 1; /* Ocupa el espacio restante */
+  flex: 1;
 }
 
 .map-column-top {
-  width: 40%; /* El mapa ocupará el 40% del ancho */
+  width: 40%;
   min-width: 300px;
 }
 
-/* Ajustes de texto */
-.listing-heading {
-  font-size: 38pt; /* Ajustado un poco */
-  font-weight: bold;
-  margin-top: 0;
-  line-height: 1.1;
+/* =========================================================
+   RESUMEN DEL EDIFICIO
+   ========================================================= */
+.building-resume p {
+  font-size: 15pt;
+  line-height: 1.7;
+  color: #333;
+  margin: 0;
+  text-align: justify;
 }
 
-/* --- 3. LAYOUT INFERIOR (Inmobiliaria + Formulario) --- */
+/* =========================================================
+   INMOBILIARIA + FORMULARIO
+   ========================================================= */
 .bottom-grid-apply {
   display: flex;
   gap: 40px;
@@ -56,122 +91,16 @@ article {
 }
 
 .real-estate-column {
-  flex: 1; /* La inmobiliaria ocupa espacio flexible */
+  flex: 1;
 }
 
 .form-column {
-  width: 35%; /* El formulario un poco más estrecho */
+  width: 35%;
   min-width: 300px;
 }
 
-/* Estilos de inputs (Mantenidos de tu original) */
+label,
 input {
-  font-size: 16pt;
-  margin-bottom: 15px;
-  padding: 10px;
-  width: 100%;
-  border: none;
-  border-bottom: solid 1px #ccc;
-  box-sizing: border-box; /* Importante para que no se salga */
-}
-
-/* --- RESPONSIVE --- */
-
-@media (max-width: 1024px) {
-  .listing-photo-header {
-    height: 350px;
-  }
-}
-
-@media (max-width: 768px) {
-  /* En móvil, cambiamos a columna normal */
-  .top-split-container {
-    flex-direction: column; /* Texto arriba (1º), Mapa abajo (2º) */
-  }
-  
-  .map-column-top {
-    width: 100%;
-    margin-top: 20px;
-  }
-  
-  .bottom-grid-apply {
-    flex-direction: column-reverse; /* Formulario arriba, Inmobiliaria abajo (opcional) o column normal */
-    flex-direction: column; 
-  }
-  
-  .form-column, .real-estate-column {
-    width: 100%;
-  }
-}
-
-/* ===== CONTENEDOR PRINCIPAL ===== */
-article {
-  max-width: 1500px;              /* Ancho máximo para centrar el contenido */
-  margin: 40px auto;              /* Margen superior/inferior + centrado horizontal */
-  padding: 0 30px;                /* Espacio lateral dentro del contenido */
-  box-sizing: border-box;
-}
-
-/* Añadimos espacio entre secciones principales */
-section {
-  margin-bottom: 40px;
-}
-
-/* ===== IMAGEN PRINCIPAL ===== */
-.listing-photo {
-  height: 550px;
-  width: 50%;
-  object-fit: cover;
-  border-radius: 0px;
-  float: right;
-  margin-left: 40px; /* margen entre la imagen y el texto */
-}
-
-/* ===== CABECERAS Y TEXTOS ===== */
-.listing-heading {
-  font-size: 48pt;
-  font-weight: bold;
-  margin-bottom: 15px;
-}
-
-.listing-location::before {
-  content: url('/assets/location-pin.svg') / '';
-}
-
-.listing-location {
-  font-size: 24pt;
-  margin-bottom: 15px;
-}
-
-.listing-features > .section-heading {
-  color: var(--primary-color);
-  font-size: 24pt;
-  margin-bottom: 15px;
-}
-
-.listing-features {
-  margin-bottom: 20px;
-}
-
-.listing-features li {
-  font-size: 14pt;
-}
-
-li {
-  list-style-type: none;
-}
-
-.unit-p {
-margin-top: 60px;
-}
-
-/* ===== FORMULARIO ===== */
-.listing-apply .section-heading {
-  font-size: 18pt;
-  margin-bottom: 15px;
-}
-
-label, input {
   display: block;
 }
 
@@ -187,124 +116,44 @@ input {
   margin-bottom: 15px;
   padding: 10px;
   width: 100%;
-  border-top: none;
-  border-right: none;
-  border-left: none;
-  border-bottom: solid .3px;
+  border: none;
+  border-bottom: solid 1px #ccc;
+  box-sizing: border-box;
 }
 
-/* ===== MAPA Y FORMULARIO ===== */
-.listing-map-apply {
-  margin: 2rem 0;
-  clear: both;
-}
+/* =========================================================
+   DOCUMENTOS DESCARGABLES
+   ========================================================= */
 
-.map-form-container {
-  display: flex;
-  gap: 2rem;
-  align-items: flex-start;
-}
-
-.map-column-top {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.map-column-top .section-heading {
-  color: var(--primary-color);
-  font-size: 24pt;
-  margin-bottom: 15px;
-  text-align: center;
-}
-
-.form-column {
-  flex: 1;
-  min-width: 0;
-}
-
-.form-column .section-heading {
-  color: var(--secondary-color);
-  font-size: 18pt;
-  margin-bottom: 15px;
-  text-align: center;
-}
-
-
-.form-column form {
-  display: flex;
-  flex-direction: column;
-}
-
-#map {
-  height: 400px;
-  width: 100%;
-  border-radius: 0px;
-  overflow: hidden;
-}
-
-.terms-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 20px 0;
-  font-size: 14pt;
-  color: #333;
-}
-
-.terms-container a {
-  color: var(--primary-color);
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.terms-container a:hover {
-  text-decoration: underline;
-}
-
-.terms-container input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  transform: translateY(2px); 
-  cursor: pointer;
-}
-
-/* ===== DESCARGAS ===== */
-
-/* Contenedor general centrado + margen arriba */
 .download-section {
-  margin-top: 80px; /* más espacio desde la sección anterior */
+  margin-top: 80px;
   text-align: center;
   width: 100%;
 }
 
-/* Título centrado con margen debajo */
 .real-doc-heading {
   color: var(--primary-color);
-  text-align: center;
   width: 100%;
-  font-size: 28px; /* ligeramente más grande */
+  font-size: 28px;
   font-weight: 700;
-  margin-bottom: 50px ; /* espacio uniforme */
+  margin-bottom: 50px;
 }
 
-/* Galería centrada */
+/* Galería */
 .pdf-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 500px)); /* tarjetas más grandes */
-  gap: 40px; /* espacio mayor entre tarjetas */
-  justify-content: center; /* centrado real del grid */
+  grid-template-columns: repeat(auto-fit, minmax(500px, 500px));
+  gap: 40px;
+  justify-content: center;
   width: 100%;
   max-width: 1400px;
 }
 
-/* Tarjeta PDF centrada y más grande */
+/* Tarjeta */
 .pdf-item {
   background: #f8f8f8;
-  padding: 25px; /* un poco más de padding */
-  box-shadow: 0 4px 15px rgba(0,0,0,0.15); /* sombra más destacada */
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -314,20 +163,19 @@ input {
 
 .pdf-item:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* CUADRADO PERFECTO (vista previa) */
+/* Vista previa */
 .pdf-preview-wrapper {
   width: 100%;
   aspect-ratio: 1 / 1;
   border: 1px solid #ddd;
   overflow: hidden;
   background: #fff;
-  margin-bottom: 15px; /* un poco más de espacio */
+  margin-bottom: 15px;
 }
 
-/* PDF dentro */
 .pdf-preview {
   width: 100%;
   height: 100%;
@@ -335,7 +183,6 @@ input {
   border: none;
 }
 
-/* Texto centrado y un poco más grande */
 .pdf-title {
   font-weight: 600;
   margin: 14px 0;
@@ -343,7 +190,6 @@ input {
   text-align: center;
 }
 
-/* Botones centrados */
 .pdf-actions {
   display: flex;
   justify-content: center;
@@ -351,9 +197,8 @@ input {
   margin-top: 12px;
 }
 
-.btn-view,
-.btn-download {
-  padding: 14px 20px; /* botones más grandes */
+.btn-view {
+  padding: 14px 20px;
   text-decoration: none;
   background-color: var(--primary-color);
   color: white;
@@ -362,65 +207,24 @@ input {
   transition: 0.3s ease;
 }
 
-.btn-view:hover,
-.btn-download:hover {
-  background-color: #ffffff;
+.btn-view:hover {
+  background-color: white;
   color: var(--primary-color);
   border: 2px solid var(--primary-color);
 }
 
-/* ===== INMOBILIARIA ===== */
-.real-estate-info {
-  background-color: var(--accent-color, #f9f9f9);
-  padding: 25px;
-  border-radius: 0px;
-  border-left: 4px solid var(--primary-color);
-  margin-top: 20px;
-}
-.real-estate-column .section-heading {
-  color: var(--primary-color);
-  font-size: 18pt;
-  margin-bottom: 15px;
-  text-align: center;
-}
-.real-estate-heading {
-  font-size: 16pt;
-  color: var(--secondary-color);
-  margin: 0 0 10px 0;
-  font-weight: 600;
-}
-
-.real-estate-name {
-  font-size: 20pt;
-  color: var(--primary-color);
-  font-weight: 700;
-  margin: 0 0 15px 0;
-}
-
-.real-estate-description {
-  font-size: 14pt;
-  color: #666;
-  margin-bottom: 20px;
-  line-height: 1.6;
-}
-
-.real-estate-actions {
-  display: flex;
-  align-items: center;
-  gap: 15px; /* separación entre botón e icono */
-  margin-top: 10px;
-}
-
+/* =========================================================
+   BOTÓN 3D
+   ========================================================= */
 .btn-real-estate {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   padding: 12px 24px;
-  margin-right: 30px;
   background-color: var(--primary-color);
   color: white;
   text-decoration: none;
-  border-radius: 0px;
+  border-radius: 0;
   font-weight: 600;
   font-size: 15px;
   transition: all 0.3s ease;
@@ -434,54 +238,12 @@ input {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.social-media-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  background: var(--primary-color);
-  border-radius: 50%;
-  color: white;
-  text-decoration: none;
-  transition: 0.2s ease;
-  border: 2px solid var(--primary-color);
-}
-
-.social-media-icon:hover {
-  background-color: white;
-  color: var(--primary-color);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-/* ===== RESUMEN DEL EDIFICIO ===== */
-.building-resume p {
-  font-size: 15pt;
-  line-height: 1.7;
-  color: #333;
-  margin: 0;
-  text-align: justify;
-}
-
-/* ===== GALERÍA ===== */
-.gallery-section {
-  margin-top: 50px;
-}
-
-.gallery-section h2 {
-  text-align: center;
-  color: var(--secondary-color);
-  font-size: 24pt;
-  margin-bottom: 25px;
-}
-
-/* ===== RESPONSIVE ===== */
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
 @media (max-width: 1024px) {
-  .listing-photo {
-    width: 100%;
-    height: 400px;
-    margin: 0 0 20px 0;
+  .listing-photo-header {
+    height: 350px;
   }
 }
 
@@ -490,26 +252,42 @@ input {
     padding: 0 15px;
   }
 
-  .map-form-container {
+  /* Layout superior */
+  .top-split-container {
     flex-direction: column;
   }
 
-  .download-buttons {
+  .map-column-top {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  /* Layout inferior */
+  .bottom-grid-apply {
     flex-direction: column;
   }
 
-  .btn-download,
-  .btn-real-estate {
-    width: auto;
-    justify-content: center;
+  .form-column,
+  .real-estate-column {
+    width: 100%;
   }
 
-  .real-estate-info {
-    padding: 20px;
+  /* PDFs */
+  .pdf-gallery {
+    grid-template-columns: 1fr;
+    padding: 0 15px;
+    gap: 25px;
   }
 
-  .real-estate-name {
-    font-size: 18pt;
+  .pdf-item {
+    padding: 15px;
   }
 
+  .pdf-preview-wrapper {
+    aspect-ratio: 4 / 3;
+  }
+
+  .pdf-title {
+    font-size: 16px;
+  }
 }
