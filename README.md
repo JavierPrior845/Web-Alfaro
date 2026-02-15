@@ -120,7 +120,6 @@ server {
 ```
 👤 Author
 Javier Prior - Computer Engineering Student @ UMU
-
-Focus: AI Engineering, Full Stack Development.
+Adrian San Pedro - DAM @ UCAM
 
 © 2024 Alfaro Promociones. All rights reserved.
