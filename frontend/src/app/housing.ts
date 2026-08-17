@@ -482,7 +482,7 @@ export class Housing {
       city: "Murcia",
       state: "Reino de Murcia",
       photo: `${this.baseUrlAssets}/PERPECTIVA_DETALLE.jpg`,
-      realEstateId: 0,
+      realEstateId: 1,
       renderLink: "https://my.matterport.com/show/?m=poxMa2bcLc2",
       units: [
         {
